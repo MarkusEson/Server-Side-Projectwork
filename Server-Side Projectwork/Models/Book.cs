@@ -5,9 +5,11 @@ using System.Web;
 
 namespace Server_Side_Projectwork.Models
 {
-    public class Books
+    public class Book
     {
-        public int ISBN;
-        public string Author;
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public int ISBN { get; set; }
+        
     }
 }
