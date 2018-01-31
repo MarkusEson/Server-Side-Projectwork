@@ -1,7 +1,13 @@
-﻿
+﻿@model List<Server_Side_Projectwork.Models.Book>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 @{
     ViewBag.Title = "Books";
 }
 
 <h2>Books</h2>
-
+@foreach (var book in Model)
+{
+    <li>@book.Title</li>
+}

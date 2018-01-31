@@ -11,7 +11,7 @@ namespace Server_Side_Projectwork.Controllers
     {
 
         // Instead of a database, we use a static list.
-        public static List<Book> Books = new List<Book>{
+        public static List<Book> BookList = new List<Book>{
             new Book { Title = "Radiology and You",         Author = "Marie Curie",             ISBN = 833 },
             new Book { Title = "How to Drive and Sing",     Author = "James Corden",            ISBN = 042 },
             new Book { Title = "Veggies for Cooking",       Author = "Artie Choke",             ISBN = 112 },
@@ -26,7 +26,21 @@ namespace Server_Side_Projectwork.Controllers
         // GET: Library
         public ActionResult Index()
         {
-            return View("Home");
+            return View();
+        }
+
+        // GET: Books
+        [HttpGet]
+        public ActionResult Books()
+        {
+            return View("Books", BookList);
+        }
+
+        // GET: Authors
+        [HttpGet]
+        public ActionResult Authors()
+        {
+            return View("Authors", BookList);
         }
     }
 }
