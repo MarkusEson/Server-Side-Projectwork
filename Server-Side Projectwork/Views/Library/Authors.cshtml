@@ -1,4 +1,4 @@
-﻿@model List<Server_Side_Projectwork.Models.Book>
+﻿@model List<Server_Side_Projectwork.Models.Author>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,8 +6,20 @@
     ViewBag.Title = "Authors";
 }
 
-<h2>Books</h2>
-@foreach (var book in Model)
+<div>
+    <form>
+        <input type="Submit" value="Add Author">
+    </form>
+</div>
+
+<h2>Search for an Author</h2>
+<form>
+    <input type="text" name="AuthorSearch">
+    <input type="submit" value="Search">
+</form>
+
+<h2>Result</h2>
+@foreach (var authors in Model)
 {
-    <li>@book.Title</li>
+    <li>@authors.FirstName @authors.LastName</li>
 }

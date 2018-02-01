@@ -20,6 +20,14 @@ namespace Server_Side_Projectwork.Controllers
             new Book { ISBN = 005, Title = "Arn", SignId = 05, PublicationYear = 1990, publicationinfo = "none", Pages = 571  }
         };
 
+        public static List<Author> AuthorList = new List<Author>
+        {
+            new Author { Aid = 000, FirstName = "Jonathan", LastName = "Woss", BirthYear = 2010 },
+            new Author { Aid = 001, FirstName = "Jimmy", LastName = "Carr", BirthYear = 1987 },
+            new Author { Aid = 002, FirstName = "Jessica", LastName = "Wok", BirthYear = 1989 },
+            new Author { Aid = 000, FirstName = "Sarah", LastName = "Silverwoman", BirthYear = 1967 }
+        };
+
         // GET: Library
         public ActionResult Index()
         {
@@ -37,7 +45,7 @@ namespace Server_Side_Projectwork.Controllers
         [HttpGet]
         public ActionResult Authors()
         {
-            return View("Authors", BookList);
+            return View("Authors", AuthorList);
         }
 
         public ActionResult Administrators()
