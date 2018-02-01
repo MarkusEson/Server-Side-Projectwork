@@ -42,5 +42,10 @@ namespace Server_Side_Projectwork.Controllers
         {
             return View("Authors", BookList);
         }
+
+        public ActionResult Administrators()
+        {
+            return View("Administrator");
+        }
     }
 }
