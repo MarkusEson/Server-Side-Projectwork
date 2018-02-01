@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AddAuthors";
+}
+
+<h2>AddAuthors</h2>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AddBook";
+}
+
+<h2>Add a Book to the database</h2>
+
+<div>
+    <form action="/Library/AddAuthors" method="POST">
+        Aid: <br>
+        <input type="text" name="Aid" value=""><br>
+        First Name: <br>
+        <input type="text" name="Firstname" value=""><br>
+        Last Name: <br>
+        <input type="text" name="LastName" value=""><br>
+        Birth Year: <br>
+        <input type="text" name="BirthYear" value=""><br>
+
+        <input type="submit" value="Submit Author"><br>
+
+    </form>
+</div>

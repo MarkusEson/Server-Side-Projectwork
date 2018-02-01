@@ -6,9 +6,12 @@
     ViewBag.Title = "Authors";
 }
 
+
+
+
 <div>
     <form>
-        <input type="Submit" value="Add Author">
+        <a href="/Library/AddAuthors">Add Author</a>
     </form>
 </div>
 
@@ -19,7 +22,20 @@
 </form>
 
 <h2>Result</h2>
-@foreach (var authors in Model)
-{
-    <li>@authors.FirstName @authors.LastName</li>
-}
+<div>
+    @foreach (var authors in Model)
+    {
+        <li>@authors.FirstName @authors.LastName</li>
+    }
+
+    <div class="pagination">
+        <a href="#">&laquo;</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+        <a href="#">&raquo;</a>
+    </div>
+</div>

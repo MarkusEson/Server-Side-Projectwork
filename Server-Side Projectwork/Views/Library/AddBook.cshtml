@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AddBook";
+}
+
+<h2>Add a Book to the database</h2>
+
+<div>
+    <form action="/Library/AddBook" method="POST">
+        ISBN: <br>
+        <input type="text" name="ISBN" value=""><br>
+        Title: <br>
+        <input type="text" name="Title" value=""><br>
+        SignId: <br>
+        <input type="text" name="SignId" value=""><br>
+        Publication Year: <br>
+        <input type="text" name="PublicationYear" value=""><br>
+        Publication info: <br>
+        <input type="text" name="publicationinfo" value=""><br>
+        Pages: <br>
+        <input type="text" name="Pages" value=""><br>
+
+        <input type="submit" value="Submit Book"><br>
+
+    </form>
+</div>
