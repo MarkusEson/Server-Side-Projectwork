@@ -28,6 +28,12 @@ namespace Server_Side_Projectwork.Controllers
             new Author { Aid = 000, FirstName = "Sarah", LastName = "Silverwoman", BirthYear = 1967 }
         };
 
+        public static List<Administrator> AdminList = new List<Administrator>
+        {
+            new Administrator { adminId = 0, firstName = "Pontus", lastName = "Anderö", description = "En riktigt lång beskrivning av denna person ska ligga här som en stor string" },
+            new Administrator { adminId = 1, firstName = "AdminTwo", lastName = "AdminLastTwo", description = "Very good admin" }
+        };
+
         // GET: Library
         public ActionResult Index()
         {
@@ -48,7 +54,8 @@ namespace Server_Side_Projectwork.Controllers
             return View("Authors", AuthorList);
         }
 
-        public ActionResult Administrators()
+        [HttpPost]
+        public ActionResult Administrator()
         {
             return View("Administrator");
         }
@@ -57,6 +64,25 @@ namespace Server_Side_Projectwork.Controllers
         public ActionResult Login()
         {
             return View("Login");
+        }
+
+        public ActionResult AdminInfo(int id = 0)
+        {
+            
+            if (0 <= id && id < AdminList.Count)
+            {
+                return View("Administrators/Information", AdminList[id]);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+        }
+
+        public ActionResult AdminEdit()
+        {
+            return View("Administrators/Edit");
         }
     }
 }
