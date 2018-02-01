@@ -163,6 +163,8 @@
     <Content Include="Views\Library\Login.cshtml" />
     <Content Include="Views\Library\AddBook.cshtml" />
     <Content Include="Views\Library\AddAuthors.cshtml" />
+    <Content Include="Views\Library\ShowBook.cshtml" />
+    <Content Include="Views\Library\ShowAuthor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

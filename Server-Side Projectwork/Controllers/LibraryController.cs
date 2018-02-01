@@ -12,12 +12,12 @@ namespace Server_Side_Projectwork.Controllers
 
         // Instead of a database, we use a static list.
         public static List<Book> BookList = new List<Book>{
-            new Book { ISBN = 000, Title = "Hej Monica", SignId = 00, PublicationYear = 1990, publicationinfo = "none", Pages = 124 },
-            new Book { ISBN = 001, Title = "Luddigt Vatten", SignId = 01, PublicationYear = 2010, publicationinfo = "none", Pages = 50  },
-            new Book { ISBN = 002, Title = "Bucklesmerry Finn", SignId = 02, PublicationYear = 1876, publicationinfo = "none", Pages = 366  },
-            new Book { ISBN = 003, Title = "Catcher in the rye", SignId = 03, PublicationYear = 1229, publicationinfo = "none", Pages = 999  },
-            new Book { ISBN = 004, Title = "Name of the Wind", SignId = 04, PublicationYear = 1999, publicationinfo = "none", Pages = 987  },
-            new Book { ISBN = 005, Title = "Arn", SignId = 05, PublicationYear = 1990, publicationinfo = "none", Pages = 571  }
+            new Book { ISBN = 0, Title = "Hej Monica", SignId = 00, PublicationYear = 1990, publicationinfo = "none", Pages = 124 },
+            new Book { ISBN = 1, Title = "Luddigt Vatten", SignId = 01, PublicationYear = 2010, publicationinfo = "none", Pages = 50  },
+            new Book { ISBN = 2, Title = "Bucklesmerry Finn", SignId = 02, PublicationYear = 1876, publicationinfo = "none", Pages = 366  },
+            new Book { ISBN = 3, Title = "Catcher in the rye", SignId = 03, PublicationYear = 1229, publicationinfo = "none", Pages = 999  },
+            new Book { ISBN = 4, Title = "Name of the Wind", SignId = 04, PublicationYear = 1999, publicationinfo = "none", Pages = 987  },
+            new Book { ISBN = 5, Title = "Arn", SignId = 05, PublicationYear = 1990, publicationinfo = "none", Pages = 571  }
         };
 
         public static List<Author> AuthorList = new List<Author>
@@ -59,16 +59,42 @@ namespace Server_Side_Projectwork.Controllers
             return View("Login");
         }
 
+
+        // GET: AddBook
         [HttpGet]
         public ActionResult AddBook()
         {
             return View("AddBook");
         }
 
+        // POST: AddBook - adds it to list
+        [HttpPost]
+        public ActionResult AddBook(Book book)
+        {
+            BookList.Add(book);
+            return Redirect("Books");
+        }
+
+        // GET: AddAuthor
         [HttpGet]
         public ActionResult AddAuthors()
         {
             return View("AddAuthors");
+        }
+
+        // POST: AddAuthor - adds it to list.
+        [HttpPost]
+        public ActionResult AddAuthors(Author author)
+        {
+            AuthorList.Add(author);
+            return Redirect("Authors");
+        }
+
+        [HttpGet]
+        public ActionResult ShowBook(int id)
+        {
+            //return View("ShowBook", BookList[isbn]);
+            return View("ShowBook", BookList.Find(x => (x.ISBN == id)));
         }
     }
 }
