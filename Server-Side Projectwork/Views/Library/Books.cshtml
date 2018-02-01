@@ -6,7 +6,21 @@
     ViewBag.Title = "Books";
 }
 
-<h2>Books</h2>
+<div>
+    <form>
+        <input type="Submit" value="Add Book">
+    </form>
+</div>
+
+<div>
+    <h2>Search for a Book</h2>
+    <form>
+        <input type="text" name="BookSearch">
+        <input type="submit" value="Search">
+    </form>
+</div>
+
+<h2>Result</h2>
 @foreach (var book in Model)
 {
     <li>@book.Title</li>
