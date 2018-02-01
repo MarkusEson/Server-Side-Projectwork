@@ -58,5 +58,17 @@ namespace Server_Side_Projectwork.Controllers
         {
             return View("Login");
         }
+
+        [HttpGet]
+        public ActionResult AddBook()
+        {
+            return View("AddBook");
+        }
+
+        [HttpGet]
+        public ActionResult AddAuthors()
+        {
+            return View("AddAuthors");
+        }
     }
 }
