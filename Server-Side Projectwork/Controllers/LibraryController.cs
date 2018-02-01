@@ -54,6 +54,7 @@ namespace Server_Side_Projectwork.Controllers
             return View("Authors", AuthorList);
         }
 
+        [HttpPost]
         public ActionResult Administrator()
         {
             return View("Administrator");
