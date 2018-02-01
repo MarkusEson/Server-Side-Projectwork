@@ -1,17 +1,9 @@
-﻿@model List<Server_Side_Projectwork.Models.Administrator>
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
     ViewBag.Title = "Administrator";
 }
 
-<h2>Administrators</h2>
+<h2>Administrator</h2>
 
-<div>
-    @foreach (var administrator in Model)
-    {
-        <a href="/Library/Administrator/Information/@administrator.adminId" class="btn btn-default" style="border-radius: 0px">@administrator.firstName @administrator.lastName</a><br />
-        <br />
-    }
-</div>

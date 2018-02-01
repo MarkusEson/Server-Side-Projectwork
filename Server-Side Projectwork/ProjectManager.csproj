@@ -138,7 +138,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Book_Author.cs" />
@@ -160,10 +159,8 @@
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Library\Books.cshtml" />
     <Content Include="Views\Library\Authors.cshtml" />
-    <Content Include="Views\Library\Login.cshtml" />
-    <Content Include="Views\Library\Administrators\Information.cshtml" />
-    <Content Include="Views\Library\Administrators\Edit.cshtml" />
     <Content Include="Views\Library\Administrator.cshtml" />
+    <Content Include="Views\Library\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
