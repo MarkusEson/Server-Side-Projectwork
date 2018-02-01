@@ -12,15 +12,12 @@ namespace Server_Side_Projectwork.Controllers
 
         // Instead of a database, we use a static list.
         public static List<Book> BookList = new List<Book>{
-            new Book { Title = "Radiology and You",         Author = "Marie Curie",             ISBN = 833 },
-            new Book { Title = "How to Drive and Sing",     Author = "James Corden",            ISBN = 042 },
-            new Book { Title = "Veggies for Cooking",       Author = "Artie Choke",             ISBN = 112 },
-            new Book { Title = "Proper Pronounciation",     Author = "Benediff Cucumberbatch",  ISBN = 399 },
-            new Book { Title = "Yxskaft",                   Author = "Ralun Jorge",             ISBN = 345 },
-            new Book { Title = "Dålig Musik",               Author = "Leffe Hoffmeistro",       ISBN = 216 },
-            new Book { Title = "Konstiga Namn",             Author = "Solen Gårupp",            ISBN = 987 },
-            new Book { Title = "Filmologi",                 Author = "Dum Dummare",             ISBN = 222 },
-            new Book { Title = "Vem är det?",               Author = "Markus Eriksson",         ISBN = 100 }
+            new Book { ISBN = 000, Title = "Hej Monica", SignId = 00, PublicationYear = 1990, publicationinfo = "none", Pages = 124 },
+            new Book { ISBN = 001, Title = "Luddigt Vatten", SignId = 01, PublicationYear = 2010, publicationinfo = "none", Pages = 50  },
+            new Book { ISBN = 002, Title = "Bucklesmerry Finn", SignId = 02, PublicationYear = 1876, publicationinfo = "none", Pages = 366  },
+            new Book { ISBN = 003, Title = "Catcher in the rye", SignId = 03, PublicationYear = 1229, publicationinfo = "none", Pages = 999  },
+            new Book { ISBN = 004, Title = "Name of the Wind", SignId = 04, PublicationYear = 1999, publicationinfo = "none", Pages = 987  },
+            new Book { ISBN = 005, Title = "Arn", SignId = 05, PublicationYear = 1990, publicationinfo = "none", Pages = 571  }
         };
 
         // GET: Library
