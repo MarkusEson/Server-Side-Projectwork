@@ -47,5 +47,10 @@ namespace Server_Side_Projectwork.Controllers
         {
             return View("Administrator");
         }
+
+        public ActionResult Login()
+        {
+            return View("Login");
+        }
     }
 }
