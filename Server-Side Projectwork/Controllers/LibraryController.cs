@@ -31,6 +31,9 @@ namespace Server_Side_Projectwork.Controllers
         // GET: Library
         public ActionResult Index()
         {
+           // Repository repo = new Repository();
+           // Session["repo"] = repo;
+        
             return View();
         }
 

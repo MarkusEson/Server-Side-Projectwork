@@ -142,6 +142,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Book_Author.cs" />
     <Compile Include="Models\Classification.cs" />
+    <Compile Include="Models\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
