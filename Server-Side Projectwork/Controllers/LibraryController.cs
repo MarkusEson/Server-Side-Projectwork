@@ -9,7 +9,7 @@ namespace Server_Side_Projectwork.Controllers
 {
     public class LibraryController : Controller
     {
-
+        /*
         // Instead of a database, we use a static list.
         public static List<Book> BookList = new List<Book>{
             new Book { ISBN = 0, Title = "Hej Monica", SignId = 00, PublicationYear = 1990, publicationinfo = "none", Pages = 124 },
@@ -27,12 +27,12 @@ namespace Server_Side_Projectwork.Controllers
             new Author { Aid = 002, FirstName = "Jessica", LastName = "Wok", BirthYear = 1989 },
             new Author { Aid = 000, FirstName = "Sarah", LastName = "Silverwoman", BirthYear = 1967 }
         };
-
+        */
         // GET: Library
         public ActionResult Index()
         {
-           // Repository repo = new Repository();
-           // Session["repo"] = repo;
+            Repository repo = new Repository();
+            Session["repo"] = repo;
         
             return View();
         }
@@ -41,14 +41,19 @@ namespace Server_Side_Projectwork.Controllers
         [HttpGet]
         public ActionResult Books()
         {
-            return View("Books", BookList);
+
+            Repository repo = (Repository)Session["repo"];
+            List<Book> myList = repo.BookList;
+            return View(myList);
         }
 
         // GET: Authors
         [HttpGet]
         public ActionResult Authors()
         {
-            return View("Authors", AuthorList);
+            Repository repo = (Repository)Session["repo"];
+            List<Author> myList = repo.AuthorList;
+            return View(myList);
         }
 
         public ActionResult Administrators()
@@ -61,8 +66,7 @@ namespace Server_Side_Projectwork.Controllers
         {
             return View("Login");
         }
-
-
+         
         // GET: AddBook
         [HttpGet]
         public ActionResult AddBook()
@@ -74,7 +78,8 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public ActionResult AddBook(Book book)
         {
-            BookList.Add(book);
+            Repository repo = (Repository)Session["repo"];
+            repo.BookList.Add(book);
             return Redirect("Books");
         }
 
@@ -89,15 +94,19 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public ActionResult AddAuthors(Author author)
         {
-            AuthorList.Add(author);
+            Repository repo = (Repository)Session["repo"];
+            repo.AuthorList.Add(author);
             return Redirect("Authors");
         }
 
         [HttpGet]
         public ActionResult ShowBook(int id)
         {
+            Repository repo = (Repository)Session["repo"];
+            
             //return View("ShowBook", BookList[isbn]);
-            return View("ShowBook", BookList.Find(x => (x.ISBN == id)));
+            return View("ShowBook", repo.BookList.Find(x => (x.ISBN == id)));
         }
+        
     }
 }

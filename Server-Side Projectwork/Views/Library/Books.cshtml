@@ -1,4 +1,4 @@
-﻿@model List<Server_Side_Projectwork.Models.Book>
+﻿@model IEnumerable<Server_Side_Projectwork.Models.Book>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -23,9 +23,9 @@
 
  <div>
      <h2>Result</h2>
-     @foreach (var book in Model)
+     @foreach (var item in Model)
      {
-         <li><a href="/Library/ShowBook/@book.ISBN">@book.Title</a></li>
+         <li><a href="/Library/ShowBook/@item.ISBN">@item.Title</a></li>
      }
 
     <div class="pagination">
