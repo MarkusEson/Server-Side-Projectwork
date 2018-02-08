@@ -18,6 +18,16 @@ namespace Server_Side_Projectwork.Controllers
             return View();
         }
 
+        // GET: Books
+        [HttpGet]
+        public ActionResult Books()
+        {
+
+            Repository repo = (Repository)Session["repo"];
+            List<Book> myList = repo.BookList;
+            return View(myList);
+        }
+
         // GET: AddBook
         [HttpGet]
         public ActionResult AddBook()
@@ -43,11 +53,53 @@ namespace Server_Side_Projectwork.Controllers
             return View("ShowBook", repo.BookList.Find(x => (x.ISBN == id)));
         }
 
-        [HttpGet]
-        public ActionResult EditBook(int isbn)
+
+
+
+
+        /*
+         * EDIT BOOK 
+         * EDIT BOOK
+         * EDIT BOOK
+         */
+
+        // GET: Update
+        public ActionResult EditBook(string id)
         {
             Repository repo = (Repository)Session["repo"];
-            return View("ShowBook", repo.BookList.Find(x => (x.ISBN == isbn)));
+
+            return View("EditBook", repo.BookList.Find(x => (x.ISBN == Convert.ToInt32(id))));
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult EditBook(string isbn, string title, string signid, string publicationyear, string publicationinfo, string pages )
+        {
+            //Repository repo = (Repository)Session["repo"];
+            //return View("ShowBook", repo.BookList.Find(x => (x.ISBN == isbn)));
+            
+            TempData["ISBN"] = Convert.ToInt32(isbn);
+            TempData["Title"] = title;
+            TempData["SignId"] = Convert.ToInt32(signid);
+            TempData["PublicationYear"] = Convert.ToInt32(publicationyear);
+            TempData["publicationinfo"] = publicationinfo;
+            TempData["Pages"] = Convert.ToInt32(pages);
+            
+            return RedirectToAction("UpdateBook");
+        }
+
+        public ActionResult UpdateBook()
+        {
+            Repository repo = (Repository)Session["repo"];
+            Book bookobj = repo.BookList.Find(x => x.ISBN == Convert.ToInt32(TempData["ISBN"]));
+            bookobj.Title = Convert.ToString(TempData["Title"]);
+            bookobj.SignId = Convert.ToInt32(TempData["SignId"]);
+            bookobj.PublicationYear = Convert.ToInt32(TempData["PublicationYear"]);
+            bookobj.publicationinfo = Convert.ToString(TempData["publicationinfo"]);
+            bookobj.Pages = Convert.ToInt32(TempData["Pages"]);
+
+            Session["repo"] = repo;
+            //return RedirectToAction("ShowBook","Book","Book");
+            return View("ShowBook", bookobj);
         }
     }
 }

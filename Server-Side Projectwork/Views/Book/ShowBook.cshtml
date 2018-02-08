@@ -11,11 +11,11 @@
 <h2>Show chosen Book</h2>
 
 <div>
-    @Html.ActionLink("Edit Book","EditBook" ,"Book",new { ISBN = Model.ISBN },null)
+    @Html.ActionLink("Edit" ,"EditBook" ,"Book" ,new { id = Model.ISBN } ,null)
 </div>
 
 <dl>
-    <dt>ISBN | @Html.ActionLink()</dt>
+    <dt>ISBN</dt>
     <dd>@Model.ISBN</dd>
 
     <dt>Title</dt>

@@ -162,8 +162,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Library\Books.cshtml" />
-    <Content Include="Views\Library\Authors.cshtml" />
+    <Content Include="Views\Book\Books.cshtml" />
+    <Content Include="Views\Author\Authors.cshtml" />
+    <Content Include="Views\Library\Administrators.cshtml" />
     <Content Include="Views\Library\Login.cshtml" />
     <Content Include="Views\Admin\AddAdmin.cshtml" />
     <Content Include="Views\Admin\ShowAdmin.cshtml" />
@@ -172,7 +173,7 @@
     <Content Include="Views\Author\AddAuthors.cshtml" />
     <Content Include="Views\Book\ShowBook.cshtml" />
     <Content Include="Views\Author\ShowAuthor.cshtml" />
-    <Content Include="Views\Library\Administrator.cshtml" />
+    <Content Include="Views\Book\EditBook.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
