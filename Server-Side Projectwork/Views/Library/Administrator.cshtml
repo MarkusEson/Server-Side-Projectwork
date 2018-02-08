@@ -6,12 +6,30 @@
     ViewBag.Title = "Administrator";
 }
 
-<h2>Administrator</h2>
-<ul style="list-style-type: none">
+<style>
+    ul
+    {
+        list-style-type: none; 
+        padding-left: 0; 
+        margin-left: 0;
+    }
+
+    #adminBtn
+    {
+        border-radius: 0; 
+        font-size: x-large; 
+        margin-top: 10px
+    }
+</style>
+
+<h2>Administrators</h2>
+
+<ul>
     @foreach (var admin in Model)
     {
-        <li><a href="/Admin/Show/@admin.AdminId" class="btn btn-default" style="border-radius: 0">@admin.FirstName @admin.LastName</a></li>
-        <br />
+        <li><a href="/Admin/Show/@admin.AdminId" class="btn btn-default" id="adminBtn">@admin.FirstName @admin.LastName</a></li>
     }
-    <a href="/Admin/Add" class="btn btn-default">Create new admin!</a>
+    
 </ul>
+
+<a href="/Admin/Add" class="btn btn-default">Create new admin!</a>

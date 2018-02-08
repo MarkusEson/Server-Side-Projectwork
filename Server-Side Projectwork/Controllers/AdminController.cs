@@ -19,6 +19,7 @@ namespace Server_Side_Projectwork.Controllers
         {
             return View("AddAdmin");
         }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -26,6 +27,8 @@ namespace Server_Side_Projectwork.Controllers
 
             return View("EditAdmin", repo.AdminList.Find(x => (x.AdminId == id)));
         }
+
+        [HttpGet]
         public ActionResult Show(int id)
         {
             Repository repo = (Repository)Session["repo"];
