@@ -10,8 +10,8 @@
 <ul style="list-style-type: none">
     @foreach (var admin in Model)
     {
-        <li><a href="/Library/EditAdmin/@admin.AdminId" class="btn btn-default" style="border-radius: 0">@admin.FirstName @admin.LastName</a></li>
+        <li><a href="/Admin/Edit/@admin.AdminId" class="btn btn-default" style="border-radius: 0">@admin.FirstName @admin.LastName</a></li>
         <br />
     }
-    <a href="/Library/AddAdmin" class="btn btn-default">Create new admin!</a>
+    <a href="/Admin/Add" class="btn btn-default">Create new admin!</a>
 </ul>

@@ -1,0 +1,22 @@
+﻿@model Server_Side_Projectwork.Models.Administrator
+@{
+    ViewBag.Title = "EditAdmin";
+}
+
+<h3>ID</h3>
+@Html.TextBoxFor(id => id.AdminId, new { @disabled = "disabled", @style = "width: 50px" })
+
+<br />
+
+<h3>Firstame</h3>
+@Html.TextBoxFor(firstname => firstname.FirstName, new { @placeholder = "Firstname" })
+
+<br />
+
+<h3>Lastname</h3>
+@Html.TextBoxFor(lastname => lastname.LastName, new { @placeholder = "Firstname" })
+
+<br />
+
+<h3>Description</h3>
+@Html.TextAreaFor(description => description.Description, new { @rows = "5", @cols = "50", @placeholder = "Description" })

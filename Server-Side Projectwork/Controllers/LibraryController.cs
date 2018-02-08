@@ -68,55 +68,6 @@ namespace Server_Side_Projectwork.Controllers
         {
             return View("Login");
         }
-         
-        // GET: AddBook
-        [HttpGet]
-        public ActionResult AddBook()
-        {
-            return View("AddBook");
-        }
-
-        // POST: AddBook - adds it to list
-        [HttpPost]
-        public ActionResult AddBook(Book book)
-        {
-            Repository repo = (Repository)Session["repo"];
-            repo.BookList.Add(book);
-            return Redirect("Books");
-        }
-
-        // GET: AddAuthor
-        [HttpGet]
-        public ActionResult AddAuthors()
-        {
-            return View("AddAuthors");
-        }
-
-        // POST: AddAuthor - adds it to list.
-        [HttpPost]
-        public ActionResult AddAuthors(Author author)
-        {
-            Repository repo = (Repository)Session["repo"];
-            repo.AuthorList.Add(author);
-            return Redirect("Authors");
-        }
-
-        [HttpGet]
-        public ActionResult ShowBook(int id)
-        {
-            Repository repo = (Repository)Session["repo"];
-            
-            //return View("ShowBook", BookList[isbn]);
-            return View("ShowBook", repo.BookList.Find(x => (x.ISBN == id)));
-        }
-
-        [HttpGet]
-        public ActionResult EditAdmin(int id)
-        {
-            Repository repo = (Repository)Session["repo"];
-
-            return View("EditAdmin", repo.AdminList.Find(x => (x.AdminId == id)));
-        }
         
     }
 }
