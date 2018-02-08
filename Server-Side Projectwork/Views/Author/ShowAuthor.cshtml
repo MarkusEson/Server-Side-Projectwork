@@ -1,0 +1,26 @@
+﻿@model Server_Side_Projectwork.Models.Author
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "ShowAuthor";
+}
+
+<h2>Show Author</h2>
+
+<dl>
+    <dt>First Name</dt>
+    <dd>@Model.FirstName</dd>
+
+    <dt>Last Name</dt>
+    <dd>@Model.LastName</dd>
+
+    <dt>AidId</dt>
+    <dd>@Model.Aid</dd>
+
+    <dt>Birth year </dt>
+    <dd>@Model.BirthYear</dd>
+
+</dl>

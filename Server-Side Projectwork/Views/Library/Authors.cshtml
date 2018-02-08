@@ -11,7 +11,7 @@
 
 <div>
     <form>
-        <a href="/Library/AddAuthors">Add Author</a>
+        <a href="/Author/AddAuthors">Add Author</a>
     </form>
 </div>
 
@@ -26,7 +26,7 @@
 
     @foreach (var item in Model)
     {
-        <li>@item.FirstName @item.LastName</li>
+        <li><a href="/Author/ShowAuthor/@item.Aid">@item.FirstName @item.LastName</a></li>
     }
 
     <div class="pagination">
