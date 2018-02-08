@@ -134,6 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -170,6 +172,10 @@
     <Content Include="Views\Library\AddAdmin.cshtml" />
     <Content Include="Views\Library\ShowAdmin.cshtml" />
     <Content Include="Views\Library\EditAdmin.cshtml" />
+    <Content Include="Views\Book\AddBook.cshtml" />
+    <Content Include="Views\Author\AddAuthors.cshtml" />
+    <Content Include="Views\Book\ShowBook.cshtml" />
+    <Content Include="Views\Author\ShowAuthor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -180,6 +186,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\" />
+    <Folder Include="Views\List\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Service\Service.csproj">

@@ -28,10 +28,10 @@ namespace Server_Side_Projectwork.Models
 
             authorList = new List<Author>
             {
-                new Author { Aid = 000, FirstName = "Jonathan", LastName = "Woss", BirthYear = 2010 },
-                new Author { Aid = 001, FirstName = "Jimmy", LastName = "Carr", BirthYear = 1987 },
-                new Author { Aid = 002, FirstName = "Jessica", LastName = "Wok", BirthYear = 1989 },
-                new Author { Aid = 000, FirstName = "Sarah", LastName = "Silverwoman", BirthYear = 1967 }
+                new Author { Aid = 0, FirstName = "Jonathan", LastName = "Woss", BirthYear = 2010 },
+                new Author { Aid = 1, FirstName = "Jimmy", LastName = "Carr", BirthYear = 1987 },
+                new Author { Aid = 2, FirstName = "Jessica", LastName = "Wok", BirthYear = 1989 },
+                new Author { Aid = 3, FirstName = "Sarah", LastName = "Silverwoman", BirthYear = 1967 }
             };
 
             adminList = new List<Administrator>
