@@ -19,24 +19,9 @@ namespace Server_Side_Projectwork.Controllers
             return View();
         }
 
-        // GET: Books
-        [HttpGet]
-        public ActionResult Books()
-        {
+        
 
-            Repository repo = (Repository)Session["repo"];
-            List<Book> myList = repo.BookList;
-            return View(myList);
-        }
-
-        // GET: Authors
-        [HttpGet]
-        public ActionResult Authors()
-        {
-            Repository repo = (Repository)Session["repo"];
-            List<Author> myList = repo.AuthorList;
-            return View(myList);
-        }
+        
 
         public ActionResult Administrator()
         {

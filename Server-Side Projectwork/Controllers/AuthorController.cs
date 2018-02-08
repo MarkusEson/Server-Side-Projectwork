@@ -18,6 +18,15 @@ namespace Server_Side_Projectwork.Controllers
             return View();
         }
 
+        // GET: Authors
+        [HttpGet]
+        public ActionResult Authors()
+        {
+            Repository repo = (Repository)Session["repo"];
+            List<Author> myList = repo.AuthorList;
+            return View(myList);
+        }
+
         // GET: AddAuthor
         [HttpGet]
         public ActionResult AddAuthors()
