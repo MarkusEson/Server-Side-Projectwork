@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Server_Side_Projectwork.Models.Administrator>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
@@ -6,4 +7,11 @@
 }
 
 <h2>Administrator</h2>
-
+<ul style="list-style-type: none">
+    @foreach (var admin in Model)
+    {
+        <li><a href="/Library/EditAdmin/@admin.AdminId" class="btn btn-default" style="border-radius: 0">@admin.FirstName @admin.LastName</a></li>
+        <br />
+    }
+    <a href="/Library/AddAdmin" class="btn btn-default">Create new admin!</a>
+</ul>

@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Book_Author.cs" />
@@ -166,6 +167,9 @@
     <Content Include="Views\Library\AddAuthors.cshtml" />
     <Content Include="Views\Library\ShowBook.cshtml" />
     <Content Include="Views\Library\ShowAuthor.cshtml" />
+    <Content Include="Views\Library\AddAdmin.cshtml" />
+    <Content Include="Views\Library\ShowAdmin.cshtml" />
+    <Content Include="Views\Library\EditAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

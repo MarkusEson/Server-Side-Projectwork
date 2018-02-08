@@ -56,9 +56,11 @@ namespace Server_Side_Projectwork.Controllers
             return View(myList);
         }
 
-        public ActionResult Administrators()
+        public ActionResult Administrator()
         {
-            return View("Administrator");
+            Repository repo = (Repository)Session["repo"];
+            List<Administrator> myList = repo.AdminList;
+            return View(myList);
         }
 
         [HttpGet]
@@ -106,6 +108,14 @@ namespace Server_Side_Projectwork.Controllers
             
             //return View("ShowBook", BookList[isbn]);
             return View("ShowBook", repo.BookList.Find(x => (x.ISBN == id)));
+        }
+
+        [HttpGet]
+        public ActionResult EditAdmin(int id)
+        {
+            Repository repo = (Repository)Session["repo"];
+
+            return View("EditAdmin", repo.AdminList.Find(x => (x.AdminId == id)));
         }
         
     }

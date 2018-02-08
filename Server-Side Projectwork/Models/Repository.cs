@@ -12,6 +12,7 @@ namespace Server_Side_Projectwork.Models
     {
         public List<Book> bookList;
         public List<Author> authorList;
+        public List<Administrator> adminList;
 
         public Repository()
         {
@@ -32,8 +33,15 @@ namespace Server_Side_Projectwork.Models
                 new Author { Aid = 002, FirstName = "Jessica", LastName = "Wok", BirthYear = 1989 },
                 new Author { Aid = 000, FirstName = "Sarah", LastName = "Silverwoman", BirthYear = 1967 }
             };
+
+            adminList = new List<Administrator>
+            {
+                new Administrator { AdminId = 0, FirstName = "Pontus", LastName = "Anderö", Description = "This is a description of various lengths." },
+                new Administrator { AdminId = 1, FirstName = "AdminFirst", LastName = "AdminLast", Description = "Short desc." }
+            };
         }
         public List<Book> BookList { get { return bookList; } set { bookList = value; } }
         public List<Author> AuthorList { get { return authorList; } set { authorList = value; } }
+        public List<Administrator> AdminList { get { return adminList; } set { adminList = value; } }
     }
 }
