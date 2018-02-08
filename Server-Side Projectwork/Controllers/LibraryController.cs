@@ -40,7 +40,7 @@ namespace Server_Side_Projectwork.Controllers
 
         public ActionResult Administrators()
         {
-            return View("Administrator");
+            return View("Administrators");
         }
 
         [HttpGet]

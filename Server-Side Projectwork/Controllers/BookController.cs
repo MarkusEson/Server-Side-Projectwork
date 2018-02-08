@@ -42,5 +42,12 @@ namespace Server_Side_Projectwork.Controllers
             //return View("ShowBook", repo.BookList[id]);
             return View("ShowBook", repo.BookList.Find(x => (x.ISBN == id)));
         }
+
+        [HttpGet]
+        public ActionResult EditBook(int isbn)
+        {
+            Repository repo = (Repository)Session["repo"];
+            return View("ShowBook", repo.BookList.Find(x => (x.ISBN == isbn)));
+        }
     }
 }
