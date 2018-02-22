@@ -7,7 +7,7 @@ namespace Server_Side_Projectwork.Models
 {
     public class Book
     {
-        public int ISBN { get; set; }   // primary key
+        public string ISBN { get; set; }   // primary key
         public string Title { get; set; }
         public int SignId { get; set; }
         public int PublicationYear { get; set; }  
