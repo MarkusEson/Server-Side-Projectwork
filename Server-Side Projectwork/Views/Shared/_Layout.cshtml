@@ -8,11 +8,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
+
+    body
+    {
+        position: relative;
+    }
+
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
       background-color: white;
+    }
+
+    .login-text
+    {
+        user-select:none;
+        color: black;
     }
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -78,7 +90,44 @@
                     <li>@Html.ActionLink("Administrators","Administrator" ,"Library")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Login", "Login", "Library")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle login-text" data-toggle="dropdown">Log In<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3><b>Log In</b></h3></div>
+                                <form class="form-horizontal" role="form" action="~/Views/Library/Login.cshtml">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                                <label for="remember"> Remember Me</label>
+                                            </div>
+                                            <div class="col-xs-5 pull-right">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

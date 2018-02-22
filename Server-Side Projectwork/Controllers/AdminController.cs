@@ -14,13 +14,13 @@ namespace Server_Side_Projectwork.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Add()
+        public ActionResult Show(int id)
         {
-            return View("AddAdmin");
+            Repository repo = (Repository)Session["repo"];
+
+            return View("ShowAdmin", repo.AdminList.Find(x => (x.AdminId == id)));
         }
 
-        [HttpGet]
         public ActionResult Edit(int id)
         {
             Repository repo = (Repository)Session["repo"];
@@ -28,12 +28,29 @@ namespace Server_Side_Projectwork.Controllers
             return View("EditAdmin", repo.AdminList.Find(x => (x.AdminId == id)));
         }
 
-        [HttpGet]
-        public ActionResult Show(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Administrator admin)
         {
             Repository repo = (Repository)Session["repo"];
 
-            return View("ShowAdmin", repo.AdminList.Find(x => (x.AdminId == id)));
+            return View("EditAdmin", admin);
+        }
+
+        public ActionResult Add()
+        {
+            Repository repo = (Repository)Session["repo"];
+
+            return View("AddAdmin");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(Administrator admin)
+        {
+            Repository repo = (Repository)Session["repo"];
+
+            return View("AddAdmin", admin);
         }
     }
 }
