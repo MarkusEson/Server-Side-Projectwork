@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Server_Side_Projectwork.Models;
 
+
 namespace Server_Side_Projectwork.Controllers
 {
     public class LibraryController : Controller
@@ -13,10 +14,17 @@ namespace Server_Side_Projectwork.Controllers
         // GET: Library
         public ActionResult Index()
         {
-            Repository repo = new Repository();
-            Session["repo"] = repo;
-        
-            return View();
+            //Repository repo = new Repository();
+            //Session["repo"] = repo;
+            // return View();
+
+
+            using (var db = new Libdb())
+            {
+                return View();
+            }
+
+         
         }
 
         
