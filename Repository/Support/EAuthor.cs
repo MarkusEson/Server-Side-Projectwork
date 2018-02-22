@@ -7,5 +7,14 @@ namespace Repository.Support
 {
     public class EAuthor
     {
+        // här ligger metoderna för att hämta 
+        // read metod
+        public AUTHOR read(int id)
+        {
+            using (var db = new Libdb)
+            {
+                
+            }
+        }
     }
 }

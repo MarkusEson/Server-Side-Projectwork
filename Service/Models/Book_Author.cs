@@ -5,7 +5,9 @@ using System.Web;
 
 namespace Service.Models
 {
-    public class BookAuthor
+    public class Book_Author
     {
+        public string ISBN { get; set; }   // primary key
+        public string Aid { get; set; }     //secondary key
     }
 }

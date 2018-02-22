@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Server_Side_Projectwork.Models;
+using Service;
 
 namespace Server_Side_Projectwork.Controllers
 {
@@ -12,8 +12,8 @@ namespace Server_Side_Projectwork.Controllers
         // GET: Library
         public ActionResult Index()
         {
-            Repository repo = new Repository();
-            Session["repo"] = repo;
+            //Repository repo = new Repository();
+            //Session["repo"] = repo;
 
             return View();
         }
@@ -22,8 +22,11 @@ namespace Server_Side_Projectwork.Controllers
         [HttpGet]
         public ActionResult Authors()
         {
-            Repository repo = (Repository)Session["repo"];
-            List<Author> myList = repo.AuthorList;
+            // controller kallar på funktion i Service modellen, som hämtar från Repository databasen.
+
+            //Repository repo = (Repository)Session["repo"];
+            Service.Models.
+            List<Author> myList = Models.Author.getAuthor();
             return View(myList);
         }
 

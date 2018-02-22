@@ -187,6 +187,10 @@
     <Folder Include="Views\List\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{6C5E0016-04C2-4782-9F83-8086EB20656E}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{c4a201c2-e5e8-4ba9-a5ef-39e478a1c2b6}</Project>
       <Name>Service</Name>
