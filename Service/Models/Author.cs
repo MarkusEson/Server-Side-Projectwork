@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Repository;
 
-namespace Server_Side_Projectwork.Models
+namespace Service.Models
 {
     public class Author
     {
@@ -11,5 +12,14 @@ namespace Server_Side_Projectwork.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string BirthYear { get; set; }
+
+
+        public Author getAuthor(int authorid)
+        {
+
+            return ;
+        }
     }
+
+
 }

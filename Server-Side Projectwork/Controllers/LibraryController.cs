@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Server_Side_Projectwork.Models;
+using Repository;
 
 namespace Server_Side_Projectwork.Controllers
 {
@@ -15,8 +16,15 @@ namespace Server_Side_Projectwork.Controllers
         {
             Repository repo = new Repository();
             Session["repo"] = repo;
-        
-            return View();
+                return View();
+
+
+            //using (var db = new Libdb())
+            //{
+             //   return View();
+            //}
+
+         
         }
 
         
