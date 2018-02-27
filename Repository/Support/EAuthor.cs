@@ -11,7 +11,7 @@ namespace Repository.Support
         // read metod
         public AUTHOR read(int id)
         {
-            using (var db = new Libdb)
+            using (var db = new Libdb())
             {
                 
             }
