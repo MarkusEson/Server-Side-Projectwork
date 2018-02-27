@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Server_Side_Projectwork.Models;
+using Service.Models;
 
 namespace Server_Side_Projectwork.Controllers
 {
     public class BookController : Controller
     {
+        /*
         // GET: Library
         public ActionResult Index()
         {
@@ -54,14 +55,9 @@ namespace Server_Side_Projectwork.Controllers
         }
 
 
-
-
-
+        */
         /*
-         * EDIT BOOK 
-         * EDIT BOOK
-         * EDIT BOOK
-         */
+
 
         // GET: Update
         public ActionResult EditBook(string id)
@@ -101,5 +97,6 @@ namespace Server_Side_Projectwork.Controllers
             //return RedirectToAction("ShowBook","Book","Book");
             return View("ShowBook", bookobj);
         }
+        */
     }
 }

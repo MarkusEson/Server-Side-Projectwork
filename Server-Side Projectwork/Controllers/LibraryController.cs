@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Server_Side_Projectwork.Models;
+using Service.Models;
+using Repository.Support;
 using Repository;
 
 namespace Server_Side_Projectwork.Controllers
@@ -13,23 +14,13 @@ namespace Server_Side_Projectwork.Controllers
     
         // GET: Library
         public ActionResult Index()
-        {
-            Repository repo = new Repository();
-            Session["repo"] = repo;
-                return View();
-
-
-            //using (var db = new Libdb())
-            //{
-             //   return View();
-            //}
-
-         
+        {      
+            return View("Index");     
         }
 
         
 
-        
+        /*
 
         public ActionResult Administrator()
         {
@@ -43,6 +34,7 @@ namespace Server_Side_Projectwork.Controllers
         {
             return View("Login");
         }
-        
+       
+        */
     }
 }

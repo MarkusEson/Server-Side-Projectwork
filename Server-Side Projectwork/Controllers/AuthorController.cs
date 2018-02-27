@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Service;
+using Service.Models;
 
 namespace Server_Side_Projectwork.Controllers
 {
     public class AuthorController : Controller
     {
         // GET: Library
-        public ActionResult Index()
+        public ActionResult ListAuthor()
         {
             //Repository repo = new Repository();
             //Session["repo"] = repo;
 
-            return View();
+            return View(Author.getAuthorList());
         }
-
+        /*
         // GET: Authors
         [HttpGet]
         public ActionResult Authors()
@@ -56,5 +56,6 @@ namespace Server_Side_Projectwork.Controllers
             //return View("ShowBook", BookList[isbn]);
             return View("ShowAuthor", repo.AuthorList.Find(x => (x.Aid == id)));
         }
+        */
     }
 }
