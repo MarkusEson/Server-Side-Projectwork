@@ -157,7 +157,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Book\Books.cshtml" />
-    <Content Include="Views\Author\Authors.cshtml" />
+    <Content Include="Views\Author\ListAuthors.cshtml" />
     <Content Include="Views\Library\Administrators.cshtml" />
     <Content Include="Views\Library\Login.cshtml" />
     <Content Include="Views\Admin\ShowAdmin.cshtml" />

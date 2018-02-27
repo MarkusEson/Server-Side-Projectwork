@@ -15,7 +15,7 @@ namespace Server_Side_Projectwork.Controllers
             //Repository repo = new Repository();
             //Session["repo"] = repo;
 
-            return View(Author.getAuthorList());
+            return View("ListAuthors", Author.getAuthorList());
         }
         /*
         // GET: Authors

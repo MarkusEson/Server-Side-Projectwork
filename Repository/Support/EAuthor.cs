@@ -44,7 +44,7 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 // return 
-                var query = db.AUTHOR.OrderBy(x => x.FirstName);
+                var query = db.AUTHOR.OrderBy(x => x.Aid);
                 return query.ToList();
             }
         }
