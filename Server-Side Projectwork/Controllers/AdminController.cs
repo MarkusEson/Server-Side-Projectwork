@@ -1,8 +1,9 @@
 ﻿using System.Web.Mvc;
-using Server_Side_Projectwork.Models;
+using Service.Models;
 
 namespace Server_Side_Projectwork.Controllers
 {
+    /*
     public class AdminController : Controller
     {
         // GET: Admin
@@ -53,4 +54,5 @@ namespace Server_Side_Projectwork.Controllers
             return View("AddAdmin", admin);
         }
     }
+    */
 }

@@ -86,7 +86,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home","Index","Library")</li>
                     <li>@Html.ActionLink("Books","Books","Book")</li>
-                    <li>@Html.ActionLink("Authors","Authors","Author")</li>
+                    <li>@Html.ActionLink("Authors","ListAuthor","Author")</li>
                     <li>@Html.ActionLink("Administrators","Administrator" ,"Library")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -142,8 +142,10 @@
             </div>
             <div class="col-sm-8 text-left">
                 <h1>Välkommen</h1>
-                    <p>Högskolebiblioteket är högskolans viktigaste gemensamma informationsresurs för vetenskaplig forskning och högre studier. <br>
-                       Vi erbjuder samlingar av tryckt och elektronisk litteratur och informationstjänster som kan användas både på plats och via webbplatsen.</p>
+                    <p>
+                       Högskolebiblioteket är högskolans viktigaste gemensamma informationsresurs för vetenskaplig forskning och högre studier. <br>
+                       Vi erbjuder samlingar av tryckt och elektronisk litteratur och informationstjänster som kan användas både på plats och via webbplatsen.
+                    </p>
                 <hr>
                 @RenderBody()
             </div>
