@@ -21,21 +21,21 @@ namespace Repository.Support
         */
         public EAuthor() { }
 
-        public EAuthor(int authAid)
+        public EAuthor(int Aid)
         {
-            _authorObj = this.Read(authAid);
+            _authorObj = this.Read(Aid);
         }
 
         private AUTHOR _authorObj = null;
 
         public AUTHOR authorobj { get { return _authorObj; } }
 
-        public AUTHOR Read(int id) // Find author by id
+        public AUTHOR Read(int Aid) // Find author by id
         {
             using (var db = new Libdb())
             {
                 db.AUTHOR.Load();
-                return db.AUTHOR.Find(id);
+                return db.AUTHOR.Find(Aid);
             }
         }
 
