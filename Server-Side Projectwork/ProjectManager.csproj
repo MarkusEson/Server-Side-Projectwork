@@ -168,6 +168,7 @@
     <Content Include="Views\Admin\EditAdmin.cshtml" />
     <Content Include="Views\Admin\AddAdmin.cshtml" />
     <Content Include="Views\Library\Administrator.cshtml" />
+    <Content Include="Views\Admin\ListAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

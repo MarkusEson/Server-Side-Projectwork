@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Service.Models.Administrator>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Authors";
+}
+
+
+
+
+<div>
+    <form>
+        <a href="/Admin/AddAdmin">Add Author</a>
+    </form>
+</div>
+
+<h2>Result</h2>
+<div>
+
+    @foreach (var item in Model)
+    {
+        <li><a href="/Admin/ShowAdmin/@item.AdminId">@item.FirstName @item.LastName</a></li>
+    }
+
+</div>

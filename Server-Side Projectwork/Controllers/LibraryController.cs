@@ -20,9 +20,7 @@ namespace Server_Side_Projectwork.Controllers
 
         public ActionResult Administrator()
         {
-            Repository repo = (Repository)Session["repo"];
-            List<Administrator> myList = repo.AdminList;
-            return View(myList);
+            return View("Administrator");
         }
 
         [HttpPost]

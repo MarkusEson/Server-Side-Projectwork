@@ -3,18 +3,16 @@ using Service.Models;
 
 namespace Server_Side_Projectwork.Controllers
 {
-    /*
+    
     public class AdminController : Controller
     {
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult ListAdmin()
         {
-            Repository repo = new Repository();
-            Session["repo"] = repo;
-
-            return View();
+            return View("ListAdmin", Administrator.getAdminList());
         }
 
+        /*
         public ActionResult Show(int id)
         {
             Repository repo = (Repository)Session["repo"];
@@ -52,7 +50,7 @@ namespace Server_Side_Projectwork.Controllers
             Repository repo = (Repository)Session["repo"];
 
             return View("AddAdmin", admin);
-        }
+        }*/
     }
-    */
+    
 }
