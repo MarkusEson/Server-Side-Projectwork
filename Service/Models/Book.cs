@@ -17,7 +17,7 @@ namespace Service.Models
 
         static private EBook _EbookObj = new EBook();
 
-        static public Book getBooks(int id)
+        static public Book getBooks(string id)
         {
             return MapBook(new EBook(id));
         }
@@ -42,7 +42,7 @@ namespace Service.Models
 
         static public void updateBook(string bISBN, string bTitle, int bsignId, string bPyear, string bpInfo, short? bPages)
         {
-            Book bookObj = Book.getBooks(bsignId);
+            Book bookObj = Book.getBooks(bISBN);
             bookObj.ISBN = bISBN;
             bookObj.Title = bTitle;
             bookObj.SignId = bsignId;
@@ -67,7 +67,7 @@ namespace Service.Models
 
         static private EBook MapBook(Book bookobj)
         {
-            EBook aBook = new EBook(bookobj.SignId);
+            EBook aBook = new EBook(bookobj.ISBN);
             aBook.bookObj.ISBN = bookobj.ISBN;
             aBook.bookObj.Title = bookobj.Title;
             aBook.bookObj.SignId = bookobj.SignId;

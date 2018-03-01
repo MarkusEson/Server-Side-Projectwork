@@ -9,10 +9,24 @@ namespace Server_Side_Projectwork.Controllers
 {
     public class BookController : Controller
     {
-        // GET: Library
+        // GET: Book
         public ActionResult ListBooks()
         {
             return View("ListBooks", Book.getBookList());
+        }
+
+    
+        public ActionResult ShowBook(string id)
+        {
+            BookDetails bookDetailObj = new BookDetails(id);
+            return View("ShowBook", bookDetailObj);
+
+            /*
+            Repository repo = (Repository)Session["repo"];
+
+            //return View("ShowBook", repo.BookList[id]);
+            return View("ShowBook", repo.BookList.Find(x => (x.ISBN == id)));
+            */
         }
         /*
         // GET: Library
