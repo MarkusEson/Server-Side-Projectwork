@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Service.Models.Administrator>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Administrator";
+}
+
+<style>
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    #adminBtn {
+        border-radius: 0;
+        font-size: x-large;
+        margin-top: 10px;
+    }
+</style>
+
+<h2>Administrators</h2>
+
+<ul>
+    @foreach (var admin in Model)
+    {
+        <li><a href="/Admin/Show/@admin.AdminId" class="btn btn-default" id="adminBtn">@admin.FirstName @admin.LastName</a></li>
+    }
+
+</ul>
+
+<a href="/Admin/Add" class="btn btn-default">Create new admin!</a>

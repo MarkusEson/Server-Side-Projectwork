@@ -39,7 +39,6 @@ namespace Service.Models
         static public void updateAdmin(int aAdminId, string fName, string lName, string aDesc)
         {
             Administrator adminObj = Administrator.getAdmin(aAdminId);
-            adminObj.AdminId = aAdminId;
             adminObj.FirstName = fName;
             adminObj.LastName = lName;
             adminObj.Description = aDesc;
