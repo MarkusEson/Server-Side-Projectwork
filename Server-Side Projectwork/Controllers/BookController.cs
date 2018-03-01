@@ -9,7 +9,7 @@ namespace Server_Side_Projectwork.Controllers
 {
     public class BookController : Controller
     {
-        // GET: Book
+        // GET:
         public ActionResult ListBooks()
         {
             return View("ListBooks", Book.getBookList());

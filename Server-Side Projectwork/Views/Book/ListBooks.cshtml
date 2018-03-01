@@ -28,6 +28,10 @@
        float: left;
    }
 
+   h3 {
+       font-size: 10px;
+   }
+
    h4 {
        margin: 0;
    }
@@ -66,16 +70,16 @@
          @foreach (var item in Model)
          {
              <div class="container">
+                 <hr>
                  <div class="left">
                      <img src="~/Resources/bookicon2.png" class="iconDetails"> 
                  </div>
                  <div class="right">
                      <h4>@Html.ActionLink(@item.Title, "ShowBook", "Book", new { id = item.ISBN }, null)</h4>
-                     <h4>isbn: @item.ISBN</h4>
-                 </div>         
-             </div>              
+                     <h3>ISBN: @item.ISBN || Pages: @item.Pages</h3>
+                 </div>
+             </div>  
          }
-
      </div>
      
 

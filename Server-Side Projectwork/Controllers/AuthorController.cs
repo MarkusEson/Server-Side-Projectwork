@@ -9,14 +9,22 @@ namespace Server_Side_Projectwork.Controllers
 {
     public class AuthorController : Controller
     {
-        // GET: Library
-        public ActionResult ListAuthor()
+        // GET: 
+        public ActionResult ListAuthors()
         {
-            //Repository repo = new Repository();
-            //Session["repo"] = repo;
-
             return View("ListAuthors", Author.getAuthorList());
         }
+
+        /*
+        public ActionResult ShowAuthor()
+        {
+            AuthorDetails authorDetailObj = new AuthorDetails(id);
+            return View("ShowAuthor", authorDetailObj);
+        }
+        */
+
+
+
         /*
         // GET: Authors
         [HttpGet]
