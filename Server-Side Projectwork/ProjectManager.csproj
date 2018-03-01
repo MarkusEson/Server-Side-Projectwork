@@ -158,7 +158,6 @@
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Book\ListBooks.cshtml" />
     <Content Include="Views\Author\ListAuthors.cshtml" />
-    <Content Include="Views\Library\Administrators.cshtml" />
     <Content Include="Views\Library\Login.cshtml" />
     <Content Include="Views\Admin\ShowAdmin.cshtml" />
     <Content Include="Views\Book\AddBook.cshtml" />
@@ -168,6 +167,7 @@
     <Content Include="Views\Book\EditBook.cshtml" />
     <Content Include="Views\Admin\EditAdmin.cshtml" />
     <Content Include="Views\Admin\AddAdmin.cshtml" />
+    <Content Include="Views\Library\Administrator.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

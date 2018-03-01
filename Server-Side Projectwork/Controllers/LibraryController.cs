@@ -18,10 +18,6 @@ namespace Server_Side_Projectwork.Controllers
             return View("Index");     
         }
 
-        
-
-        /*
-
         public ActionResult Administrator()
         {
             Repository repo = (Repository)Session["repo"];
@@ -34,7 +30,7 @@ namespace Server_Side_Projectwork.Controllers
         {
             return View("Login");
         }
-       */
+       
         
     }
 }
