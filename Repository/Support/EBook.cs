@@ -10,7 +10,7 @@ namespace Repository.Support
     {
         public EBook() { }
 
-        public EBook(int? id)
+        public EBook(string id)
         {
             _bookObj = this.Read(id);
         }
@@ -19,7 +19,7 @@ namespace Repository.Support
 
         public BOOK bookObj { get { return _bookObj; } }
 
-        public BOOK Read(int? id) // Find book by id
+        public BOOK Read(string id) // Find book by id
         {
             using (var db = new Libdb())
             {
