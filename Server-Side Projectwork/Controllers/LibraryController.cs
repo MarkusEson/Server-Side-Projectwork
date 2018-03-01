@@ -29,12 +29,12 @@ namespace Server_Side_Projectwork.Controllers
             return View(myList);
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Login()
         {
             return View("Login");
         }
-       
-        */
+       */
+        
     }
 }
