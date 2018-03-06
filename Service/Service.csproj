@@ -113,10 +113,10 @@
   <ItemGroup>
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Author.cs" />
-    <Compile Include="Models\AuthorDetails.cs" />
+    <Compile Include="Models\AuthorManager.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Book_Author.cs" />
-    <Compile Include="Models\BookDetails.cs" />
+    <Compile Include="Models\BookManager.cs" />
     <Compile Include="Models\Classification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -12,13 +12,13 @@ namespace Server_Side_Projectwork.Controllers
         // GET:
         public ActionResult ListBooks()
         {
-            return View("ListBooks", Book.getBookList());
+            return View("ListBooks", BookManager.getBookList());
         }
 
     
         public ActionResult ShowBook(string id)
         {
-            BookDetails bookDetailObj = new BookDetails(id);
+            BookManager bookDetailObj = new BookManager(id);
             return View("ShowBook", bookDetailObj);
 
             /*
