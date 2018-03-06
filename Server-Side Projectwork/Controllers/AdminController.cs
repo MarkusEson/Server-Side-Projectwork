@@ -32,9 +32,9 @@ namespace Server_Side_Projectwork.Controllers
             {
                 UpdateModel(admin);
 
-                Administrator.updateAdmin(id , formValues["fName"],
-                                               formValues["lName"],
-                                               formValues["aDesc"]);
+                Administrator.updateAdmin(id , formValues["FirstName"],
+                                               formValues["LastName"],
+                                               formValues["Description"]);
 
                 return RedirectToAction("Show", new { id = admin.AdminId });
             }
@@ -43,7 +43,6 @@ namespace Server_Side_Projectwork.Controllers
                 return View("EditAdmin", admin);
             }
 
-            
         }
 
         public ActionResult Add()
@@ -56,16 +55,16 @@ namespace Server_Side_Projectwork.Controllers
         {
             if(ModelState.IsValid)
             {
-                try
-                {
+                /*try
+                {*/
                     Administrator.createAdmin(newAdmin);
 
                     return RedirectToAction("Show", new { id = newAdmin.AdminId });
-                }
+                /*}
                 catch (Exception exception)
                 {
                     return View("Error", exception);
-                }
+                }*/
             }
 
             return View(newAdmin);

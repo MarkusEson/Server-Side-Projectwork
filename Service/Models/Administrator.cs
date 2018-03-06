@@ -17,7 +17,7 @@ namespace Service.Models
 
         static public Administrator getAdmin(int aAdminId)
         {
-            return MapAuthor(new AdminRepository(aAdminId));
+            return MapAdmin(new AdminRepository(aAdminId));
         }
 
         static public List<Administrator> getAdminList()
@@ -38,7 +38,8 @@ namespace Service.Models
 
         static public void createAdmin(Administrator newAdmin)
         {
-            Administrator adminObj = Administrator.getAdmin(newAdmin.AdminId);
+            Administrator adminObj = new Administrator();
+            bool updated = false;
 
             adminObj = newAdmin;
 
@@ -47,11 +48,13 @@ namespace Service.Models
                 if (newAdmin.AdminId == currentAdmin.AdminId)
                 {
                     _eAdminObj.Update(MapAdmin(adminObj).adminobj);
+                    updated = true;
                 }
-                else
-                {
-                    _eAdminObj.Add(MapAdmin(adminObj).adminobj);
-                }
+            }
+
+            if (!updated)
+            {
+                _eAdminObj.Add(MapNewAdmin(adminObj).adminobj);
             }
         }
 
@@ -70,7 +73,7 @@ namespace Service.Models
 
         }
 
-        static private Administrator MapAuthor(AdminRepository adminObj)
+        static private Administrator MapAdmin(AdminRepository adminObj)
         {
             Administrator theAdmin = new Administrator();
             theAdmin.AdminId = adminObj.adminobj.AdminId;
@@ -83,6 +86,16 @@ namespace Service.Models
         static private AdminRepository MapAdmin(Administrator adminObj)
         {
             AdminRepository theAdmin = new AdminRepository(adminObj.AdminId);
+            theAdmin.adminobj.AdminId = adminObj.AdminId;
+            theAdmin.adminobj.Fname = adminObj.FirstName;
+            theAdmin.adminobj.Lname = adminObj.LastName;
+            theAdmin.adminobj.AdminDescription = adminObj.Description;
+            return theAdmin;
+        }
+
+        static private AdminRepository MapNewAdmin(Administrator adminObj)
+        {
+            AdminRepository theAdmin = new AdminRepository(0);
             theAdmin.adminobj.AdminId = adminObj.AdminId;
             theAdmin.adminobj.Fname = adminObj.FirstName;
             theAdmin.adminobj.Lname = adminObj.LastName;
