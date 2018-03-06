@@ -99,4 +99,50 @@
         width: auto;
     }
     /* VIEWS END */
+    /* ADMIN START */
+       ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    #adminBtn {
+        border-radius: 0;
+        font-size: x-large;
+        margin-top: 10px;
+    }
+    #nameDiv
+    {
+        height: 50px; 
+        text-align: center; 
+        border: 1px solid #000; 
+        display: inline-block;
+    }
+
+    #nameDiv a
+    {
+        text-decoration: none;
+        color: black;
+        margin-left: 20px; 
+        margin-right: 20px;
+        font-size: xx-large;
+    }
+
+    #descDiv
+    {
+        width: 460px; 
+        height: 100px; 
+        text-align: center; 
+        border: 1px solid #000; 
+        border-radius: 8px;
+        word-wrap: normal;
+    }
+
+    #descDiv a
+    {
+        text-decoration: none;
+        color: black;
+        margin-top: 10px;
+    }
+    /*ADMIN END */
     </style>
