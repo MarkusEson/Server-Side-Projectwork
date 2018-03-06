@@ -1,0 +1,13 @@
+﻿@model Exception
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1>Error: @Model.Message</h1>
+@if (Model.InnerException != null)
+{
+    @Html
+
+    <p style="width: 50%;"> @Model.InnerException.InnerException.Message </p>
+}
+

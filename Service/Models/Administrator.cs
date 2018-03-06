@@ -36,6 +36,30 @@ namespace Service.Models
             return adminList;
         }
 
+        static public void createAdmin(Administrator newAdmin)
+        {
+            Administrator adminObj = Administrator.getAdmin(newAdmin.AdminId);
+
+            adminObj = newAdmin;
+
+            foreach (var currentAdmin in Administrator.getAdminList())
+            {
+                if (newAdmin.AdminId == currentAdmin.AdminId)
+                {
+                    _eAdminObj.Update(MapAdmin(adminObj).adminobj);
+                }
+                else
+                {
+                    _eAdminObj.Add(MapAdmin(adminObj).adminobj);
+                }
+            }
+        }
+
+        static public void saveAdmin()
+        {
+            _eAdminObj.Save();
+        }
+
         static public void updateAdmin(int aAdminId, string fName, string lName, string aDesc)
         {
             Administrator adminObj = Administrator.getAdmin(aAdminId);

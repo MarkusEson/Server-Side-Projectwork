@@ -20,7 +20,7 @@
         <h4>Administrator</h4>
 
         <hr />
-        <h5>ID: </h5> <input type="number" value="@i" name="aId" disabled/>
+        <h5>ID: </h5> <input type="number" value="@i" name="aId"/>
         <h5>Firstname: </h5><input type="text" name="fName" />
         <h5>Lstname: </h5><input type="text" name="lName" />
         <h5>Description: </h5><input type="text" name="aDesc" />
@@ -28,9 +28,9 @@
 
         
         <!--<div class="form-group">
-            @Html.Label("FirstName", "ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("adminId", "ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("AdminId", i, new { @class = "form-control", @disabled = "disabled", @style = "width: 400px" })
+                @Html.TextBox("adminId", i, new { @class = "form-control", @disabled = "disabled", @style = "width: 400px" })
             </div>
         </div>
 

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Service.Models;
 
 namespace Server_Side_Projectwork.Controllers
@@ -22,44 +23,53 @@ namespace Server_Side_Projectwork.Controllers
             return View("EditAdmin", Administrator.getAdmin(id));
         }
 
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Edit(int id, FormCollection formValues)
+        {
+            Administrator admin = Administrator.getAdmin(id);
+
+            try
+            {
+                UpdateModel(admin);
+
+                Administrator.updateAdmin(id , formValues["fName"],
+                                               formValues["lName"],
+                                               formValues["aDesc"]);
+
+                return RedirectToAction("Show", new { id = admin.AdminId });
+            }
+            catch 
+            {
+                return View("EditAdmin", admin);
+            }
+
+            
+        }
+
         public ActionResult Add()
         {
             return View("AddAdmin", Administrator.getAdminList());
         }
 
-        [HttpPost]
-        public ActionResult Add(string fName, string lName, string aDesc = "", int aId = 0)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Add(Administrator newAdmin)
         {
-            Administrator admin = new Administrator();
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    Administrator.createAdmin(newAdmin);
 
-            Administrator.updateAdmin(aId, fName, lName, aDesc);
-            return View("AddAdmin", admin);
+                    return RedirectToAction("Show", new { id = newAdmin.AdminId });
+                }
+                catch (Exception exception)
+                {
+                    return View("Error", exception);
+                }
+            }
+
+            return View(newAdmin);
         }
-
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Administrator admin)
-        {
-            Repository repo = (Repository)Session["repo"];
-
-            return View("EditAdmin", admin);
-        }
-
-        public ActionResult Add()
-        {
-            Repository repo = (Repository)Session["repo"];
-
-            return View("AddAdmin");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Add(Administrator admin)
-        {
-            Repository repo = (Repository)Session["repo"];
-
-            return View("AddAdmin", admin);
-        }*/
     }
     
 }

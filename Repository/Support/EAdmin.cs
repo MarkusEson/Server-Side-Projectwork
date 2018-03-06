@@ -39,12 +39,30 @@ namespace Repository.Support
             }
         }
 
+        public void Add(ADMINISTRATOR admin)
+        {
+            using (var db = new Libdb())
+            {
+                db.ADMINISTRATOR.Add(adminobj);
+                db.Entry(adminobj).State = EntityState.Added;
+                db.SaveChanges();
+            }
+        }
+
         public void Update(ADMINISTRATOR adminobj)
         {
             using (var db = new Libdb())
             {
                 db.ADMINISTRATOR.Attach(adminobj);
                 db.Entry(adminobj).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Save()
+        {
+            using (var db = new Libdb())
+            {
                 db.SaveChanges();
             }
         }

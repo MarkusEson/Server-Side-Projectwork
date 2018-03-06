@@ -1,4 +1,4 @@
-﻿@model Server_Side_Projectwork.Models.Administrator
+﻿@model Service.Models.Administrator
 
 @{
     ViewBag.Title = "EditAdmin";
@@ -8,16 +8,18 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
     
     <div class="form-horizontal">
         <h4>Administrator</h4>
+
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "Fix errors")
         <div class="form-group">
-            @Html.Label("AdminId", "ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("adminId", "ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AdminId, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width: 50px" } })
-                @Html.ValidationMessageFor(model => model.AdminId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.AdminId, "*")
             </div>
         </div>
 
@@ -25,7 +27,7 @@
             @Html.Label("FirstName", "Firstname", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Firstname" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.FirstName, "*")
             </div>
         </div>
 
@@ -33,7 +35,7 @@
             @Html.Label("LastName", "Lastname", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Lastname" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.LastName, "*")
             </div>
         </div>
 
@@ -41,7 +43,7 @@
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @style = "width: 400px", @rows = "5", @placeholder = "Description" })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Description, "*")
             </div>
         </div>
 
