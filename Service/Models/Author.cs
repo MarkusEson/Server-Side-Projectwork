@@ -13,11 +13,11 @@ namespace Service.Models
         public string LastName { get; set; }
         public string BirthYear { get; set; }
 
-        static private EAuthor _eAuthObj = new EAuthor();
+        static private AuthorRepository _eAuthObj = new AuthorRepository();
 
         static public Author getAuthor(int aAid)
         {
-            return MapAuthor(new EAuthor(aAid));
+            return MapAuthor(new AuthorRepository(aAid));
         }
 
         static public List<Author> getAuthorList()
@@ -47,7 +47,7 @@ namespace Service.Models
 
         }
 
-        static private Author MapAuthor(EAuthor authObj)
+        static private Author MapAuthor(AuthorRepository authObj)
         {
             Author theAuthor = new Author();
             theAuthor.Aid = authObj.authorobj.Aid;
@@ -57,9 +57,9 @@ namespace Service.Models
             return theAuthor;
         }
 
-        static private EAuthor MapAuthor(Author authObj)
+        static private AuthorRepository MapAuthor(Author authObj)
         {
-            EAuthor theAuthor = new EAuthor(authObj.Aid);
+            AuthorRepository theAuthor = new AuthorRepository(authObj.Aid);
             theAuthor.authorobj.Aid = authObj.Aid;
             theAuthor.authorobj.FirstName = authObj.FirstName;
             theAuthor.authorobj.LastName = authObj.LastName;

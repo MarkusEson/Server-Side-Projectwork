@@ -6,12 +6,12 @@ using System.Data.Entity;
 
 namespace Repository.Support
 {
-    public class EAdmin
+    public class AdminRepository
     {
 
-        public EAdmin() { }
+        public AdminRepository() { }
 
-        public EAdmin(int AdminId)
+        public AdminRepository(int AdminId)
         {
             _adminObj = this.Read(AdminId);
         }

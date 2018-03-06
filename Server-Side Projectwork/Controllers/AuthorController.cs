@@ -15,13 +15,13 @@ namespace Server_Side_Projectwork.Controllers
             return View("ListAuthors", Author.getAuthorList());
         }
 
-        /*
-        public ActionResult ShowAuthor()
+        
+        public ActionResult ShowAuthor(int id)
         {
             AuthorDetails authorDetailObj = new AuthorDetails(id);
             return View("ShowAuthor", authorDetailObj);
         }
-        */
+        
 
 
 

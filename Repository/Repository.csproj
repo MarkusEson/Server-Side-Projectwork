@@ -127,9 +127,9 @@
     <Compile Include="CLASSIFICATION.cs" />
     <Compile Include="Libdb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Support\EAdmin.cs" />
-    <Compile Include="Support\EAuthor.cs" />
-    <Compile Include="Support\EBook.cs" />
+    <Compile Include="Support\AdminRepository.cs" />
+    <Compile Include="Support\AuthorRepository.cs" />
+    <Compile Include="Support\BookRepository.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

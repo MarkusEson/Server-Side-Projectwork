@@ -15,11 +15,11 @@ namespace Service.Models
         public string publicationinfo { get; set; }
         public short? Pages { get; set; }
 
-        static private EBook _EbookObj = new EBook();
+        static private BookRepository _EbookObj = new BookRepository();
 
         static public Book getBooks(string id)
         {
-            return MapBook(new EBook(id));
+            return MapBook(new BookRepository(id));
         }
 
         static public List<Book> getBookList()
@@ -53,7 +53,7 @@ namespace Service.Models
 
         }
 
-        static private Book MapBook(EBook bookobj)
+        static private Book MapBook(BookRepository bookobj)
         {
             Book aBook = new Book();
             aBook.ISBN = bookobj.bookObj.ISBN;
@@ -65,9 +65,9 @@ namespace Service.Models
             return aBook;
         }
 
-        static private EBook MapBook(Book bookobj)
+        static private BookRepository MapBook(Book bookobj)
         {
-            EBook aBook = new EBook(bookobj.ISBN);
+            BookRepository aBook = new BookRepository(bookobj.ISBN);
             aBook.bookObj.ISBN = bookobj.ISBN;
             aBook.bookObj.Title = bookobj.Title;
             aBook.bookObj.SignId = bookobj.SignId;
