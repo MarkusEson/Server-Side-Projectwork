@@ -6,11 +6,11 @@ using System.Data.Entity;
 
 namespace Repository.Support
 {
-    public class EBook
+    public class BookRepository
     {
-        public EBook() { }
+        public BookRepository() { }
 
-        public EBook(string id)
+        public BookRepository(string id)
         {
             _bookObj = this.Read(id);
         }

@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace Repository.Support
 {
-    public class EAuthor
+    public class AuthorRepository
     {
         /*
         // här ligger metoderna för att hämta 
@@ -19,9 +19,9 @@ namespace Repository.Support
             }
         }
         */
-        public EAuthor() { }
+        public AuthorRepository() { }
 
-        public EAuthor(int Aid)
+        public AuthorRepository(int Aid)
         {
             _authorObj = this.Read(Aid);
         }

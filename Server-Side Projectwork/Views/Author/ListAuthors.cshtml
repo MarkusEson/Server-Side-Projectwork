@@ -6,48 +6,6 @@
     ViewBag.Title = "Authors";
 }
 
-<style>
-    li {
-        font-size: 20px;
-        list-style-type: none;
-        padding-left: 0;
-        margin-left: 0;
-    }
-
-    .iconDetails {
-        float: left;
-        height: 80px;
-        width: 80px;
-    }
-
-    .container {
-        width: 100%;
-        height: auto;
-        padding: 1%;
-        float: left;
-    }
-
-    h3 {
-        font-size: 10px;
-    }
-
-    h4 {
-        margin: 0;
-    }
-
-    .left {
-        float: left;
-        width: 85px;
-    }
-
-    .right {
-        float: left;
-        margin: 0 0 0 5px;
-        width: auto;
-    }
-</style>
-
-
 <div>
     <form>
         <a href="/Author/AddAuthors">Add Author</a>
@@ -66,13 +24,14 @@
     <div>
         @foreach (var item in Model)
         {
+            var Fullname = @item.FirstName + " " + @item.LastName;
             <div class="container">
                 <hr>
                 <div class="left">
                     <img src="~/Resources/authimg1.png" class="iconDetails">
                 </div>
                 <div class="right">
-                    <h4>@item.FirstName @item.LastName</h4>
+                    <h4>@Html.ActionLink(Fullname, "ShowAuthor", "Author", new { id = item.Aid }, null)</h4>
                 </div>
             </div>
         }

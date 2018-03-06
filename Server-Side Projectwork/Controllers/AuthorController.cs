@@ -12,16 +12,16 @@ namespace Server_Side_Projectwork.Controllers
         // GET: 
         public ActionResult ListAuthors()
         {
-            return View("ListAuthors", Author.getAuthorList());
+            return View("ListAuthors", AuthorManager.getAuthorList());
         }
 
-        /*
-        public ActionResult ShowAuthor()
+        
+        public ActionResult ShowAuthor(int id)
         {
-            AuthorDetails authorDetailObj = new AuthorDetails(id);
+            AuthorManager authorDetailObj = new AuthorManager(id);
             return View("ShowAuthor", authorDetailObj);
         }
-        */
+        
 
 
 
