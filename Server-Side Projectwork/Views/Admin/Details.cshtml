@@ -1,6 +1,6 @@
 ﻿@model Service.Models.Administrator
 @{
-    ViewBag.Title = "ShowAdmin";
+    ViewBag.Title = "Details";
 }
 
 <div id="nameDiv">
@@ -15,3 +15,7 @@
 </div>
 
 <a href="/Admin/Edit/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default">Edit</a>
+
+<div>
+    @Html.ActionLink("Back to List", "../Admin")
+</div>

@@ -13,14 +13,14 @@ namespace Server_Side_Projectwork.Controllers
             return View(Administrator.getAdminList());
         }
 
-        public ActionResult Show(int id)
+        public ActionResult Details(int id)
         {
-            return View("ShowAdmin", Administrator.getAdmin(id));
+            return View(Administrator.getAdmin(id));
         }
 
         public ActionResult Edit(int id)
         {
-            return View("EditAdmin", Administrator.getAdmin(id));
+            return View(Administrator.getAdmin(id));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -36,30 +36,30 @@ namespace Server_Side_Projectwork.Controllers
                                                formValues["LastName"],
                                                formValues["Description"]);
 
-                return RedirectToAction("Show", new { id = admin.AdminId });
+                return RedirectToAction("Details", new { id = admin.AdminId });
             }
             catch 
             {
-                return View("EditAdmin", admin);
+                return View(admin);
             }
 
         }
 
-        public ActionResult Add()
+        public ActionResult Create()
         {
-            return View("AddAdmin", Administrator.getAdminList());
+            return View(Administrator.getAdminList());
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Add(Administrator newAdmin)
+        public ActionResult Create(Administrator newAdmin)
         {
             if(ModelState.IsValid)
             {
                 /*try
                 {*/
-                    Administrator.createAdmin(newAdmin);
+                Administrator.createAdmin(newAdmin);
 
-                    return RedirectToAction("Show", new { id = newAdmin.AdminId });
+                return RedirectToAction("Details", new { id = newAdmin.AdminId });
                 /*}
                 catch (Exception exception)
                 {

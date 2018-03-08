@@ -2,12 +2,12 @@
 
 
 @{
-    ViewBag.Title = "AddAdmin";
+    ViewBag.Title = "Create";
 }
 
 
 
-@using (Html.BeginForm("Add", "Admin", FormMethod.Post))
+@using (Html.BeginForm("Create", "Admin", FormMethod.Post))
 {
     int i = 0;
 
@@ -69,5 +69,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "../Library/Administrator")
+    @Html.ActionLink("Back to List", "../Admin")
 </div>

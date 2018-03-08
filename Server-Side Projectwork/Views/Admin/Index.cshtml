@@ -11,9 +11,9 @@
 <ul>
     @foreach (var admin in Model)
     {
-        <li><a href="/Admin/Show/@admin.AdminId" class="btn btn-default" id="adminBtn">@admin.FirstName @admin.LastName</a></li>
+        <li><a href="/Admin/Details/@admin.AdminId" class="btn btn-default" id="adminBtn">@admin.FirstName @admin.LastName</a></li>
     }
 
 </ul>
 
-<a href="/Admin/Add" class="btn btn-default">Create new admin!</a>
+<a href="/Admin/Create" class="btn btn-default">Create new admin!</a>
