@@ -11,16 +11,12 @@ namespace Server_Side_Projectwork.Controllers
 {
     public class LibraryController : Controller
     {
-    
+
         // GET: Library
+        [OutputCache(Duration = 86400, VaryByParam = "none")]
         public ActionResult Index()
         {      
             return View("Index");     
-        }
-
-        public ActionResult Administrator()
-        {
-            return View("Administrator");
         }
 
         [HttpPost]

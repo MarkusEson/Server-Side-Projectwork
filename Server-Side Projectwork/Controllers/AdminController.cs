@@ -7,7 +7,6 @@ namespace Server_Side_Projectwork.Controllers
     
     public class AdminController : Controller
     {
-        // GET: Admin
         public ActionResult Index()
         {
             return View(Administrator.getAdminList());
@@ -18,11 +17,13 @@ namespace Server_Side_Projectwork.Controllers
             return View(Administrator.getAdmin(id));
         }
 
+        [OutputCache(Duration = 3600)]
         public ActionResult Edit(int id)
         {
             return View(Administrator.getAdmin(id));
         }
 
+        [OutputCache(Duration = 3600)]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection formValues)
         {
@@ -45,26 +46,21 @@ namespace Server_Side_Projectwork.Controllers
 
         }
 
+        [OutputCache(Duration = 3600)]
         public ActionResult Create()
         {
             return View(Administrator.getAdminList());
         }
 
+        [OutputCache(Duration = 3600)]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Administrator newAdmin)
         {
             if(ModelState.IsValid)
             {
-                /*try
-                {*/
                 Administrator.createAdmin(newAdmin);
 
                 return RedirectToAction("Details", new { id = newAdmin.AdminId });
-                /*}
-                catch (Exception exception)
-                {
-                    return View("Error", exception);
-                }*/
             }
 
             return View(newAdmin);

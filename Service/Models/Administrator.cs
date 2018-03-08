@@ -58,11 +58,6 @@ namespace Service.Models
             }
         }
 
-        static public void saveAdmin()
-        {
-            _eAdminObj.Save();
-        }
-
         static public void updateAdmin(int aAdminId, string fName, string lName, string aDesc)
         {
             Administrator adminObj = Administrator.getAdmin(aAdminId);
@@ -95,8 +90,7 @@ namespace Service.Models
 
         static private AdminRepository MapNewAdmin(Administrator adminObj)
         {
-            AdminRepository theAdmin = new AdminRepository(0);
-            theAdmin.adminobj.AdminId = adminObj.AdminId;
+            AdminRepository theAdmin = new AdminRepository();
             theAdmin.adminobj.Fname = adminObj.FirstName;
             theAdmin.adminobj.Lname = adminObj.LastName;
             theAdmin.adminobj.AdminDescription = adminObj.Description;

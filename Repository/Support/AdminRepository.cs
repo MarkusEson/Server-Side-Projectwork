@@ -18,7 +18,17 @@ namespace Repository.Support
 
         private ADMINISTRATOR _adminObj = null;
 
-        public ADMINISTRATOR adminobj { get { return _adminObj; } }
+        public ADMINISTRATOR adminobj
+        {
+            get
+            {
+                if (_adminObj == null)
+                {
+                    _adminObj = new ADMINISTRATOR();
+                    return _adminObj;
+                } else { return _adminObj; }
+            }
+        }
 
         public ADMINISTRATOR Read(int AdminId) // Find author by id
         {
@@ -43,8 +53,8 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                db.ADMINISTRATOR.Add(adminobj);
-                db.Entry(adminobj).State = EntityState.Added;
+                db.ADMINISTRATOR.Add(admin);
+                db.Entry(admin).State = EntityState.Added;
                 db.SaveChanges();
             }
         }
@@ -55,14 +65,6 @@ namespace Repository.Support
             {
                 db.ADMINISTRATOR.Attach(adminobj);
                 db.Entry(adminobj).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-        }
-
-        public void Save()
-        {
-            using (var db = new Libdb())
-            {
                 db.SaveChanges();
             }
         }
