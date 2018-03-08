@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Service.Models.Author>
+﻿@using MvcPaging
+@model IPagedList<Service.Models.Author>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -20,33 +21,26 @@
 
 <h2>Result</h2>
 <div>
+    <div class="pagination">
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+    </div>
+    <div class="pagination">
 
-    <div>
-        @foreach (var item in Model)
+        @foreach (var author in Model)
         {
-            var Fullname = @item.FirstName + " " + @item.LastName;
+            var FullName = @author.FirstName + " " + @author.LastName;
             <div class="container">
                 <hr>
                 <div class="left">
                     <img src="~/Resources/authimg1.png" class="iconDetails">
                 </div>
                 <div class="right">
-                    <h4>@Html.ActionLink(Fullname, "ShowAuthor", "Author", new { id = item.Aid }, null)</h4>
+                    @Html.ActionLink(FullName, "ShowAuthor", "Author", new { id = author.Aid }, null)
                 </div>
             </div>
         }
     </div>
-
-   
-
     <div class="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">&raquo;</a>
+        <a>@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)</a>
     </div>
 </div>

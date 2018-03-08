@@ -4,15 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Service.Models;
+using MvcPaging;
 
 namespace Server_Side_Projectwork.Controllers
 {
     public class AuthorController : Controller
     {
+        private const int DefaultPageSize = 10;
+        private IList<Author> allAuthors = AuthorManager.getAuthorList();
         // GET: 
-        public ActionResult ListAuthors()
+        public ActionResult ListAuthors(int? page)
         {
-            return View("ListAuthors", AuthorManager.getAuthorList());
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            return View("ListAuthors", this.allAuthors.ToPagedList(currentPageIndex, DefaultPageSize));
         }
 
         

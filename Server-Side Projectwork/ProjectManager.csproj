@@ -131,6 +131,7 @@
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="Pagination\MvcPaging.csproj" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +143,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\ViewCategoriesViewModel.cs" />
+    <Compile Include="Models\ViewSourceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pagination\IPagedList.cs" />
+    <Compile Include="Pagination\PagedList.cs" />
+    <Compile Include="Pagination\Pager.cs" />
+    <Compile Include="Pagination\PagerOptions.cs" />
+    <Compile Include="Pagination\PagerOptionsBuilder.cs" />
+    <Compile Include="Pagination\PaginationModel.cs" />
+    <Compile Include="Pagination\PagingExtensions.cs" />
+    <Compile Include="Pagination\RouteValueDictionaryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -170,6 +182,7 @@
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Error.cshtml" />
+    <Content Include="Pagination\packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -179,7 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Pagination\bin\" />
+    <Folder Include="Pagination\obj\" />
+    <Folder Include="Pagination\Properties\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\List\" />
   </ItemGroup>

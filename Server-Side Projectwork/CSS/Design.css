@@ -35,18 +35,21 @@
       padding: 15px;
     }
     
+
     /*Pagination Styles - Begin*/
     .pagination {
         display: inline-block;
+        
     }
 
-    .pagination a {
+    .pagination a{
         color: black;
-        float: left;
-        padding: 8px 16px;
+        float: unset;
+        padding: 5px 10px;
         text-decoration: none;
     }
 
+    
     .pagination a.active {
         background-color: #4CAF50;
         color: white;
@@ -58,6 +61,8 @@
         border-radius: 5px;
     }
     /*Pagination Styles - End*/
+
+
 
     /* VIEWS START */
     li {

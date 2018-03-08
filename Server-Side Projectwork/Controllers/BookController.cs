@@ -4,15 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Service.Models;
+using MvcPaging;
+
+
 
 namespace Server_Side_Projectwork.Controllers
 {
     public class BookController : Controller
     {
+        private const int DefaultPageSize = 10;
+        private IList<Book> allBooks = BookManager.getBookList();
+        
+
         // GET:
-        public ActionResult ListBooks()
+        public ActionResult ListBooks(int? page)
         {
-            return View("ListBooks", BookManager.getBookList());
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            return View("ListBooks", this.allBooks.ToPagedList(currentPageIndex, DefaultPageSize));
         }
 
 
@@ -22,6 +30,11 @@ namespace Server_Side_Projectwork.Controllers
             return View("ShowBook", bookDetailObj);
 
         }
+
+
+
+
+
 
 
         /*

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Service.Models.Book>
+﻿@using MvcPaging
+@model IPagedList<Service.Models.Book>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -20,27 +21,33 @@
     </form>
 </div>
 
-
  <div>
      <h2>Result</h2>
 
-     <div>
-         @foreach (var item in Model)
-         {
-             <div class="container">
-                 <hr>
-                 <div class="left">
-                     <img src="~/Resources/bookicon2.png" class="iconDetails"> 
-                 </div>
-                 <div class="right">
-                     <h4>@Html.ActionLink(@item.Title, "ShowBook", "Book", new { id = item.ISBN }, null)</h4>
-                     <h3>ISBN: @item.ISBN || Pages: @item.Pages</h3>
-                 </div>
-             </div>  
-         }
+     <div class="pagination">
+         @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
      </div>
-     
+     <div class="pagination">
+        
+            @foreach(var book in Model)
+            {
+                <div class="container">
+                    <hr>
+                    <div class="left">
+                        <img src="~/Resources/bookicon2.png" class="iconDetails">
+                    </div>
+                    <div class="right">
+                        @Html.ActionLink(@book.Title, "ShowBook", "Book", new { id = book.ISBN }, null)
+                    </div>
+                </div>     
+            }     
+     </div>
+     <div class="pagination">
+         <a>@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)</a>
+     </div>
 
+
+<!--
     <div class="pagination">
         <a href="#">&laquo;</a>
         <a href="#">1</a>
@@ -51,4 +58,5 @@
         <a href="#">6</a>
         <a href="#">&raquo;</a>
     </div>
+-->
 </div>
