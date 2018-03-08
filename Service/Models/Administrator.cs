@@ -39,23 +39,9 @@ namespace Service.Models
         static public void createAdmin(Administrator newAdmin)
         {
             Administrator adminObj = new Administrator();
-            bool updated = false;
-
             adminObj = newAdmin;
 
-            foreach (var currentAdmin in Administrator.getAdminList())
-            {
-                if (newAdmin.AdminId == currentAdmin.AdminId)
-                {
-                    _eAdminObj.Update(MapAdmin(adminObj).adminobj);
-                    updated = true;
-                }
-            }
-
-            if (!updated)
-            {
-                _eAdminObj.Add(MapNewAdmin(adminObj).adminobj);
-            }
+            _eAdminObj.Add(MapNewAdmin(adminObj).adminobj);
         }
 
         static public void updateAdmin(int aAdminId, string fName, string lName, string aDesc)
@@ -91,6 +77,7 @@ namespace Service.Models
         static private AdminRepository MapNewAdmin(Administrator adminObj)
         {
             AdminRepository theAdmin = new AdminRepository();
+            theAdmin.adminobj.AdminId = adminObj.AdminId;
             theAdmin.adminobj.Fname = adminObj.FirstName;
             theAdmin.adminobj.Lname = adminObj.LastName;
             theAdmin.adminobj.AdminDescription = adminObj.Description;

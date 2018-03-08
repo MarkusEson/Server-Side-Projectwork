@@ -13,7 +13,6 @@ namespace Server_Side_Projectwork.Controllers
     {
 
         // GET: Library
-        [OutputCache(Duration = 86400, VaryByParam = "none")]
         public ActionResult Index()
         {      
             return View("Index");     
