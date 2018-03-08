@@ -1,0 +1,9 @@
+﻿CREATE TABLE ADMINISTRATOR(
+   AdminId INT NOT NULL IDENTITY(0,1),
+   LoginName VARCHAR(20) NOT NULL,
+   LoginPass VARCHAR(12) NOT NULL,
+   FirstName VARCHAR(20),
+   LastName VARCHAR(30),
+   AdminDesc VARCHAR(255),
+   PRIMARY KEY ( AdminId )
+);

@@ -23,7 +23,6 @@
         
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <!--<input type="number" value="@i" name="adminId" readonly hidden />-->
         @Html.TextBox("adminId", i, new { @readonly = "readonly", @hidden = "hidden" });
 
         <div class="form-group">
