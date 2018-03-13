@@ -8,17 +8,7 @@ namespace Repository.Support
 {
     public class AuthorRepository
     {
-        /*
-        // här ligger metoderna för att hämta 
-        // read metod
-        public AUTHOR read(int id)
-        {
-            using (var db = new Libdb())
-            {
-                
-            }
-        }
-        */
+       
         public AuthorRepository() { }
 
         public AuthorRepository(int Aid)
@@ -34,8 +24,10 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                db.AUTHOR.Load();
-                return db.AUTHOR.Find(Aid);
+                var query = db.AUTHOR.Where(x => x.Aid == Aid);
+                return query.SingleOrDefault();
+                //db.AUTHOR.Load();
+                //return db.AUTHOR.Find(Aid);
             }
         }
 
@@ -56,6 +48,17 @@ namespace Repository.Support
                 db.AUTHOR.Attach(authobj);
                 db.Entry(authobj).State = EntityState.Modified;
                 db.SaveChanges();
+            }
+        }
+
+        public void Add(AUTHOR authobj)
+        {
+            using (var db = new Libdb())
+            {
+                db.AUTHOR.Add(authobj);
+                db.Entry(authobj).State = EntityState.Added;
+                db.SaveChanges();
+                
             }
         }
     }

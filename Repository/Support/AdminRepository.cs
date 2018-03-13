@@ -34,6 +34,7 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
+
                 db.ADMINISTRATOR.Load();
                 return db.ADMINISTRATOR.Find(AdminId);
             }

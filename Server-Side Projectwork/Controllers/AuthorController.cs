@@ -26,8 +26,40 @@ namespace Server_Side_Projectwork.Controllers
             return View("ShowAuthor", authorDetailObj);
         }
         
+        public ActionResult EditAuthor(int id)
+        {
+            AuthorManager aobj = new AuthorManager(id);
+            return View(aobj);
+        }
 
+        [HttpPost]
+        public RedirectToRouteResult EditAuthor( int aid, string fname, string lname, string byear)
+        {
+            TempData["Aid"] = aid;
+            TempData["FirstName"] = fname;
+            TempData["LastName"] = lname;
+            TempData["BirthYear"] = byear;
+            return RedirectToAction("UpdateAuthor");
+        }
 
+        public RedirectToRouteResult UpdateAuthor()
+        {
+            AuthorManager.updateAuthor(Convert.ToInt32(TempData["Aid"]), Convert.ToString(TempData["FirstName"]), Convert.ToString(TempData["LastName"]), Convert.ToString(TempData["BirthYear"]));
+            return RedirectToAction("ListAuthors", "Author");
+        }
+
+        public ActionResult AddAuthor()
+        {
+            return View("AddAuthor");
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult AddAuthor(int aid, string fname, string lname, string byear)
+        {
+            AuthorManager.AddAnAuthor(aid, fname, lname, byear);
+            return RedirectToAction("ListAuthors", "Author");
+           
+        }
 
         /*
         // GET: Authors

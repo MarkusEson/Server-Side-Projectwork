@@ -23,8 +23,10 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                db.BOOK.Load();
-                return db.BOOK.Find(id);
+                var query = db.BOOK.Where(x => x.ISBN == id);
+                return query.SingleOrDefault();
+                //db.BOOK.Load();
+                //return db.BOOK.Find(id);
             }
         }
 

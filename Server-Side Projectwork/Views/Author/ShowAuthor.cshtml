@@ -9,7 +9,9 @@
 }
 
 <h2>Show Author</h2>
-
+<div>
+    @Html.ActionLink("Edit", "EditAuthor", "Author", new { id = Model.Aid }, null)
+</div>
 <dl>
     <dd>
         <img src="~/Resources/authimg1.png" class="iconDetails">

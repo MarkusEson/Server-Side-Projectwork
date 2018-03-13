@@ -174,7 +174,7 @@
     <Content Include="Views\Library\Login.cshtml" />
     <Content Include="Views\Admin\Details.cshtml" />
     <Content Include="Views\Book\AddBook.cshtml" />
-    <Content Include="Views\Author\AddAuthors.cshtml" />
+    <Content Include="Views\Author\AddAuthor.cshtml" />
     <Content Include="Views\Book\ShowBook.cshtml" />
     <Content Include="Views\Author\ShowAuthor.cshtml" />
     <Content Include="Views\Book\EditBook.cshtml" />
@@ -183,6 +183,8 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Error.cshtml" />
     <Content Include="Pagination\packages.config" />
+    <Content Include="Views\Author\EditAuthor.cshtml" />
+    <Content Include="Views\Library\SignUp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

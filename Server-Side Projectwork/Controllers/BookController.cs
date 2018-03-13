@@ -32,25 +32,14 @@ namespace Server_Side_Projectwork.Controllers
         }
 
 
-
-
-
-
-
-        /*
-         * 
-         * 
-         * EDIT BOOK DOES NOT WORK
-         * 
-         * 
-         */
         public ActionResult EditBook(string id)
         {
             BookManager bookObj = new BookManager(id); // id == ISBN
-            ViewBag.isbn = bookObj.BookAuthor.FindIndex(x => x.Aid == bookObj.SignId);
+            //ViewBag.isbn = bookObj.BookAuthor.FindIndex(x => x.Aid == bookObj.SignId);
             return View(bookObj);
         }
 
+        [HttpPost]
         public RedirectToRouteResult EditBook( string isbn, string title, int? signid, string pubyear, string pubinfo, short? pages )
         {
             // string isbn, string title, int? signid, string pubyear, string pubinfo, short? pages 
@@ -68,7 +57,7 @@ namespace Server_Side_Projectwork.Controllers
         {
             //string bISBN, string bTitle, int bsignId, string bPyear, string bpInfo, short? bPages
             BookManager.updateBook(Convert.ToString(TempData["ISBN"]), Convert.ToString(TempData["Title"]), Convert.ToInt32(TempData["SignId"]), Convert.ToString(TempData["PublicationYear"]), Convert.ToString(TempData["publicationinfo"]), Convert.ToInt16(TempData["Pages"]));
-            return RedirectToAction("ShowBook", "Book");
+            return RedirectToAction("ListBooks", "Book");
         }
 
        

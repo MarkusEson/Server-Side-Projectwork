@@ -1,0 +1,28 @@
+﻿@model Service.Models.Author
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AddAuthor";
+}
+
+<h2>AddAuthors</h2>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AddAuthor";
+}
+
+<h2>Add a Book to the database</h2>
+
+
+@using (Html.BeginForm())
+{
+    @:Aid: @Html.TextBox("aid")<br>
+    @:First Name: @Html.TextBox("fname")<br>
+    @:Last Name: @Html.TextBox("lname")<br>
+    @:Birth Year: @Html.TextBox("byear")<br>
+    <input type="submit" value="Add" formmethod="post" /><br>
+}

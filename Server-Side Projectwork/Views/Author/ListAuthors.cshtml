@@ -7,12 +7,6 @@
     ViewBag.Title = "Authors";
 }
 
-<div>
-    <form>
-        <a href="/Author/AddAuthors">Add Author</a>
-    </form>
-</div>
-
 <h2>Search for an Author</h2>
 <form>
     <input type="text" name="AuthorSearch">
@@ -20,6 +14,9 @@
 </form>
 
 <h2>Result</h2>
+<div>
+    @Html.ActionLink("Add New Author", "AddAuthor", "Author", null, null)
+</div>
 <div>
     <div class="pagination">
         @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)

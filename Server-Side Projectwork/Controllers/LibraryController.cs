@@ -24,6 +24,9 @@ namespace Server_Side_Projectwork.Controllers
             return View("Login");
         }
        
-        
+        public ActionResult SignUp()
+        {
+            return View("SignUp");
+        }
     }
 }

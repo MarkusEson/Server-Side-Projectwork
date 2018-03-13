@@ -63,6 +63,7 @@ namespace Service.Models
 
         }
 
+
         static private Author MapAuthor(AuthorRepository authObj)
         {
             Author theAuthor = new Author();
@@ -81,6 +82,27 @@ namespace Service.Models
             theAuthor.authorobj.LastName = authObj.LastName;
             theAuthor.authorobj.BirthYear = authObj.BirthYear;
             return theAuthor;
+        }
+
+
+        static public void AddAnAuthor(int aid, string fname, string lname, string byear)
+        {
+            Author auth = new Author();
+            auth.Aid = aid;
+            auth.FirstName = fname;
+            auth.LastName = lname;
+            auth.BirthYear = byear;
+            _eAuthObj.Add(AddAuthor(auth).authorobj);
+        }
+
+        static private AuthorRepository AddAuthor(Author newAuthor)
+        {
+            AuthorRepository auth = new AuthorRepository();
+            auth.authorobj.Aid = newAuthor.Aid;
+            auth.authorobj.FirstName = newAuthor.FirstName;
+            auth.authorobj.LastName = newAuthor.LastName;
+            auth.authorobj.BirthYear = newAuthor.BirthYear;
+            return auth;
         }
     }
 }
