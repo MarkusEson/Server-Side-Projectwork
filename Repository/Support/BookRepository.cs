@@ -76,7 +76,7 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                db.BOOK.Remove(book);
+                //db.BOOK.Remove(book);
                 db.Entry(book).State = EntityState.Deleted;
                 db.SaveChanges();
             }

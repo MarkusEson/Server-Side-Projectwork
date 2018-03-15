@@ -119,10 +119,11 @@ namespace Service.Models
         {
             
             getBookList().Remove(getBooks(isbn));
-            _eBookRepo.Remove(MapBook(getBooks(isbn)).bookObj);
-
+            Book book = BookManager.getBooks(isbn); 
             
-        }
-        
+
+            _eBookRepo.Remove(MapBook(book).bookObj);
+            
+        }      
     }
 }
