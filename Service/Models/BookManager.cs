@@ -27,7 +27,7 @@ namespace Service.Models
         public string AuthorName { get; set; }
         public List<Author> BookAuthor { get; set; }
 
-        static private BookRepository _EbookObj = new BookRepository();
+        static private BookRepository _eBookRepo = new BookRepository();
 
         static public Book getBooks(string id)
         {
@@ -38,7 +38,7 @@ namespace Service.Models
         {
             List<Book> BookList = new List<Book>();
 
-            foreach (var elem in _EbookObj.List())
+            foreach (var elem in _eBookRepo.List())
             {
                 Book aBook = new Book();
                 aBook.ISBN = elem.ISBN;
@@ -61,7 +61,7 @@ namespace Service.Models
             bookObj.PublicationYear = bPyear;
             bookObj.publicationinfo = bpInfo;
             bookObj.Pages = bPages;
-            _EbookObj.Update(MapBook(bookObj).bookObj);
+            _eBookRepo.Update(MapBook(bookObj).bookObj);
 
         }
 
@@ -88,7 +88,32 @@ namespace Service.Models
             aBook.bookObj.pages = bookobj.Pages;
             return aBook;
         }
+   
+        static public void AddABook(string isbn, string title, int? signid, string pyear, string pinfo, short pages)
+        {
+            Book book = new Book();
+            book.ISBN = isbn;
+            book.Title = title;
+            book.SignId = signid;
+            book.PublicationYear = pyear;
+            book.publicationinfo = pinfo;
+            book.Pages = pages;
 
+            _eBookRepo.Add(MapNewBook(book).bookObj);
+            // _eAuthorRepo.Add(MapNewAuthor(auth).authorobj);
+        }
 
+        static private BookRepository MapNewBook(Book newBook)
+        {
+            BookRepository book = new BookRepository();
+            book.bookObj.ISBN = newBook.ISBN;
+            book.bookObj.Title = newBook.Title;
+            book.bookObj.SignId = newBook.SignId;
+            book.bookObj.PublicationYear = newBook.PublicationYear;
+            book.bookObj.publicationinfo = newBook.publicationinfo;
+            book.bookObj.pages = newBook.Pages;
+            return book;
+        }
+        
     }
 }

@@ -18,7 +18,20 @@ namespace Repository.Support
 
         private AUTHOR _authorObj = null;
 
-        public AUTHOR authorobj { get { return _authorObj; } }
+        public AUTHOR authorobj {
+            get {
+                if(_authorObj == null)
+                {
+                    _authorObj = new AUTHOR();
+                    return _authorObj;
+                }
+                else
+                {
+                    return _authorObj;
+                }
+                //return _authorObj;
+            }
+        }
 
         public AUTHOR Read(int Aid) // Find author by id
         {

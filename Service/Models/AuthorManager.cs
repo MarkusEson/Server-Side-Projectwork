@@ -29,7 +29,7 @@ namespace Service.Models
 
         public List<Book> ListofAuthorsBooks { get; set; }
 
-        static private AuthorRepository _eAuthObj = new AuthorRepository();
+        static private AuthorRepository _eAuthorRepo = new AuthorRepository();
 
         static public Author getAuthor(int aAid)
         {
@@ -40,7 +40,7 @@ namespace Service.Models
         {
             List<Author> authorList = new List<Author>();
 
-            foreach (var elem in _eAuthObj.List())
+            foreach (var elem in _eAuthorRepo.List())
             {
                 Author anAuthor = new Author();
                 anAuthor.Aid = elem.Aid;
@@ -59,7 +59,7 @@ namespace Service.Models
             authObj.FirstName = fName;
             authObj.LastName = lName;
             authObj.BirthYear = bYear;
-            _eAuthObj.Update(MapAuthor(authObj).authorobj);
+            _eAuthorRepo.Update(MapAuthor(authObj).authorobj);
 
         }
 
@@ -85,17 +85,17 @@ namespace Service.Models
         }
 
 
-        static public void AddAnAuthor(int aid, string fname, string lname, string byear)
+        static public void AddAnAuthor(string fname, string lname, string byear)
         {
             Author auth = new Author();
-            auth.Aid = aid;
+            auth.Aid = getAuthorList().Count();
             auth.FirstName = fname;
             auth.LastName = lname;
             auth.BirthYear = byear;
-            _eAuthObj.Add(AddAuthor(auth).authorobj);
+            _eAuthorRepo.Add(MapNewAuthor(auth).authorobj);
         }
 
-        static private AuthorRepository AddAuthor(Author newAuthor)
+        static private AuthorRepository MapNewAuthor(Author newAuthor)
         {
             AuthorRepository auth = new AuthorRepository();
             auth.authorobj.Aid = newAuthor.Aid;

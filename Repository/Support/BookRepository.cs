@@ -17,7 +17,19 @@ namespace Repository.Support
 
         private BOOK _bookObj = null;
 
-        public BOOK bookObj { get { return _bookObj; } }
+        public BOOK bookObj {
+            get {
+                if(_bookObj == null)
+                {
+                    _bookObj = new BOOK();
+                    return _bookObj;
+                }
+                else{
+                    return _bookObj;
+                }
+               
+            }
+        }
 
         public BOOK Read(string id) // Find book by id
         {
@@ -47,6 +59,16 @@ namespace Repository.Support
                 db.BOOK.Attach(bookObj);
                 db.Entry(bookObj).State = EntityState.Modified;
                 db.SaveChanges();
+            }
+        }
+        public void Add(BOOK bk)
+        {
+            using (var db = new Libdb())
+            {
+                db.BOOK.Add(bk);
+                db.Entry(bk).State = EntityState.Added;
+                db.SaveChanges();
+
             }
         }
     }
