@@ -114,6 +114,15 @@ namespace Service.Models
             book.bookObj.pages = newBook.Pages;
             return book;
         }
+
+        static public void RemoveBook(string isbn)
+        {
+            
+            getBookList().Remove(getBooks(isbn));
+            _eBookRepo.Remove(MapBook(getBooks(isbn)).bookObj);
+
+            
+        }
         
     }
 }

@@ -71,5 +71,15 @@ namespace Repository.Support
 
             }
         }
+
+        public void Remove(BOOK book)
+        {
+            using (var db = new Libdb())
+            {
+                db.BOOK.Remove(book);
+                db.Entry(book).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+        }
     }
 }

@@ -72,7 +72,13 @@ namespace Server_Side_Projectwork.Controllers
             return RedirectToAction("ListBooks", "Book");
 
         }
-
+        
+        [HttpGet]
+        public RedirectToRouteResult DeleteBook(string id)
+        {
+            BookManager.RemoveBook(id);
+            return RedirectToAction("ListBooks", 0);
+        }
 
 
         /*
