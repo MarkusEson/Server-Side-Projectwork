@@ -19,14 +19,31 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login()
+        public ActionResult Login(string uName, string uPass)
         {
-            return View("Login");
+            foreach (var admin in Administrator.getAdminList())
+            {
+                if (admin.UserName == uName)
+                {
+                    if (admin.UserPass == uPass)
+                    {
+                        
+
+                        ViewBag.Auth = true;
+                        return View();
+                    }
+                    else { ViewBag.Auth = false; return View(); }
+                }
+
+                ViewBag.Auth = false;
+            }
+
+            return View();
         }
-       
-        public ActionResult SignUp()
+
+        public ActionResult Logout()
         {
-            return View("SignUp");
+            return View();
         }
     }
 }

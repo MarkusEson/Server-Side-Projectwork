@@ -11,6 +11,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
     
 </head>
+
 <body>
 
     <nav class="navbar navbar-inverse">
@@ -30,51 +31,50 @@
                     <li>@Html.ActionLink("Authors","ListAuthors","Author")</li>
                     <li>@Html.ActionLink("Administrators","Index" ,"Admin")</li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <!------------------------------------------------------------- Login-dropdown Start ------------------------------------------------------------->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle login-text" data-toggle="dropdown">Log In<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu" style="width: 230px">
-                            <li class="col-lg-12">
-                                <div class="text-center"><h3><b>Log In</b></h3></div>
-                                <form class="form-horizontal" role="form" action="@Url.Action("Login", "Library")" style="margin-left: 10px; margin-right: 10px;">
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-7">
-                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
-                                                <label for="remember"> Remember Me</label>
-                                            </div>
-                                            <div class="col-xs-5 pull-right">
-                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In">
-                                            </div>
+                <!------------------------------------------------------------- Login-dropdown Start ------------------------------------------------------------->
+                <ul class="nav navbar-nav navbar-right" id="LoggedOut">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle login-text" data-toggle="dropdown">Log In<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu" style="width: 235px">
+                                <li class="col-lg-12">
+                                    <div class="text-center"><h3><b></b></h3></div>
+                                    @using (Html.BeginForm("Login", "Library", FormMethod.Post))
+                                    {
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" name="uName" id="uName" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" name="uPass" id="uPass" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-7 pull-left">
+                                                    <a href="#" tabindex="3" style="font-size: small" class="forgot-password">Forgot Password?</a>
+                                                </div>
+                                                <div class="col-xs-5 pull-right">
+                                                    <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
+                                    } 
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            @Html.ActionLink("Sign Up", "Create", "Admin")
+                        </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="LoggedIn" hidden>
+                    <li class="dropdown">
+                        @Html.ActionLink("Account", "Account", "Admin")
                     </li>
                     <li class="dropdown">
-                        @Html.ActionLink("Sign Up", "SignUp", "Library")
+                        @Html.ActionLink("Logout", "Logout", "Library")
                     </li>
-                    <!------------------------------------------------------------- Login-dropdown End ------------------------------------------------------------->
                 </ul>
+                <!------------------------------------------------------------- Login-dropdown End ------------------------------------------------------------->
             </div>
         </div>
     </nav>

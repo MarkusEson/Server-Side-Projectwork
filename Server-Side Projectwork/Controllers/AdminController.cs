@@ -39,24 +39,24 @@ namespace Server_Side_Projectwork.Controllers
 
                 return RedirectToAction("Details", new { id = admin.AdminId });
             }
-            catch 
+            catch (Exception ex)
             {
+                Console.Write("Exception: " + ex);
+                Console.Write("InnerException: " + ex.InnerException);
                 return View(admin);
             }
 
         }
 
-        [OutputCache(Duration = 3600)]
         public ActionResult Create()
         {
             return View(Administrator.getAdminList());
         }
 
-        [OutputCache(Duration = 3600)]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Administrator newAdmin)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Administrator.createAdmin(newAdmin);
 

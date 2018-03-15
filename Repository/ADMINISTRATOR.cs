@@ -19,13 +19,19 @@
         public int AdminId { get; set; }
 
         [StringLength(20)]
-        public string Fname { get; set; }
+        public string UserName { get; set; }
 
-        [StringLength(20)]
-        public string Lname { get; set; }
+        [StringLength(12)]
+        public string UserPass { get; set; }
 
-        [StringLength(200)]
-        public string AdminDescription { get; set; }
+        [StringLength(25)]
+        public string FirstName { get; set; }
+
+        [StringLength(25)]
+        public string LastName { get; set; }
+
+        [StringLength(255)]
+        public string AdminDesc { get; set; }
 
     }
 }

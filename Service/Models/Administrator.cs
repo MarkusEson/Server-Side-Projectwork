@@ -9,6 +9,8 @@ namespace Service.Models
     public class Administrator
     {
         public int AdminId { get; set; }    // Primary Key
+        public string UserName { get; set; }
+        public string UserPass { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Description { get; set; }
@@ -28,9 +30,11 @@ namespace Service.Models
             {
                 Administrator anAdmin = new Administrator();
                 anAdmin.AdminId = elem.AdminId;
-                anAdmin.FirstName = elem.Fname;
-                anAdmin.LastName = elem.Lname;
-                anAdmin.Description = elem.AdminDescription;
+                anAdmin.UserName = elem.UserName;
+                anAdmin.UserPass = elem.UserPass;
+                anAdmin.FirstName = elem.FirstName;
+                anAdmin.LastName = elem.LastName;
+                anAdmin.Description = elem.AdminDesc;
                 adminList.Add(anAdmin);
             }
             return adminList;
@@ -58,9 +62,11 @@ namespace Service.Models
         {
             Administrator theAdmin = new Administrator();
             theAdmin.AdminId = adminObj.adminobj.AdminId;
-            theAdmin.FirstName = adminObj.adminobj.Fname;
-            theAdmin.LastName = adminObj.adminobj.Lname;
-            theAdmin.Description = adminObj.adminobj.AdminDescription;
+            theAdmin.UserName = adminObj.adminobj.UserName;
+            theAdmin.UserPass = adminObj.adminobj.UserPass;
+            theAdmin.FirstName = adminObj.adminobj.FirstName;
+            theAdmin.LastName = adminObj.adminobj.LastName;
+            theAdmin.Description = adminObj.adminobj.AdminDesc;
             return theAdmin;
         }
 
@@ -68,9 +74,11 @@ namespace Service.Models
         {
             AdminRepository theAdmin = new AdminRepository(adminObj.AdminId);
             theAdmin.adminobj.AdminId = adminObj.AdminId;
-            theAdmin.adminobj.Fname = adminObj.FirstName;
-            theAdmin.adminobj.Lname = adminObj.LastName;
-            theAdmin.adminobj.AdminDescription = adminObj.Description;
+            theAdmin.adminobj.UserName = adminObj.UserName;
+            theAdmin.adminobj.UserPass = adminObj.UserPass;
+            theAdmin.adminobj.FirstName = adminObj.FirstName;
+            theAdmin.adminobj.LastName = adminObj.LastName;
+            theAdmin.adminobj.AdminDesc = adminObj.Description;
             return theAdmin;
         }
 
@@ -78,9 +86,11 @@ namespace Service.Models
         {
             AdminRepository theAdmin = new AdminRepository();
             theAdmin.adminobj.AdminId = adminObj.AdminId;
-            theAdmin.adminobj.Fname = adminObj.FirstName;
-            theAdmin.adminobj.Lname = adminObj.LastName;
-            theAdmin.adminobj.AdminDescription = adminObj.Description;
+            theAdmin.adminobj.UserName = adminObj.UserName;
+            theAdmin.adminobj.UserPass = adminObj.UserPass;
+            theAdmin.adminobj.FirstName = adminObj.FirstName;
+            theAdmin.adminobj.LastName = adminObj.LastName;
+            theAdmin.adminobj.AdminDesc = adminObj.Description;
             return theAdmin;
         }
     }
