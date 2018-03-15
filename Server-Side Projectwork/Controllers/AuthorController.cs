@@ -54,9 +54,9 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult AddAuthor(int aid, string fname, string lname, string byear)
+        public RedirectToRouteResult AddAuthor(string fname, string lname, string byear)
         {
-            AuthorManager.AddAnAuthor(aid, fname, lname, byear);
+            AuthorManager.AddAnAuthor(fname, lname, byear);
             return RedirectToAction("ListAuthors", "Author");
            
         }

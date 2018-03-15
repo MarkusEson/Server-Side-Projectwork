@@ -1,5 +1,4 @@
-﻿<style>
-
+﻿
     body
     {
         position: relative;
@@ -52,7 +51,7 @@
     
     .pagination a.active {
         background-color: #4CAF50;
-        color: white;
+        color: blue;
         border-radius: 5px;
     }
 
@@ -103,6 +102,9 @@
         margin: 0 0 0 5px;
         width: auto;
     }
+
+
+
     /* VIEWS END */
     /* ADMIN START */
        ul {
@@ -151,4 +153,4 @@
     }
 
     /*ADMIN END */
-    </style>
+    

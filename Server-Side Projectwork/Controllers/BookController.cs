@@ -60,8 +60,27 @@ namespace Server_Side_Projectwork.Controllers
             return RedirectToAction("ListBooks", "Book");
         }
 
-       
-            
+        public ActionResult AddBook()
+        {
+            return View("AddBook");
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult AddBook(string isbn, string title, int? signid, string pyear, string pinfo, short pages)
+        {
+            BookManager.AddABook(isbn, title, signid, pyear, pinfo, pages);
+            return RedirectToAction("ListBooks", "Book");
+
+        }
+        
+        [HttpGet]
+        public RedirectToRouteResult DeleteBook(string id)
+        {
+            BookManager.RemoveBook(id);
+            return RedirectToAction("ListBooks", 0);
+        }
+
+
         /*
         // GET: Library
         public ActionResult Index()
