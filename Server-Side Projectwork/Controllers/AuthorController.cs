@@ -61,6 +61,13 @@ namespace Server_Side_Projectwork.Controllers
            
         }
 
+        [HttpGet]
+        public RedirectToRouteResult DeleteAuthor(int id)
+        {
+            AuthorManager.RemoveAuthor(id);
+            return RedirectToAction("ListAuthors", 0);
+        }
+
         /*
         // GET: Authors
         [HttpGet]

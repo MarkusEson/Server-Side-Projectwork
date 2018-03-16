@@ -74,5 +74,17 @@ namespace Repository.Support
                 
             }
         }
+    
+        
+        public void Remove(AUTHOR auth)
+        {
+            using (var db = new Libdb())
+            {
+                db.AUTHOR.Remove(auth);
+                db.Entry(auth).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+        }
+        
     }
 }

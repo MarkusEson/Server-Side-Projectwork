@@ -104,5 +104,15 @@ namespace Service.Models
             auth.authorobj.BirthYear = newAuthor.BirthYear;
             return auth;
         }
+
+        
+        static public void RemoveAuthor(int id)
+        {
+            Author auth = AuthorManager.getAuthor(id);
+            getAuthorList().Remove(getAuthor(id));
+            _eAuthorRepo.Remove(MapAuthor(auth).authorobj);
+
+        }
+        
     }
 }
