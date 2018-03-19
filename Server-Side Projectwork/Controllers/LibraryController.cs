@@ -27,22 +27,24 @@ namespace Server_Side_Projectwork.Controllers
                 {
                     if (admin.UserPass == uPass)
                     {
-                        
 
-                        ViewBag.Auth = true;
+                        Session["UserName"] = admin.UserName;
                         return View();
                     }
-                    else { ViewBag.Auth = false; return View(); }
                 }
-
-                ViewBag.Auth = false;
             }
 
-            return View();
+            ViewBag.errorMessage = "Wrong login credentials";
+            return View("Error");
         }
 
         public ActionResult Logout()
         {
+            Session.Abandon();
+
+            Session.Contents.Abandon();
+            Session.Contents.RemoveAll();
+
             return View();
         }
     }

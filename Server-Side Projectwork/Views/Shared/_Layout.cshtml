@@ -34,7 +34,9 @@
                     <li>@Html.ActionLink("Administrators","Index" ,"Admin")</li>
                 </ul>
                 <!------------------------------------------------------------- Login-dropdown Start ------------------------------------------------------------->
-                <ul class="nav navbar-nav navbar-right" id="LoggedOut">
+                @if (Session["UserName"] == null)
+                {
+                    <ul class="nav navbar-nav navbar-right" id="LoggedOut">
                         <li class="dropdown">
                             <a class="dropdown-toggle login-text" data-toggle="dropdown">Log In<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu" style="width: 235px">
@@ -60,22 +62,26 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    } 
+                                    }
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             @Html.ActionLink("Sign Up", "Create", "Admin")
                         </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" id="LoggedIn" hidden>
-                    <li class="dropdown">
-                        @Html.ActionLink("Account", "Account", "Admin")
-                    </li>
-                    <li class="dropdown">
-                        @Html.ActionLink("Logout", "Logout", "Library")
-                    </li>
-                </ul>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right" id="LoggedIn">
+                        <li class="dropdown">
+                            @Html.ActionLink("Account", "Account", "Admin")
+                        </li>
+                        <li class="dropdown">
+                            @Html.ActionLink("Logout", "Logout", "Library")
+                        </li>
+                    </ul>
+                }
                 <!------------------------------------------------------------- Login-dropdown End ------------------------------------------------------------->
             </div>
         </div>

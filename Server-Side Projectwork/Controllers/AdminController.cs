@@ -41,9 +41,10 @@ namespace Server_Side_Projectwork.Controllers
             }
             catch (Exception ex)
             {
-                Console.Write("Exception: " + ex);
-                Console.Write("InnerException: " + ex.InnerException);
-                return View(admin);
+                ViewBag.errorMessage(ex);
+                ViewBag.innerMessage(ex.InnerException);
+
+                return View("Error");
             }
 
         }
@@ -63,7 +64,8 @@ namespace Server_Side_Projectwork.Controllers
                 return RedirectToAction("Details", new { id = newAdmin.AdminId });
             }
 
-            return View(newAdmin);
+            ViewBag.errorMessage("Could not make new admin account!");
+            return View("Error");
         }
     }
     

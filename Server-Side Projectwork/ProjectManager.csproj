@@ -192,6 +192,7 @@
     <Content Include="Pagination\packages.config" />
     <Content Include="Views\Author\EditAuthor.cshtml" />
     <Content Include="Views\Library\Logout.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,26 +1,12 @@
-﻿@{
+﻿@model Service.Models.Administrator
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
     ViewBag.Title = "Login";
 }
 
-@if (ViewBag.Auth == true)
+@if (Session["UserName"] != null)
 {
-    <script type="text/javascript">
-
-        window.localStorage.setItem("LoggedIn", true);
-
-    </script>
-    <h1>Logged In!</h1>
+    <a> Welcome @Session["UserName"].ToString() </a>
 }
-else
-{
-    <script type="text/javascript">
-
-        window.localStorage.setItem("LoggedIn", false);
-
-    </script>
-    <h1>Username or pasword wrong</h1>
-}
-
