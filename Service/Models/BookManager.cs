@@ -105,7 +105,7 @@ namespace Service.Models
 
         static private BookRepository MapNewBook(Book newBook)
         {
-            BookRepository book = new BookRepository();
+            BookRepository book = new BookRepository(newBook.ISBN);
             book.bookObj.ISBN = newBook.ISBN;
             book.bookObj.Title = newBook.Title;
             book.bookObj.SignId = newBook.SignId;

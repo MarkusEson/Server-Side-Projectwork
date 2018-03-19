@@ -80,5 +80,16 @@ namespace Server_Side_Projectwork.Controllers
             return RedirectToAction("ListBooks", 0);
         }
 
+
+        // ADD A SEARCH METHOD
+        // https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/search
+
+        public ActionResult SearchBook(string searchString)
+        {
+            
+        
+            return View("ListBooks", searchList.ToPagedList(0, DefaultPageSize));
+        }
+
     }
 }
