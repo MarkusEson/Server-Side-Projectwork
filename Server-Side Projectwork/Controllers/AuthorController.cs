@@ -61,6 +61,7 @@ namespace Server_Side_Projectwork.Controllers
            
         }
 
+<<<<<<< Updated upstream
         [HttpGet]
         public RedirectToRouteResult DeleteAuthor(int id)
         {
@@ -108,5 +109,8 @@ namespace Server_Side_Projectwork.Controllers
             return View("ShowAuthor", repo.AuthorList.Find(x => (x.Aid == id)));
         }
         */
+=======
+        
+>>>>>>> Stashed changes
     }
 }

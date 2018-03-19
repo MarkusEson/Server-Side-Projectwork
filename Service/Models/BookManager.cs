@@ -117,13 +117,13 @@ namespace Service.Models
 
         static public void RemoveBook(string isbn)
         {
-            
-            getBookList().Remove(getBooks(isbn));
+        
             Book book = BookManager.getBooks(isbn); 
-            
+            _eBookRepo.Delete(MapBook(book).bookObj);
 
-            _eBookRepo.Remove(MapBook(book).bookObj);
-            
+            getBookList().Remove(getBooks(isbn));
+           
+
         }      
     }
 }
