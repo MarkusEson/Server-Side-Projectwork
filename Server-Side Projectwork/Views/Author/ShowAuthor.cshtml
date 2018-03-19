@@ -10,7 +10,7 @@
 
 <h2>Show Author</h2>
 <div>
-    @Html.ActionLink("Edit", "EditAuthor", "Author", new { id = Model.Aid }, null)
+    @Html.ActionLink("Edit", "EditAuthor", "Author", new { id = Model.Aid }, null) || @Html.ActionLink("Delete", "DeleteAuthor", "Author", new { id = Model.Aid }, null)
 </div>
 <dl>
     <dd>

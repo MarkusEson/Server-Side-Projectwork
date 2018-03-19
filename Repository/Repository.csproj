@@ -130,6 +130,7 @@
     <Compile Include="Support\AdminRepository.cs" />
     <Compile Include="Support\AuthorRepository.cs" />
     <Compile Include="Support\BookRepository.cs" />
+    <Compile Include="Support\ClassificationRepository.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

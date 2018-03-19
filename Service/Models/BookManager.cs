@@ -105,7 +105,7 @@ namespace Service.Models
 
         static private BookRepository MapNewBook(Book newBook)
         {
-            BookRepository book = new BookRepository();
+            BookRepository book = new BookRepository(newBook.ISBN);
             book.bookObj.ISBN = newBook.ISBN;
             book.bookObj.Title = newBook.Title;
             book.bookObj.SignId = newBook.SignId;
@@ -117,13 +117,13 @@ namespace Service.Models
 
         static public void RemoveBook(string isbn)
         {
-            
-            getBookList().Remove(getBooks(isbn));
+        
             Book book = BookManager.getBooks(isbn); 
-            
+            _eBookRepo.Delete(MapBook(book).bookObj);
 
-            _eBookRepo.Remove(MapBook(book).bookObj);
-            
+            getBookList().Remove(getBooks(isbn));
+           
+
         }      
     }
 }
