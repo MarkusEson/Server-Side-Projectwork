@@ -7,12 +7,14 @@
     ViewBag.Title = "Books";
 }
 
-
-<div>
-    <form>
-        <a href="/Book/AddBook">Add Book</a>
-    </form>
-</div>
+@if (Session["UserName"] != null)
+{
+    <div>
+        <form>
+            <a href="/Book/AddBook">Add Book</a>
+        </form>
+    </div>
+}
 
 <div>
     <h2>Search for a Book</h2>

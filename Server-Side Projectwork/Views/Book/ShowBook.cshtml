@@ -10,9 +10,12 @@
 
 <h2>Show chosen Book</h2>
 
-<div>
-    @Html.ActionLink("Edit" ,"EditBook" ,"Book" ,new { id = Model.ISBN } ,null) || @Html.ActionLink("Delete", "DeleteBook", "Book", new { id = Model.ISBN }, null)
-</div>
+@if (Session["UserName"] != null)
+{
+    <div>
+        @Html.ActionLink("Edit", "EditBook", "Book", new { id = Model.ISBN }, null) || @Html.ActionLink("Delete", "DeleteBook", "Book", new { id = Model.ISBN }, null)
+    </div>
+}
 
 <dl>
     <dt>ISBN</dt>

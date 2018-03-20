@@ -3,17 +3,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>Add a Book to the database</h2>
-
-
-@using (Html.BeginForm())
+@if (Session["UserName"] != null)
 {
-    @:ISBN: @Html.TextBox("isbn")<br>
-    @:Title: @Html.TextBox("title")<br>
-    @:SignID: @Html.TextBox("signid")<br>
-    @:Publication year: @Html.TextBox("pyear")<br>
-    @:Publication info: @Html.TextBox("pinfo")<br>
-    @:Pages: @Html.TextBox("pages")<br>
-    <input type="submit" value="Add" formmethod="post" /><br>
+    <h2>Add a Book to the database</h2>
+
+
+    using (Html.BeginForm())
+    {
+        @:ISBN: @Html.TextBox("isbn")<br>
+        @:Title: @Html.TextBox("title")<br>
+        @:SignID: @Html.TextBox("signid")<br>
+        @:Publication year: @Html.TextBox("pyear")<br>
+        @:Publication info: @Html.TextBox("pinfo")<br>
+        @:Pages: @Html.TextBox("pages")<br>
+        <input type="submit" value="Add" formmethod="post" /><br>
+    }
 }

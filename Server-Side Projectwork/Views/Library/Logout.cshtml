@@ -3,12 +3,8 @@
     ViewBag.Title = "Logout";
 }
 
-<script src="~/scripts/jquery-1.10.2.js">
-
-    localStorage.LoggedIn = false;
-
-</script>
-
-<h2>Logged out</h2>
-
+@if (Session["UserName"] == null)
+{
+    <h2>Logged out</h2>
+}
 

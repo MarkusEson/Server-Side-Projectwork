@@ -14,9 +14,12 @@
 </form>
 
 <h2>Result</h2>
-<div>
-    @Html.ActionLink("Add New Author", "AddAuthor", "Author", null, null)
-</div>
+@if (Session["UserName"] != null)
+{
+    <div>
+        @Html.ActionLink("Add New Author", "AddAuthor", "Author", null, null)
+    </div>
+}
 <div>
     <div class="pagination">
         @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)

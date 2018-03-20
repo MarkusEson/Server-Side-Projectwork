@@ -6,14 +6,16 @@
     ViewBag.Title = "AddAuthor";
 }
 
-
-<h2>Add a Book to the database</h2>
-
-
-@using (Html.BeginForm())
+@if (Session["UserName"] != null)
 {
-    @:First Name: @Html.TextBox("fname")<br>
-    @:Last Name: @Html.TextBox("lname")<br>
-    @:Birth Year: @Html.TextBox("byear")<br>
-    <input type="submit" value="Add" formmethod="post" /><br>
+    <h2>Add a Book to the database</h2>
+
+
+    using (Html.BeginForm())
+    {
+        @:First Name: @Html.TextBox("fname")<br>
+        @:Last Name: @Html.TextBox("lname")<br>
+        @:Birth Year: @Html.TextBox("byear")<br>
+        <input type="submit" value="Add" formmethod="post" /><br>
+    }
 }
