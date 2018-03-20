@@ -11,10 +11,12 @@
       background-color: white;
     }
 
+    /* Dropdown-menu's text control */
     .login-text
     {
         user-select:none;
         color: black;
+        cursor: pointer;
     }
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */

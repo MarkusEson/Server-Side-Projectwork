@@ -88,7 +88,7 @@ namespace Server_Side_Projectwork.Controllers
         {
             
         
-            return View("ListBooks", searchList.ToPagedList(0, DefaultPageSize));
+            return View("ListBooks"/*, searchList.ToPagedList(0, DefaultPageSize)*/);
         }
 
     }

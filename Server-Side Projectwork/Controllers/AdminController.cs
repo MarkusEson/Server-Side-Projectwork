@@ -17,13 +17,11 @@ namespace Server_Side_Projectwork.Controllers
             return View(Administrator.getAdmin(id));
         }
 
-        [OutputCache(Duration = 3600)]
         public ActionResult Edit(int id)
         {
             return View(Administrator.getAdmin(id));
         }
 
-        [OutputCache(Duration = 3600)]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection formValues)
         {
