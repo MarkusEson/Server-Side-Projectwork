@@ -13,6 +13,7 @@ namespace Service.Models
         public BookManager(string id)
         {
             this.id = id;
+            
             Book bookobj = BookManager.getBooks(id);
             List<Author> bookAuthorList = AuthorManager.getAuthorList();
             Author bookAuthorObj = bookAuthorList.Find(x => x.Aid == bookobj.SignId);
@@ -151,10 +152,19 @@ namespace Service.Models
             {
                 SearchList.Add(MapBook(book));
             }
-            
-
             return SearchList;
-
-        }     
+        }   
+        
+        public List<Book> GetBooksByAid(int aid)
+        {
+            var repo = new BookRepository();
+            List<Book> booklist = new List<Book>();
+            var booksbyaid = repo.GetBooksByAid(aid);
+            foreach(var book in booksbyaid )
+            {
+                booklist.Add(MapBook(book));
+            }  
+            return booklist;
+        }
     }
 }

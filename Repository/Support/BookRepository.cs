@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 
+
 namespace Repository.Support
 {
     public class BookRepository
@@ -89,6 +90,15 @@ namespace Repository.Support
             {
                 db.Configuration.LazyLoadingEnabled = false;
                 return db.BOOK.Where(x => x.Title.Contains(searchString)).OrderBy(x => x.Title).ToList();
+            }
+        }
+
+        public List<BOOK> GetBookByAid(int aid)
+        {
+            using (var db = new Libdb())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return db.AUTHOR.Include(x => x.BOOK).FirstOrDefault(x => x.Aid.Equals(aid)).BOOK.ToList();
             }
         }
     }

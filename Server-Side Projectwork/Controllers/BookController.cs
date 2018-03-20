@@ -89,6 +89,7 @@ namespace Server_Side_Projectwork.Controllers
             var list = Service.Models.BookManager.SearchForBook(searchString);
             return View("ListBooks", list.ToPagedList(0,10));
         }
+        
 
     }
 }

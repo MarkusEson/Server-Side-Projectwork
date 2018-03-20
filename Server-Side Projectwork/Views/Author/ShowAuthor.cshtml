@@ -22,11 +22,20 @@
 
     <dt>Name</dt>
     <dd>@Model.FirstName @Model.LastName</dd>
-
+    
     <dt>AidId</dt>
     <dd>@Model.Aid</dd>
 
     <dt>Birth year </dt>
     <dd>@Model.BirthYear</dd>
 
+    
+    @foreach (var item in Model.AuthBooks)
+    {
+        <dd>
+            @item.Title
+        </dd>
+    }
+    
+   
 </dl>

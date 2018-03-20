@@ -9,5 +9,7 @@ namespace Service.Models
     {
         public string ISBN { get; set; }   // primary key
         public string Aid { get; set; }     //secondary key
+
+
     }
 }

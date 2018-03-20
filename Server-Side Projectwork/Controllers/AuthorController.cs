@@ -23,6 +23,7 @@ namespace Server_Side_Projectwork.Controllers
         public ActionResult ShowAuthor(int id)
         {
             AuthorManager authorDetailObj = new AuthorManager(id);
+            
             return View("ShowAuthor", authorDetailObj);
         }
         

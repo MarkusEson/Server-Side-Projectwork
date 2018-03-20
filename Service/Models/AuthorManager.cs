@@ -13,16 +13,35 @@ namespace Service.Models
         public AuthorManager(int id)
         {
             this.id = id;
+
             Author authobj = AuthorManager.getAuthor(id);
+
+            foreach (var book in AuthorManager.getAuthorBooks(id))
+            {
+                authobj.AuthBooks.Add(book);
+            }
+
+            
             List<Book> authorBookList = BookManager.getBookList();
             Book authBookObj = authorBookList.Find(x => x.SignId == authobj.Aid);
+
             Aid = authobj.Aid;
             FirstName = authobj.FirstName;
             LastName = authobj.LastName;
             BirthYear = authobj.BirthYear;
             
         }
-
+        /*
+        public Author getAuthorFromAid(int Aid)
+        {
+            Author authobj = AuthorManager.getAuthor(id);
+            foreach (var book in AuthorManager.getAuthorBooks(id))
+            {
+                authobj.AuthBooks.Add(book);
+            }
+            return authobj;
+        }
+        */
         public string AuthorName { get; set; }
 
         public string Bookname { get; set; }
@@ -71,6 +90,7 @@ namespace Service.Models
             theAuthor.FirstName = authObj.authorobj.FirstName;
             theAuthor.LastName = authObj.authorobj.LastName;
             theAuthor.BirthYear = authObj.authorobj.BirthYear;
+            //theAuthor.AuthBooks = authObj.authorobj.BOOK;
             return theAuthor;
         }
 
@@ -135,6 +155,21 @@ namespace Service.Models
                 SearchList.Add(MapAuthor(auth));
             }
             return SearchList;
+        }
+
+        static public List<Book> getAuthorBooks(int id)
+        {
+            List<Book> bookList = BookManager.getBookList();
+            List<Book> authorBooksList = new List<Book>();
+
+            foreach(var book in bookList)
+            {
+                if( book.SignId == id ) // inga kommer att matcha . ta bort funktion. gör en funk i repository som hämtar alla books där author id stämmer
+                {
+                    authorBooksList.Add(book);
+                }
+            }
+            return authorBooksList;
         }
 
     }

@@ -13,5 +13,7 @@ namespace Service.Models
         public string LastName { get; set; }
         public string BirthYear { get; set; }
 
+        public List<Book> AuthBooks { get; set; }
+
     }
 }
