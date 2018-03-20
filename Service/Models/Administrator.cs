@@ -48,6 +48,14 @@ namespace Service.Models
             _eAdminObj.Add(MapNewAdmin(adminObj).adminobj);
         }
 
+        static public void removeAdmin(int id)
+        {
+            Administrator admin = Administrator.getAdmin(id);
+            getAdminList().Remove(getAdmin(id));
+            _eAdminObj.Remove(MapAdmin(admin).adminobj);
+
+        }
+
         static public void updateAdmin(int aAdminId, string fName, string lName, string aDesc)
         {
             Administrator adminObj = Administrator.getAdmin(aAdminId);

@@ -36,6 +36,7 @@ namespace Repository.Support
             {
 
                 db.ADMINISTRATOR.Load();
+
                 return db.ADMINISTRATOR.Find(AdminId);
             }
         }
@@ -55,7 +56,20 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 db.ADMINISTRATOR.Add(admin);
+
                 db.Entry(admin).State = EntityState.Added;
+                db.SaveChanges();
+            }
+        }
+
+        public void Remove(ADMINISTRATOR admin)
+        {
+            using (var db = new Libdb())
+            {
+                db.ADMINISTRATOR.Attach(admin);
+                db.ADMINISTRATOR.Remove(admin);
+
+                db.Entry(admin).State = EntityState.Deleted;
                 db.SaveChanges();
             }
         }
@@ -65,6 +79,7 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 db.ADMINISTRATOR.Attach(adminobj);
+
                 db.Entry(adminobj).State = EntityState.Modified;
                 db.SaveChanges();
             }

@@ -65,6 +65,17 @@ namespace Server_Side_Projectwork.Controllers
             ViewBag.errorMessage("Could not make new admin account!");
             return View("Error");
         }
+
+        public ActionResult Delete(int id)
+        {
+            Administrator.removeAdmin(id);
+
+            Session.Abandon();
+            Session.Contents.Abandon();
+            Session.Contents.RemoveAll();
+
+            return RedirectToAction("Index");
+        }
     }
     
 }

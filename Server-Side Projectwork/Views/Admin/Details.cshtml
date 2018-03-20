@@ -19,6 +19,7 @@
     if (Session["UserName"].Equals(Model.UserName))
     {
         <a href="/Admin/Edit/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default">Edit</a>
+        <a href="/Admin/Delete/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default">Delete</a>
     }
 }
 
