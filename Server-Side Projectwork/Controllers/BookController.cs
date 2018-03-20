@@ -86,14 +86,8 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public ActionResult SearchBook(string searchString)
         {
-<<<<<<< Updated upstream
-            
-        
-            return View("ListBooks"/*, searchList.ToPagedList(0, DefaultPageSize)*/);
-=======
             var list = Service.Models.BookManager.SearchForBook(searchString);
             return View("ListBooks", list.ToPagedList(0,10));
->>>>>>> Stashed changes
         }
 
     }
