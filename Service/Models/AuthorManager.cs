@@ -74,6 +74,16 @@ namespace Service.Models
             return theAuthor;
         }
 
+        static private Author MapAuthor(Repository.AUTHOR authObj)
+        {
+            Author theAuthor = new Author();
+            theAuthor.Aid = authObj.Aid;
+            theAuthor.FirstName = authObj.FirstName;
+            theAuthor.LastName = authObj.LastName;
+            theAuthor.BirthYear = authObj.BirthYear;
+            return theAuthor;
+        }
+
         static private AuthorRepository MapAuthor(Author authObj)
         {
             AuthorRepository theAuthor = new AuthorRepository(authObj.Aid);
@@ -113,6 +123,19 @@ namespace Service.Models
             _eAuthorRepo.Remove(MapAuthor(auth).authorobj);
 
         }
-        
+
+        static public List<Author> SearchForAuthor(string searchString)
+        {
+            List<Author> SearchList = new List<Author>();
+            var repo = new AuthorRepository();
+            var authorlist = repo.getSearchAuthorListFromDb(searchString);
+
+            foreach (var auth in authorlist)
+            {
+                SearchList.Add(MapAuthor(auth));
+            }
+            return SearchList;
+        }
+
     }
 }

@@ -82,5 +82,14 @@ namespace Repository.Support
                 db.SaveChanges();
             }
         }
+
+        public List<BOOK> getSearchBookListFromDb(string searchString)
+        {
+            using (var db = new Libdb())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return db.BOOK.Where(x => x.Title.Contains(searchString)).OrderBy(x => x.Title).ToList();
+            }
+        }
     }
 }

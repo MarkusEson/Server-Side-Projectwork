@@ -17,11 +17,12 @@
 }
 
 <div>
-    <h2>Search for a Book</h2>
-    <form>
-        <input type="text" name="BookSearch">
-        <input type="submit" value="Search">
-    </form>
+    <h2>Search for a Book</h2>  
+    @using (Html.BeginForm("SearchBook", "Book", FormMethod.Post))
+    {
+        @Html.TextBox("searchString")
+        <input type="Submit" />
+    }
 </div>
 
  <div>

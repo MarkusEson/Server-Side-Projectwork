@@ -77,6 +77,21 @@ namespace Service.Models
             return aBook;
         }
 
+
+        // TEST TEST
+        static private Book MapBook(Repository.BOOK bookobj)
+        {
+            Book aBook = new Book();
+            aBook.ISBN = bookobj.ISBN;
+            aBook.Title = bookobj.Title;
+            aBook.SignId = bookobj.SignId;
+            aBook.PublicationYear = bookobj.PublicationYear;
+            aBook.publicationinfo = bookobj.publicationinfo;
+            aBook.Pages = bookobj.pages;
+            return aBook;
+        }
+        // TEST TEST
+
         static private BookRepository MapBook(Book bookobj)
         {
             BookRepository aBook = new BookRepository(bookobj.ISBN);
@@ -124,6 +139,22 @@ namespace Service.Models
             getBookList().Remove(getBooks(isbn));
            
 
-        }      
+        } 
+        
+        static public List<Book> SearchForBook(string searchString)
+        {
+            List<Book> SearchList = new List<Book>();
+            var repo = new BookRepository();
+            var booklist = repo.getSearchBookListFromDb(searchString);
+
+            foreach (var book in booklist)
+            {
+                SearchList.Add(MapBook(book));
+            }
+            
+
+            return SearchList;
+
+        }     
     }
 }

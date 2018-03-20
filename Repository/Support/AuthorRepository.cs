@@ -85,6 +85,15 @@ namespace Repository.Support
                 db.SaveChanges();
             }
         }
-        
+
+        public List<AUTHOR> getSearchAuthorListFromDb(string searchString)
+        {
+            using (var db = new Libdb())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return db.AUTHOR.Where(x => x.FirstName.Contains(searchString)).OrderBy(x => x.FirstName).ToList();
+            }
+        }
+
     }
 }

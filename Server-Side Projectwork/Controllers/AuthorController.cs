@@ -68,5 +68,12 @@ namespace Server_Side_Projectwork.Controllers
             return RedirectToAction("ListAuthors", 0);
         }
 
+        [HttpPost]
+        public ActionResult SearchAuthor(string searchString)
+        {
+            var list = Service.Models.AuthorManager.SearchForAuthor(searchString);
+            return View("ListAuthors", list.ToPagedList(0, 10));
+        }
+
     }
 }
