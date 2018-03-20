@@ -130,11 +130,22 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Resources\auhimg2.jpg" />
+    <Content Include="Resources\authimg1.png" />
+    <Content Include="Resources\authimg3.png" />
+    <Content Include="Resources\authimg4.png" />
+    <Content Include="Resources\bookicon1.jpg" />
+    <Content Include="Resources\bookicon2.png" />
+    <Content Include="Resources\bookicon3.png" />
+    <Content Include="Resources\JU-Logo-Lib.png" />
+    <Content Include="Resources\JU-Logo-Lib2.png" />
+    <Content Include="Resources\JU-Logo-Lib3.png" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="CSS\Design.css" />
+    <None Include="Properties\PublishProfiles\Projectweb.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -205,7 +216,6 @@
     <Folder Include="Pagination\bin\" />
     <Folder Include="Pagination\obj\" />
     <Folder Include="Pagination\Properties\" />
-    <Folder Include="Resources\" />
     <Folder Include="Views\List\" />
   </ItemGroup>
   <ItemGroup>
