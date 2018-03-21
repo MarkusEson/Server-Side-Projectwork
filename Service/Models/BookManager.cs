@@ -53,6 +53,19 @@ namespace Service.Models
             return BookList;
         }
 
+        static public List<Book> GetBooksByAid(int aid)
+        {
+            List<Book> returnbooklist = new List<Book>();
+            var repo = new BookRepository();
+            var booksbyaid = repo.GetBookByAid(aid);
+
+            foreach (var book in booksbyaid)
+            {
+                returnbooklist.Add(MapBook(book));
+            }
+            return returnbooklist;
+        }
+
         static public void updateBook(string bISBN, string bTitle, int bsignId, string bPyear, string bpInfo, short? bPages)
         {
             Book bookObj = BookManager.getBooks(bISBN);
@@ -155,16 +168,8 @@ namespace Service.Models
             return SearchList;
         }   
         
-        public List<Book> GetBooksByAid(int aid)
-        {
-            var repo = new BookRepository();
-            List<Book> booklist = new List<Book>();
-            var booksbyaid = repo.GetBooksByAid(aid);
-            foreach(var book in booksbyaid )
-            {
-                booklist.Add(MapBook(book));
-            }  
-            return booklist;
-        }
+        
+
+
     }
 }

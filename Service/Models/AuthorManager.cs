@@ -15,21 +15,16 @@ namespace Service.Models
             this.id = id;
 
             Author authobj = AuthorManager.getAuthor(id);
+            var authorBookList = BookManager.GetBooksByAid(id);
 
-            foreach (var book in AuthorManager.getAuthorBooks(id))
-            {
-                authobj.AuthBooks.Add(book);
-            }
-
-            
-            List<Book> authorBookList = BookManager.getBookList();
-            Book authBookObj = authorBookList.Find(x => x.SignId == authobj.Aid);
+            //Book authBookObj = authorBookList.Find(x => x.SignId == authobj.Aid);
 
             Aid = authobj.Aid;
             FirstName = authobj.FirstName;
             LastName = authobj.LastName;
             BirthYear = authobj.BirthYear;
-            
+
+            AuthBooks = authorBookList;
         }
         /*
         public Author getAuthorFromAid(int Aid)
@@ -157,8 +152,25 @@ namespace Service.Models
             return SearchList;
         }
 
+        /*
         static public List<Book> getAuthorBooks(int id)
         {
+            
+            var repo = new BookRepository();
+
+            List<Book> returnList = new List<Book>();
+            var BookList = repo.GetBookByAid(id);
+
+            foreach(var book in BookList)
+            {
+                returnList.Add(book);
+            }
+
+
+            //
+            //
+            //
+            //
             List<Book> bookList = BookManager.getBookList();
             List<Book> authorBooksList = new List<Book>();
 
@@ -171,6 +183,7 @@ namespace Service.Models
             }
             return authorBooksList;
         }
-
+        */
+    
     }
 }

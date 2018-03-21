@@ -15,7 +15,7 @@
         @Html.ActionLink("Edit", "EditAuthor", "Author", new { id = Model.Aid }, null) || @Html.ActionLink("Delete", "DeleteAuthor", "Author", new { id = Model.Aid }, null)
     </div>
 }
-<dl>
+<div>
     <dd>
         <img src="~/Resources/authimg1.png" class="iconDetails">
     </dd>
@@ -30,12 +30,16 @@
     <dd>@Model.BirthYear</dd>
 
     
+    <dt>
+        Books by @Model.FirstName @Model.LastName:
+    </dt>
+
     @foreach (var item in Model.AuthBooks)
     {
-        <dd>
-            @item.Title
-        </dd>
+        <li class="listauthbooks">
+            @Html.ActionLink(@item.Title, "ShowBook", "Book", new { id = item.ISBN }, null)
+        </li>
     }
     
    
-</dl>
+</div>
