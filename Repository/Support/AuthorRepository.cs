@@ -95,15 +95,5 @@ namespace Repository.Support
             }
         }
 
-        public List<AUTHOR> GetAuthorByIsbn(string id)
-        {
-            using (var db = new Libdb())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                return db.BOOK.Find(ISBN).AUTHOR.ToList();
-
-            }
-        }
-
     }
 }

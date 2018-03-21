@@ -15,6 +15,6 @@ namespace Service.Models
         public string publicationinfo { get; set; }
         public short? Pages { get; set; }
 
-        public List<Author> BookAuth { get; set; } 
+        
     }
 }

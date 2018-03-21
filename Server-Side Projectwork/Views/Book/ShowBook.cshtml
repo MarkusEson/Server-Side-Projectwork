@@ -17,42 +17,22 @@
     </div>
 }
 
-<div class="container">
-    <div class="left">
-        <img src="~/Resources/bookicon2.jpg" class="iconDetails">
-    </div>
-    <div class="right">
-        <dt>ISBN</dt>
-        <dd>@Model.ISBN</dd>
+<dl>
+    <dt>ISBN</dt>
+    <dd>@Model.ISBN</dd>
 
-        <dt>Title</dt>
-        <dd>@Model.Title</dd>
+    <dt>Title</dt>
+    <dd>@Model.Title</dd>
 
-        <dt>SignId</dt>
-        <dd>@Model.SignId</dd>
+    <dt>SignId</dt>
+    <dd>@Model.SignId</dd>
 
-        <dt>Publication Year</dt>
-        <dd>@Model.PublicationYear</dd>
+    <dt>Publication Year</dt>
+    <dd>@Model.PublicationYear</dd>
 
-        <dt>Publication Info</dt>
-        <dd>@Model.publicationinfo</dd>
+    <dt>Publication Info</dt>
+    <dd>@Model.publicationinfo</dd>
 
-        <dt>Pages</dt>
-        <dd>@Model.Pages</dd>
-    </div>
-</div>
-
-
-<div class="container">
-    <hr>
-    <dt>
-        Author of @Model.Title:
-    </dt>
-
-    @foreach (var item in Model.BookAuth)
-    {
-        <li>
-            @Html.ActionLink(@item.FirstName, "ShowAuthor", "Author", new { id = item.Aid }, null)
-        </li>
-    }
-</div>
+    <dt>Pages</dt>
+    <dd>@Model.Pages</dd>
+</dl>
