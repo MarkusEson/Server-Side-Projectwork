@@ -15,22 +15,28 @@
         @Html.ActionLink("Edit", "EditAuthor", "Author", new { id = Model.Aid }, null) || @Html.ActionLink("Delete", "DeleteAuthor", "Author", new { id = Model.Aid }, null)
     </div>
 }
-<div>
-    <dd>
+<div class="container">
+    <div class="left">
         <img src="~/Resources/authimg1.png" class="iconDetails">
-    </dd>
+    </div>
+    <div class="right">
+        <dt>Name</dt>
+        <dd>@Model.FirstName @Model.LastName</dd>
 
-    <dt>Name</dt>
-    <dd>@Model.FirstName @Model.LastName</dd>
+        <dt>AidId</dt>
+        <dd>@Model.Aid</dd>
+
+        <dt>Birth year </dt>
+        <dd>@Model.BirthYear</dd>
+    </div>
     
-    <dt>AidId</dt>
-    <dd>@Model.Aid</dd>
+</div>
 
-    <dt>Birth year </dt>
-    <dd>@Model.BirthYear</dd>
 
-    
-    <dt>
+
+<div class="container">
+     <hr>
+     <dt>
         Books by @Model.FirstName @Model.LastName:
     </dt>
 
@@ -40,6 +46,8 @@
             @Html.ActionLink(@item.Title, "ShowBook", "Book", new { id = item.ISBN }, null)
         </li>
     }
+</div>
     
    
-</div>
+    
+   
