@@ -80,8 +80,9 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                db.AUTHOR.Remove(auth);
+                
                 db.Entry(auth).State = EntityState.Deleted;
+                db.AUTHOR.Remove(auth);
                 db.SaveChanges();
             }
         }
@@ -100,7 +101,7 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.BOOK.Find(ISBN).AUTHOR.ToList();
+                return db.BOOK.Include(x => x.AUTHOR).First(x => x.ISBN == id).AUTHOR.ToList();
 
             }
         }

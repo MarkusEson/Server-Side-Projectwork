@@ -28,9 +28,6 @@
         <dt>Title</dt>
         <dd>@Model.Title</dd>
 
-        <dt>SignId</dt>
-        <dd>@Model.SignId</dd>
-
         <dt>Publication Year</dt>
         <dd>@Model.PublicationYear</dd>
 
@@ -51,8 +48,9 @@
 
     @foreach (var item in Model.BookAuth)
     {
+        var FullName = @item.FirstName + " " + @item.LastName;
         <li>
-            @Html.ActionLink(@item.FirstName, "ShowAuthor", "Author", new { id = item.Aid }, null)
+            @Html.ActionLink(@FullName, "ShowAuthor", "Author", new { id = item.Aid }, null)
         </li>
     }
 </div>
