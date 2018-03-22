@@ -1,9 +1,9 @@
 **CRITICAL TO DO:**
-- [ ] Fix Add Book. 
-	- [ ] Fix Add Book ( it crashes upon db.SaveChanges(); faulty inputs?)
-	- [ ] Fix add Author ^^
-- [ ] Fix connection between Book and Author 
-	- [ ] Adding a new book should connect it to the author, and you should be able to view the new book in authors details.
+- [x] Fix Add Book. 
+	- [x] Fix Add Book ( it crashes upon db.SaveChanges(); faulty inputs?)
+	- [x] Fix add Author ^^
+- [x] Fix connection between Book and Author 
+	- [x] Adding a new book should connect it to the author, and you should be able to view the new book in authors details.
 
 **GENERAL TODO:**
 - [X] List pages
@@ -11,15 +11,20 @@
 	- [x] list author
 	- [X] list admins
 
-- [ ] edit
+- [ ] password hashing
+	
+- [ ] protection vs sql injection
+
+- [x] edit
 	- [x] books
 	- [x] author
 	- [ ] admins
+		- [ ] edit or change password
 	
-- [ ] add
-	- [ ] books
+- [x] add
+	- [x] books
 	- [x] author
-	- [ ] admins
+	- [x] admins
 	
 - [ ] delete
 	- [x] books
@@ -28,16 +33,16 @@
 
 - [x] Show Books written by Author
 	- [x] Author
-  - [ ] Books
+  - [x] Books
 	
 - [ ] validation
 
-- [ ] Pageination
+- [x] Pageination
 	- [x] Books
 	- [x] Authors
 
 
-- [ ] Login feature
+- [x] Login feature
 
 - [ ] Admins table
 
