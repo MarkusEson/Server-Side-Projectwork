@@ -21,8 +21,11 @@
         [StringLength(20)]
         public string UserName { get; set; }
 
-        [StringLength(12)]
-        public string UserPass { get; set; }
+        [StringLength(128)]
+        public string PassSalt { get; set; }
+
+        [StringLength(128)]
+        public string PassHash { get; set; }
 
         [StringLength(25)]
         public string FirstName { get; set; }
@@ -30,7 +33,6 @@
         [StringLength(25)]
         public string LastName { get; set; }
 
-        [StringLength(255)]
         public string AdminDesc { get; set; }
 
     }

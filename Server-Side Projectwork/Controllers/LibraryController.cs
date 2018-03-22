@@ -21,11 +21,11 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public ActionResult Login(string uName, string uPass)
         {
-            foreach (var admin in Administrator.getAdminList())
+            foreach (var admin in Administrator.GetAdminList())
             {
                 if (admin.UserName == uName)
                 {
-                    if (admin.UserPass == uPass)
+                    if (Administrator.IsPasswordMatch(uPass, admin.PassSalt, admin.PassHash))
                     {
 
                         Session["UserName"] = admin.UserName;

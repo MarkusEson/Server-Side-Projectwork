@@ -9,29 +9,29 @@ namespace Server_Side_Projectwork.Controllers
     {
         public ActionResult Index()
         {
-            return View(Administrator.getAdminList());
+            return View(Administrator.GetAdminList());
         }
 
         public ActionResult Details(int id)
         {
-            return View(Administrator.getAdmin(id));
+            return View(Administrator.GetAdmin(id));
         }
 
         public ActionResult Edit(int id)
         {
-            return View(Administrator.getAdmin(id));
+            return View(Administrator.GetAdmin(id));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection formValues)
         {
-            Administrator admin = Administrator.getAdmin(id);
+            Administrator admin = Administrator.GetAdmin(id);
 
             try
             {
                 UpdateModel(admin);
 
-                Administrator.updateAdmin(id , formValues["FirstName"],
+                Administrator.UpdateAdmin(id , formValues["FirstName"],
                                                formValues["LastName"],
                                                formValues["Description"]);
 
@@ -49,15 +49,15 @@ namespace Server_Side_Projectwork.Controllers
 
         public ActionResult Create()
         {
-            return View(Administrator.getAdminList());
+            return View(Administrator.GetAdminList());
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(Administrator newAdmin)
+        public ActionResult Create(Administrator newAdmin, string inPassword)
         {
             if (ModelState.IsValid)
             {
-                Administrator.createAdmin(newAdmin);
+                Administrator.CreateAdmin(newAdmin, inPassword);
 
                 return RedirectToAction("Details", new { id = newAdmin.AdminId });
             }
@@ -68,7 +68,7 @@ namespace Server_Side_Projectwork.Controllers
 
         public ActionResult Delete(int id)
         {
-            Administrator.removeAdmin(id);
+            Administrator.DeleteAdmin(id);
 
             Session.Abandon();
             Session.Contents.Abandon();

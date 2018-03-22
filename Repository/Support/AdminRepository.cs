@@ -50,12 +50,10 @@ namespace Repository.Support
             }
         }
 
-        public void Add(ADMINISTRATOR admin)
+        public void Create(ADMINISTRATOR admin)
         {
             using (var db = new Libdb())
             {
-                
-
                 db.ADMINISTRATOR.Add(admin);
 
                 db.Entry(admin).State = EntityState.Added;
@@ -63,7 +61,7 @@ namespace Repository.Support
             }
         }
 
-        public void Remove(ADMINISTRATOR admin)
+        public void Delete(ADMINISTRATOR admin)
         {
             using (var db = new Libdb())
             {

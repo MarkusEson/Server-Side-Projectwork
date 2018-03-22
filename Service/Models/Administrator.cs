@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Repository.Support;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Service.Models
 {
@@ -11,19 +12,24 @@ namespace Service.Models
     {
         public int AdminId { get; set; }    // Primary Key
         public string UserName { get; set; }
-        public string UserPass { get; set; }
+        public string PassSalt { get; set; }
+        public string PassHash { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Description { get; set; }
 
         static private AdminRepository _eAdminObj = new AdminRepository();
+        static private RNGCryptoServiceProvider generatedSalt = null;
+        private const int SALT_SIZE = 24;
 
-        static public Administrator getAdmin(int aAdminId)
+        static Administrator() { generatedSalt = new RNGCryptoServiceProvider(); }
+
+        static public Administrator GetAdmin(int aAdminId)
         {
             return MapAdmin(new AdminRepository(aAdminId));
         }
 
-        static public List<Administrator> getAdminList()
+        static public List<Administrator> GetAdminList()
         {
             List<Administrator> adminList = new List<Administrator>();
 
@@ -32,7 +38,8 @@ namespace Service.Models
                 Administrator anAdmin = new Administrator();
                 anAdmin.AdminId = elem.AdminId;
                 anAdmin.UserName = elem.UserName;
-                anAdmin.UserPass = elem.UserPass;
+                anAdmin.PassSalt = elem.PassSalt;
+                anAdmin.PassHash = elem.PassHash;
                 anAdmin.FirstName = elem.FirstName;
                 anAdmin.LastName = elem.LastName;
                 anAdmin.Description = elem.AdminDesc;
@@ -41,25 +48,32 @@ namespace Service.Models
             return adminList;
         }
 
-        static public void createAdmin(Administrator newAdmin)
+        static public void CreateAdmin(Administrator newAdmin, string password)
         {
             Administrator adminObj = new Administrator();
             adminObj = newAdmin;
 
-            _eAdminObj.Add(MapNewAdmin(adminObj).adminobj);
+            var salt = GetSalt();
+            var saltedPassword = salt + password;
+            var hash = HashPassword(saltedPassword);
+
+            adminObj.PassSalt = salt;
+            adminObj.PassHash = hash;
+
+            _eAdminObj.Create(MapNewAdmin(adminObj).adminobj);
         }
 
-        static public void removeAdmin(int id)
+        static public void DeleteAdmin(int id)
         {
-            Administrator admin = Administrator.getAdmin(id);
-            getAdminList().Remove(getAdmin(id));
-            _eAdminObj.Remove(MapAdmin(admin).adminobj);
+            Administrator admin = Administrator.GetAdmin(id);
+            GetAdminList().Remove(GetAdmin(id));
+            _eAdminObj.Delete(MapAdmin(admin).adminobj);
 
         }
 
-        static public void updateAdmin(int aAdminId, string fName, string lName, string aDesc)
+        static public void UpdateAdmin(int aAdminId, string fName, string lName, string aDesc)
         {
-            Administrator adminObj = Administrator.getAdmin(aAdminId);
+            Administrator adminObj = Administrator.GetAdmin(aAdminId);
             adminObj.FirstName = fName;
             adminObj.LastName = lName;
             adminObj.Description = aDesc;
@@ -67,12 +81,20 @@ namespace Service.Models
 
         }
 
+        static public bool IsPasswordMatch(string passwordInput, string salt, string hash)
+        {
+            var saltedInput = salt + passwordInput;
+
+            return hash == HashPassword(saltedInput);
+        }
+
         static private Administrator MapAdmin(AdminRepository adminObj)
         {
             Administrator theAdmin = new Administrator();
             theAdmin.AdminId = adminObj.adminobj.AdminId;
             theAdmin.UserName = adminObj.adminobj.UserName;
-            theAdmin.UserPass = adminObj.adminobj.UserPass;
+            theAdmin.PassSalt = adminObj.adminobj.PassSalt;
+            theAdmin.PassHash = adminObj.adminobj.PassHash;
             theAdmin.FirstName = adminObj.adminobj.FirstName;
             theAdmin.LastName = adminObj.adminobj.LastName;
             theAdmin.Description = adminObj.adminobj.AdminDesc;
@@ -84,7 +106,8 @@ namespace Service.Models
             AdminRepository theAdmin = new AdminRepository(adminObj.AdminId);
             theAdmin.adminobj.AdminId = adminObj.AdminId;
             theAdmin.adminobj.UserName = adminObj.UserName;
-            theAdmin.adminobj.UserPass = adminObj.UserPass;
+            theAdmin.adminobj.PassSalt = adminObj.PassSalt;
+            theAdmin.adminobj.PassHash = adminObj.PassHash;
             theAdmin.adminobj.FirstName = adminObj.FirstName;
             theAdmin.adminobj.LastName = adminObj.LastName;
             theAdmin.adminobj.AdminDesc = adminObj.Description;
@@ -96,11 +119,31 @@ namespace Service.Models
             AdminRepository theAdmin = new AdminRepository();
             theAdmin.adminobj.AdminId = adminObj.AdminId;
             theAdmin.adminobj.UserName = adminObj.UserName;
-            theAdmin.adminobj.UserPass = adminObj.UserPass;
+            theAdmin.adminobj.PassSalt = adminObj.PassSalt;
+            theAdmin.adminobj.PassHash = adminObj.PassHash;
             theAdmin.adminobj.FirstName = adminObj.FirstName;
             theAdmin.adminobj.LastName = adminObj.LastName;
             theAdmin.adminobj.AdminDesc = adminObj.Description;
             return theAdmin;
+        }
+
+        static private string GetSalt()
+        {
+            byte[] saltBytes = new byte[SALT_SIZE];
+
+            generatedSalt.GetNonZeroBytes(saltBytes); // generate salt in the byte array
+
+            return Convert.ToBase64String(saltBytes);
+        }
+
+        static private string HashPassword(string saltedPassword)
+        {
+            SHA512 SHA = new SHA512CryptoServiceProvider();
+
+            Byte[] dataBytes = Encoding.Default.GetBytes(saltedPassword);
+            Byte[] resultBytes = SHA.ComputeHash(dataBytes);
+
+            return Convert.ToBase64String(resultBytes);
         }
     }
 }
