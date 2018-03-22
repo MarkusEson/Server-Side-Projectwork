@@ -10,6 +10,7 @@ namespace Service.Models
     {
         private string id;
 
+        // constructor for bookmanager. sets book info and a list of the books autor(s)
         public BookManager(string id)
         {
             this.id = id;
@@ -34,6 +35,7 @@ namespace Service.Models
             return MapBook(new BookRepository(id));
         }
 
+        // gets the book list from db
         static public List<Book> getBookList()
         {
             List<Book> BookList = new List<Book>();
@@ -51,6 +53,7 @@ namespace Service.Models
             return BookList;
         }
 
+        // gets a lit of books by author id
         static public List<Book> GetBooksByAid(int aid)
         {
             List<Book> returnbooklist = new List<Book>();
@@ -147,6 +150,7 @@ namespace Service.Models
 
         } 
         
+        // returns a list of books based on the searchString 
         static public List<Book> SearchForBook(string searchString)
         {
             List<Book> SearchList = new List<Book>();

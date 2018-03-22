@@ -81,6 +81,25 @@ namespace Service.Models
 
         }
 
+        static public void changePassword(int id, string op, string np, string cnp)
+        {
+            if (np == cnp)
+            {
+                Administrator adminObj = Administrator.GetAdmin(id);
+                if (IsPasswordMatch(op, adminObj.PassSalt, adminObj.PassHash))
+                {
+                    var salt = GetSalt();
+                    var saltedPassword = salt + np;
+                    var hash = HashPassword(saltedPassword);
+
+                    adminObj.PassSalt = salt;
+                    adminObj.PassHash = hash;
+
+                }
+                _eAdminObj.Update(MapAdmin(adminObj).adminobj);
+            }
+        }
+
         static public bool IsPasswordMatch(string passwordInput, string salt, string hash)
         {
             var saltedInput = salt + passwordInput;

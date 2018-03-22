@@ -50,7 +50,7 @@ namespace Server_Side_Projectwork.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult ChangePassword(int id, FormCollection formValues)
         {
-            Administrator admin = Administrator.getAdmin(id);
+            Administrator admin = Administrator.GetAdmin(id);
             
             try
             {

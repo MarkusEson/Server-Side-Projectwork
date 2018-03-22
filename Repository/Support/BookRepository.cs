@@ -84,6 +84,7 @@ namespace Repository.Support
             }
         }
 
+        // returns a list of books where the title contains the search string
         public List<BOOK> getSearchBookListFromDb(string searchString)
         {
             using (var db = new Libdb())
@@ -93,6 +94,7 @@ namespace Repository.Support
             }
         }
 
+        // returns list of books written by the author aid from db
         public List<BOOK> GetBookByAid(int aid)
         {
             using (var db = new Libdb())

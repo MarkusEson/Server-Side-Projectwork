@@ -16,33 +16,30 @@ namespace Server_Side_Projectwork.Controllers
         private IList<Book> allBooks = BookManager.getBookList();
         
 
-        // GET:
+        // ListBooks sends the user to the "ListBooks" view where all the books in the databse are listen and separated by pagination
         public ActionResult ListBooks(int? page)
         {
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
             return View("ListBooks", this.allBooks.ToPagedList(currentPageIndex, DefaultPageSize));
         }
 
-
+        // Shows the clicked book in detail, displaying information about pages, author, etc.
         public ActionResult ShowBook(string id)
         {
             BookManager bookDetailObj = new BookManager(id);
             return View("ShowBook", bookDetailObj);
 
         }
-
-
+        
         public ActionResult EditBook(string id)
         {
-            BookManager bookObj = new BookManager(id); // id == ISBN
-            //ViewBag.isbn = bookObj.BookAuthor.FindIndex(x => x.Aid == bookObj.SignId);
+            BookManager bookObj = new BookManager(id);
             return View(bookObj);
         }
 
         [HttpPost]
         public RedirectToRouteResult EditBook( string isbn, string title, string pubyear, string pubinfo, short? pages )
         {
-            // string isbn, string title, int? signid, string pubyear, string pubinfo, short? pages 
             TempData["ISBN"] = isbn;
             TempData["Title"] = title;
             TempData["PublicationYear"] = pubyear;
@@ -52,9 +49,9 @@ namespace Server_Side_Projectwork.Controllers
             return RedirectToAction("UpdateBook");
         }
 
+        // update book sends the tempdata to the update func. then redirets to the book list again.
         public RedirectToRouteResult UpdateBook()
         {
-            //string bISBN, string bTitle, int bsignId, string bPyear, string bpInfo, short? bPages
             BookManager.updateBook(Convert.ToString(TempData["ISBN"]), Convert.ToString(TempData["Title"]), Convert.ToString(TempData["PublicationYear"]), Convert.ToString(TempData["publicationinfo"]), Convert.ToInt16(TempData["Pages"]));
             return RedirectToAction("ListBooks", "Book");
         }
@@ -81,7 +78,7 @@ namespace Server_Side_Projectwork.Controllers
 
 
         
-
+        // fetches a new list of books based on the search word user entered, ends to listbooks view.
         [HttpPost]
         public ActionResult SearchBook(string searchString)
         {
