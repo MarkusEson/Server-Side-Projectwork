@@ -115,7 +115,6 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\AuthorManager.cs" />
     <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\Book_Author.cs" />
     <Compile Include="Models\BookManager.cs" />
     <Compile Include="Models\Classification.cs" />
     <Compile Include="Models\ClassificationManager.cs" />

@@ -68,9 +68,18 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public RedirectToRouteResult AddBook(string isbn, string title, int? signid, string pyear, string pinfo, short pages)
         {
-            BookManager.AddABook(isbn, title, signid, pyear, pinfo, pages);
-            return RedirectToAction("ListBooks", "Book");
-
+            try
+            {
+                BookManager.AddABook(isbn, title, signid, pyear, pinfo, pages);
+                return RedirectToAction("ListBooks", "Book");
+            }
+            catch(Exception ex)
+            {
+                ViewBag.errorMessage(ex);
+                ViewBag.innerMessage(ex.InnerException);
+                return RedirectToAction("listBooks", "Book");
+            }
+            
         }
         
         [HttpGet]

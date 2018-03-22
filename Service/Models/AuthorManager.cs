@@ -26,17 +26,20 @@ namespace Service.Models
 
             AuthBooks = authorBookList;
         }
-        /*
-        public Author getAuthorFromAid(int Aid)
+
+        static public List<Author> GetAuthorByIsbn(string id)
         {
-            Author authobj = AuthorManager.getAuthor(id);
-            foreach (var book in AuthorManager.getAuthorBooks(id))
+            List<Author> returnauthorlist = new List<Author>();
+            var repo = new AuthorRepository();
+            var authbyid = repo.GetAuthorByIsbn(id);
+
+            foreach (var auth in authbyid)
             {
-                authobj.AuthBooks.Add(book);
+                returnauthorlist.Add(MapAuthor(auth));
             }
-            return authobj;
+            return returnauthorlist;
         }
-        */
+
         public string AuthorName { get; set; }
 
         public string Bookname { get; set; }
@@ -152,38 +155,7 @@ namespace Service.Models
             return SearchList;
         }
 
-        /*
-        static public List<Book> getAuthorBooks(int id)
-        {
-            
-            var repo = new BookRepository();
-
-            List<Book> returnList = new List<Book>();
-            var BookList = repo.GetBookByAid(id);
-
-            foreach(var book in BookList)
-            {
-                returnList.Add(book);
-            }
-
-
-            //
-            //
-            //
-            //
-            List<Book> bookList = BookManager.getBookList();
-            List<Book> authorBooksList = new List<Book>();
-
-            foreach(var book in bookList)
-            {
-                if( book.SignId == id ) // inga kommer att matcha . ta bort funktion. gör en funk i repository som hämtar alla books där author id stämmer
-                {
-                    authorBooksList.Add(book);
-                }
-            }
-            return authorBooksList;
-        }
-        */
+        
     
     }
 }

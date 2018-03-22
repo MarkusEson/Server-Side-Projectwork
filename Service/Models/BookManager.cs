@@ -15,14 +15,17 @@ namespace Service.Models
             this.id = id;
             
             Book bookobj = BookManager.getBooks(id);
-            List<Author> bookAuthorList = AuthorManager.getAuthorList();
-            Author bookAuthorObj = bookAuthorList.Find(x => x.Aid == bookobj.SignId);
+            var bookAuthorList = AuthorManager.GetAuthorByIsbn(id);
+
             ISBN = bookobj.ISBN;
             Title = bookobj.Title;
             SignId = bookobj.SignId;
             PublicationYear = bookobj.PublicationYear;
             publicationinfo = bookobj.publicationinfo;
             Pages = bookobj.Pages;
+
+            BookAuthor = bookAuthorList;
+            
         }
 
         public string AuthorName { get; set; }
