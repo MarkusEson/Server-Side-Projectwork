@@ -43,7 +43,7 @@ namespace Repository.Support
             }
         }
 
-        public List<BOOK> List() // retrieve all authors
+        public List<BOOK> List() 
         {
             using (var db = new Libdb())
             {
@@ -77,9 +77,9 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                db.BOOK.Remove(book);
-                db.Entry(book).State = EntityState.Deleted;
                 
+                db.Entry(book).State = EntityState.Deleted;
+                db.BOOK.Remove(book);
                 db.SaveChanges();
             }
         }

@@ -5,9 +5,8 @@
     ViewBag.Title = "Create";
 }
 
-@if (Session["UserName"] != null)
-{
-    using (Html.BeginForm("Create", "Admin", FormMethod.Post))
+
+    @using (Html.BeginForm("Create", "Admin", FormMethod.Post))
     {
         int i = 0;
 
@@ -79,4 +78,3 @@
     <div>
         @Html.ActionLink("Back to List", "../Admin")
     </div>
-}

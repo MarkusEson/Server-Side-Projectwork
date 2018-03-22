@@ -22,8 +22,6 @@ namespace Repository
         [StringLength(255)]
         public string Title { get; set; }
 
-        public int? SignId { get; set; }
-
         [StringLength(10)]
         public string PublicationYear { get; set; }
 
@@ -32,7 +30,6 @@ namespace Repository
 
         public short? pages { get; set; }
 
-        public virtual CLASSIFICATION CLASSIFICATION { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AUTHOR> AUTHOR { get; set; }

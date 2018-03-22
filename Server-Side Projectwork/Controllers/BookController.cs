@@ -40,12 +40,11 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult EditBook( string isbn, string title, int? signid, string pubyear, string pubinfo, short? pages )
+        public RedirectToRouteResult EditBook( string isbn, string title, string pubyear, string pubinfo, short? pages )
         {
             // string isbn, string title, int? signid, string pubyear, string pubinfo, short? pages 
             TempData["ISBN"] = isbn;
             TempData["Title"] = title;
-            TempData["SignId"] = signid;
             TempData["PublicationYear"] = pubyear;
             TempData["publicationinfo"] = pubinfo;
             TempData["Pages"] = pages;
@@ -56,7 +55,7 @@ namespace Server_Side_Projectwork.Controllers
         public RedirectToRouteResult UpdateBook()
         {
             //string bISBN, string bTitle, int bsignId, string bPyear, string bpInfo, short? bPages
-            BookManager.updateBook(Convert.ToString(TempData["ISBN"]), Convert.ToString(TempData["Title"]), Convert.ToInt32(TempData["SignId"]), Convert.ToString(TempData["PublicationYear"]), Convert.ToString(TempData["publicationinfo"]), Convert.ToInt16(TempData["Pages"]));
+            BookManager.updateBook(Convert.ToString(TempData["ISBN"]), Convert.ToString(TempData["Title"]), Convert.ToString(TempData["PublicationYear"]), Convert.ToString(TempData["publicationinfo"]), Convert.ToInt16(TempData["Pages"]));
             return RedirectToAction("ListBooks", "Book");
         }
 
@@ -66,9 +65,9 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult AddBook(string isbn, string title, int? signid, string pyear, string pinfo, short pages)
+        public RedirectToRouteResult AddBook(string isbn, string title, string pyear, string pinfo, short pages)
         {
-            BookManager.AddABook(isbn, title, signid, pyear, pinfo, pages);
+            BookManager.AddABook(isbn, title, pyear, pinfo, pages);
             return RedirectToAction("ListBooks", "Book");
 
         }

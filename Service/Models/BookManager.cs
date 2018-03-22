@@ -19,15 +19,13 @@ namespace Service.Models
 
             ISBN = bookobj.ISBN;
             Title = bookobj.Title;
-            SignId = bookobj.SignId;
             PublicationYear = bookobj.PublicationYear;
             publicationinfo = bookobj.publicationinfo;
             Pages = bookobj.Pages;
-            BookAuthor = bookAuthList;
+            BookAuth = bookAuthList;
         }
 
         public string AuthorName { get; set; }
-        public List<Author> BookAuthor { get; set; }
 
         static private BookRepository _eBookRepo = new BookRepository();
 
@@ -45,7 +43,6 @@ namespace Service.Models
                 Book aBook = new Book();
                 aBook.ISBN = elem.ISBN;
                 aBook.Title = elem.Title;
-                aBook.SignId = elem.SignId;
                 aBook.PublicationYear = elem.PublicationYear;
                 aBook.publicationinfo = elem.publicationinfo;
                 aBook.Pages = elem.pages;
@@ -67,12 +64,11 @@ namespace Service.Models
             return returnbooklist;
         }
 
-        static public void updateBook(string bISBN, string bTitle, int bsignId, string bPyear, string bpInfo, short? bPages)
+        static public void updateBook(string bISBN, string bTitle, string bPyear, string bpInfo, short? bPages)
         {
             Book bookObj = BookManager.getBooks(bISBN);
             bookObj.ISBN = bISBN;
             bookObj.Title = bTitle;
-            bookObj.SignId = bsignId;
             bookObj.PublicationYear = bPyear;
             bookObj.publicationinfo = bpInfo;
             bookObj.Pages = bPages;
@@ -85,7 +81,6 @@ namespace Service.Models
             Book aBook = new Book();
             aBook.ISBN = bookobj.bookObj.ISBN;
             aBook.Title = bookobj.bookObj.Title;
-            aBook.SignId = bookobj.bookObj.SignId;
             aBook.PublicationYear = bookobj.bookObj.PublicationYear;
             aBook.publicationinfo = bookobj.bookObj.publicationinfo;
             aBook.Pages = bookobj.bookObj.pages;
@@ -99,7 +94,6 @@ namespace Service.Models
             Book aBook = new Book();
             aBook.ISBN = bookobj.ISBN;
             aBook.Title = bookobj.Title;
-            aBook.SignId = bookobj.SignId;
             aBook.PublicationYear = bookobj.PublicationYear;
             aBook.publicationinfo = bookobj.publicationinfo;
             aBook.Pages = bookobj.pages;
@@ -112,19 +106,17 @@ namespace Service.Models
             BookRepository aBook = new BookRepository(bookobj.ISBN);
             aBook.bookObj.ISBN = bookobj.ISBN;
             aBook.bookObj.Title = bookobj.Title;
-            aBook.bookObj.SignId = bookobj.SignId;
             aBook.bookObj.PublicationYear = bookobj.PublicationYear;
             aBook.bookObj.publicationinfo = bookobj.publicationinfo;
             aBook.bookObj.pages = bookobj.Pages;
             return aBook;
         }
    
-        static public void AddABook(string isbn, string title, int? signid, string pyear, string pinfo, short pages)
+        static public void AddABook(string isbn, string title, string pyear, string pinfo, short pages)
         {
             Book book = new Book();
             book.ISBN = isbn;
             book.Title = title;
-            book.SignId = signid;
             book.PublicationYear = pyear;
             book.publicationinfo = pinfo;
             book.Pages = pages;
@@ -138,7 +130,6 @@ namespace Service.Models
             BookRepository book = new BookRepository(newBook.ISBN);
             book.bookObj.ISBN = newBook.ISBN;
             book.bookObj.Title = newBook.Title;
-            book.bookObj.SignId = newBook.SignId;
             book.bookObj.PublicationYear = newBook.PublicationYear;
             book.bookObj.publicationinfo = newBook.publicationinfo;
             book.bookObj.pages = newBook.Pages;
