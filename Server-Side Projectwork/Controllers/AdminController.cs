@@ -55,9 +55,16 @@ namespace Server_Side_Projectwork.Controllers
             try
             {
                 UpdateModel(admin);
-                Administrator.changePassword(id, formValues["OldPassword"], formValues["NewPassword"], formValues["ConfirmNewPassword"]);
+                if(formValues["NewPassword"] == formValues["ConfirmNewPassword"])
+                {
+                    Administrator.changePassword(id, formValues["OldPassword"], formValues["NewPassword"], formValues["ConfirmNewPassword"]);
 
-                return RedirectToAction("Details");
+                    return RedirectToAction("Details");
+                }
+                else
+                {
+                    return View("Error");
+                } 
             }
             catch(Exception ex)
             {
