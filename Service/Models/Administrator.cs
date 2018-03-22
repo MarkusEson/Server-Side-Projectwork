@@ -66,6 +66,19 @@ namespace Service.Models
 
         }
 
+        static public void changePassword(int id, string op, string np, string cnp)
+        {
+            if(np == cnp)
+            {
+                Administrator adminObj = Administrator.getAdmin(id);
+                if (adminObj.UserPass == op)
+                {
+                    adminObj.UserPass = np;
+                }
+                _eAdminObj.Update(MapAdmin(adminObj).adminobj);
+            }
+        }
+
         static private Administrator MapAdmin(AdminRepository adminObj)
         {
             Administrator theAdmin = new Administrator();
