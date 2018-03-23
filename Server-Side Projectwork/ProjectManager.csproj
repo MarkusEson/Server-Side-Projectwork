@@ -145,7 +145,7 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="CSS\Design.css" />
-    <Content Include=".ebextensions\.config" />
+    <Content Include=".ebextensions\install-certificate.config" />
     <Content Include=".ebextensions\certificate.pfx" />
     <Content Include=".ebextensions\install-certificate.ps1" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
