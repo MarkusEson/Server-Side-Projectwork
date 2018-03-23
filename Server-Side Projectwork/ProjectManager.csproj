@@ -146,6 +146,7 @@
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="CSS\Design.css" />
     <None Include="Properties\PublishProfiles\Projectweb.pubxml" />
+    <None Include="Properties\PublishProfiles\WebsiteProject.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
