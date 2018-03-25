@@ -10,14 +10,13 @@ namespace Service.Models
     {
         private int id;
 
+        // Constructor - sets all info about object and list of the books author has written
         public AuthorManager(int id)
         {
             this.id = id;
 
             Author authobj = AuthorManager.getAuthor(id);
             var authorBookList = BookManager.GetBooksByAid(id);
-
-            //Book authBookObj = authorBookList.Find(x => x.SignId == authobj.Aid);
 
             Aid = authobj.Aid;
             FirstName = authobj.FirstName;
@@ -40,17 +39,18 @@ namespace Service.Models
             return MapAuthor(new AuthorRepository(aAid));
         }
 
+        // gets the author by the books isbn
         static public List<Author> GetAuthorByIsbn(string id)
         {
-            List<Author> returnauthlist = new List<Author>();
+            List<Author> returnAuthList = new List<Author>();
             var repo = new AuthorRepository();
             var authbyisbn = repo.GetAuthorByIsbn(id);
 
             foreach (var auth in authbyisbn)
             {
-                returnauthlist.Add(MapAuthor(auth));
+                returnAuthList.Add(MapAuthor(auth));
             }
-            return returnauthlist;
+            return returnAuthList;
         }
 
         static public List<Author> getAuthorList()

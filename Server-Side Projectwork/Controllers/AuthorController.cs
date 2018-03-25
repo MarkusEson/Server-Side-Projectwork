@@ -13,7 +13,7 @@ namespace Server_Side_Projectwork.Controllers
         private const int DefaultPageSize = 10;
         private IList<Author> allAuthors = AuthorManager.getAuthorList();
         
-        // lists all the authors on the db 
+        // lists all the authors on the db and sends as paged list
         public ActionResult ListAuthors(int? page)
         {
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;

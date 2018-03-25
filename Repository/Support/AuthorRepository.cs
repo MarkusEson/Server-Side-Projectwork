@@ -87,6 +87,7 @@ namespace Repository.Support
             }
         }
 
+        // returns a list of authors where the the name contains the searchString
         public List<AUTHOR> getSearchAuthorListFromDb(string searchString)
         {
             using (var db = new Libdb())
@@ -96,6 +97,7 @@ namespace Repository.Support
             }
         }
 
+        // returns list of authors based connected to the id=isbn
         public List<AUTHOR> GetAuthorByIsbn(string id)
         {
             using (var db = new Libdb())

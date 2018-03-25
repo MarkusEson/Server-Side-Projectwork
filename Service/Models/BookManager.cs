@@ -164,8 +164,5 @@ namespace Service.Models
             return SearchList;
         }   
         
-        
-
-
     }
 }
