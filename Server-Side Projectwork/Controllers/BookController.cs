@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Service.Models;
 using MvcPaging;
 
+using System.ComponentModel.DataAnnotations;
+
 
 
 namespace Server_Side_Projectwork.Controllers
@@ -62,10 +64,16 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult AddBook(string isbn, string title, string pyear, string pinfo, short pages)
+        public ActionResult AddBook(string isbn, string title, string pyear, string pinfo, short pages)
         {
-            BookManager.AddABook(isbn, title, pyear, pinfo, pages);
-            return RedirectToAction("ListBooks", "Book");
+            if (ModelState.IsValid)
+            {
+                BookManager.AddABook(isbn, title, pyear, pinfo, pages);
+                return RedirectToAction("ListBooks", "Book");
+            }
+            
+            return View("Error");
+            
 
         }
         

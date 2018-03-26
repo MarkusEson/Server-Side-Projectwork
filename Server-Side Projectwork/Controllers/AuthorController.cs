@@ -55,7 +55,7 @@ namespace Server_Side_Projectwork.Controllers
             return View("AddAuthor");
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         public RedirectToRouteResult AddAuthor(string fname, string lname, string byear)
         {
             AuthorManager.AddAnAuthor(fname, lname, byear);

@@ -10,7 +10,10 @@
         <div class="form-horizontal">
             <h2>Add a Book to the database</h2>
             <hr />
-
+            <!-- 
+                ÄNDRA EditorFor(< => x.ISBN)
+                ÄNDRA ValidationMessageFor(x => x.ISBN)
+            -->
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.Label("isbn", "ISBN", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -47,6 +50,7 @@
                     @Html.ValidationMessage("pages", "", new { @class = "text-danger" })
                 </div>
             </div>
+            
             <hr />
 
             <div class="form-group">
@@ -59,6 +63,6 @@
     }
 
     <div>
-        @Html.ActionLink("Back to List", "../Book")
+        @Html.ActionLink("Back to List", "../Book/ListBooks")
     </div>
 }
