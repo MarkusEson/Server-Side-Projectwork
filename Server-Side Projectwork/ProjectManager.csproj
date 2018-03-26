@@ -146,8 +146,9 @@
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="CSS\Design.css" />
     <Content Include=".ebextensions\install-certificate.config" />
-    <Content Include=".ebextensions\certificate.pfx" />
     <Content Include=".ebextensions\install-certificate.ps1" />
+    <Content Include=".ebextensions\certificate.pfx" />
+    <None Include="Properties\PublishProfiles\WebKit.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -218,7 +219,6 @@
     <Folder Include="Pagination\bin\" />
     <Folder Include="Pagination\obj\" />
     <Folder Include="Pagination\Properties\" />
-    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\List\" />
   </ItemGroup>
   <ItemGroup>
