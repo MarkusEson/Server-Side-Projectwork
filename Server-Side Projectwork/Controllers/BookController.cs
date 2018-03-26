@@ -38,12 +38,12 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult EditBook( string isbn, string title, string pubyear, string pubinfo, short? pages )
+        public RedirectToRouteResult EditBook( string isbn, string title, string pyear, string pinfo, short? pages )
         {
             TempData["ISBN"] = isbn;
             TempData["Title"] = title;
-            TempData["PublicationYear"] = pubyear;
-            TempData["publicationinfo"] = pubinfo;
+            TempData["PublicationYear"] = pyear;
+            TempData["publicationinfo"] = pinfo;
             TempData["Pages"] = pages;
 
             return RedirectToAction("UpdateBook");

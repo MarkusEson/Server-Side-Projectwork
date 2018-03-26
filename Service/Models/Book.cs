@@ -10,7 +10,6 @@ namespace Service.Models
     {
         public string ISBN { get; set; }   // primary key
         public string Title { get; set; }
-        public int? SignId { get; set; }
         public string PublicationYear { get; set; }
         public string publicationinfo { get; set; }
         public short? Pages { get; set; }

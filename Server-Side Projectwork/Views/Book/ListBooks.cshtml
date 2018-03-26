@@ -7,6 +7,17 @@
     ViewBag.Title = "Books";
 }
 
+
+
+<div>
+    <h2>Search for a Book</h2>  
+    @using (Html.BeginForm("SearchBook", "Book", FormMethod.Post))
+    {
+        @Html.TextBox("searchString")
+        <input type="Submit" value="Search" />
+    }
+</div>
+
 @if (Session["UserName"] != null)
 {
     <div>
@@ -15,15 +26,6 @@
         </form>
     </div>
 }
-
-<div>
-    <h2>Search for a Book</h2>  
-    @using (Html.BeginForm("SearchBook", "Book", FormMethod.Post))
-    {
-        @Html.TextBox("searchString")
-        <input type="Submit" />
-    }
-</div>
 
  <div>
      <h2>Result</h2>
