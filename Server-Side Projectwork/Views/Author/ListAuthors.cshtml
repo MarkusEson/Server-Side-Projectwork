@@ -13,11 +13,11 @@
     @using (Html.BeginForm("SearchAuthor", "Author", FormMethod.Post))
     {
         @Html.TextBox("searchString")
-        <input type="Submit" />
+        <input type="Submit" value="Search"/>
     }
 </div>
 
-<h2>Result</h2>
+
 @if (Session["UserName"] != null)
 {
     <div>
