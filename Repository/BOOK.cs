@@ -16,9 +16,11 @@ namespace Repository
         }
 
         [Key]
+        [Required]
         [StringLength(15)]
         public string ISBN { get; set; }
 
+        [Required]
         [StringLength(255)]
         public string Title { get; set; }
 
@@ -28,6 +30,7 @@ namespace Repository
         [StringLength(255)]
         public string publicationinfo { get; set; }
 
+        [Range(0,9999)]
         public short? pages { get; set; }
 
 
