@@ -7,7 +7,6 @@
     ViewBag.Title = "Authors";
 }
 
-
 <div>
     <h2>Search for an Author</h2>
     @using (Html.BeginForm("SearchAuthor", "Author", FormMethod.Post))
@@ -18,7 +17,7 @@
 </div>
 
 
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
     <div>
         @Html.ActionLink("Add New Author", "AddAuthor", "Author", null, null)

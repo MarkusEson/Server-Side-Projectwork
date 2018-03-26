@@ -35,6 +35,7 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public RedirectToRouteResult EditAuthor( int aid, string fname, string lname, string byear)
         {
             TempData["Aid"] = aid;
@@ -55,7 +56,8 @@ namespace Server_Side_Projectwork.Controllers
             return View("AddAuthor");
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public RedirectToRouteResult AddAuthor(string fname, string lname, string byear)
         {
             AuthorManager.AddAnAuthor(fname, lname, byear);

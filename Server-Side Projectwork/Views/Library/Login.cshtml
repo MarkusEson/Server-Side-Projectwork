@@ -6,6 +6,8 @@
     ViewBag.Title = "Login";
 }
 
+@Html.AntiForgeryToken();
+
 @if (Session["UserName"] != null)
 {
     <h1> Logged In! </h1>

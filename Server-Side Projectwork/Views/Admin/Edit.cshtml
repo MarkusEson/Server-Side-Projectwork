@@ -4,14 +4,13 @@
     ViewBag.Title = "Edit";
 }
 <!--------BLOCK AREA----------->
+@Html.AntiForgeryToken();
 
-@if(Session["UserName"] != null && Session["UserName"].Equals(Model.UserName))
+@if(Session["UserSession"] != null && Session["UserName"].Equals(Model.UserName))
 {
     <p>Edit User:</p>
     using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
     {
-        @Html.AntiForgeryToken()
-
     
         <div class="form-horizontal">
             <h4>Administrator</h4>
@@ -61,8 +60,6 @@
     <p>Change password:</p>
     using (Html.BeginForm("ChangePassword", "Admin", FormMethod.Post))
     {
-        @Html.AntiForgeryToken()
-
 
         <div class="form-horizontal">
             <hr />
@@ -73,21 +70,21 @@
                 @Html.Label("OldPassword", "Old Password", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Editor("OldPassword",new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Old Password" } })
-                    @Html.ValidationMessageFor(model => model.UserPass, "")
+                    @Html.ValidationMessageFor(model => model.PassHash, "")
                 </div>
             </div>
             <div class="form-group">
                 @Html.Label("NewPassword", "New Password", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Editor("NewPassword", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "New Password" } })
-                    @Html.ValidationMessageFor(model => model.UserPass, "")
+                    @Html.ValidationMessageFor(model => model.PassHash, "")
                 </div>
             </div>
             <div class="form-group">
                 @Html.Label("ConfirmNewPassword", "Confirm New Password", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Editor("ConfirmNewPassword", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Confirm New Password" } })
-                    @Html.ValidationMessageFor(model => model.UserPass, "")
+                    @Html.ValidationMessageFor(model => model.PassHash, "")
                 </div>
             </div>
             

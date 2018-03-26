@@ -19,6 +19,7 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(string uName, string uPass)
         {
             foreach (var admin in Administrator.GetAdminList())
@@ -28,7 +29,7 @@ namespace Server_Side_Projectwork.Controllers
                     if (Administrator.IsPasswordMatch(uPass, admin.PassSalt, admin.PassHash))
                     {
 
-                        Session["UserName"] = admin.UserName;
+                        Session["UserSession"] = Session.SessionID;
                         return View();
                     }
                 }

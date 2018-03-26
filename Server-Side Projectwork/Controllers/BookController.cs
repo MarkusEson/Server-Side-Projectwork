@@ -38,6 +38,7 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public RedirectToRouteResult EditBook( string isbn, string title, string pyear, string pinfo, short? pages )
         {
             TempData["ISBN"] = isbn;
@@ -62,6 +63,7 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public RedirectToRouteResult AddBook(string isbn, string title, string pyear, string pinfo, short pages)
         {
             BookManager.AddABook(isbn, title, pyear, pinfo, pages);

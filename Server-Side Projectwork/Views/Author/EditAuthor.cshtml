@@ -4,8 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Html.AntiForgeryToken();
 
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
     using (Html.BeginForm("EditAuthor", "Author", FormMethod.Post))
     {

@@ -34,8 +34,10 @@
                     <li>@Html.ActionLink("Administrators","Index" ,"Admin")</li>
                 </ul>
                 <!------------------------------------------------------------- Login-dropdown Start ------------------------------------------------------------->
-                @if (Session["UserName"] == null)
+                @if (Session["UserSession"] == null)
                 {
+                    Html.AntiForgeryToken();
+
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle login-text" data-toggle="dropdown">Log In<span class="caret"></span></a>
@@ -66,17 +68,11 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            @Html.ActionLink("Sign Up", "Create", "Admin")
-                        </li>
                     </ul>
                 }
                 else
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            @Html.ActionLink("Account", "Account", "Admin")
-                        </li>
                         <li class="dropdown">
                             @Html.ActionLink("Logout", "Logout", "Library")
                         </li>

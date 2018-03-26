@@ -4,7 +4,6 @@ using Service.Models;
 
 namespace Server_Side_Projectwork.Controllers
 {
-    
     public class AdminController : Controller
     {
         public ActionResult Index()
@@ -22,7 +21,8 @@ namespace Server_Side_Projectwork.Controllers
             return View(Administrator.GetAdmin(id));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, FormCollection formValues)
         {
             Administrator admin = Administrator.GetAdmin(id);
@@ -47,7 +47,8 @@ namespace Server_Side_Projectwork.Controllers
 
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(int id, FormCollection formValues)
         {
             Administrator admin = Administrator.GetAdmin(id);
@@ -81,7 +82,8 @@ namespace Server_Side_Projectwork.Controllers
             return View(Administrator.GetAdminList());
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Administrator newAdmin, string inPassword)
         {
             if (ModelState.IsValid)

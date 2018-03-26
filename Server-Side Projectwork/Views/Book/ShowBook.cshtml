@@ -10,7 +10,7 @@
 
 <h2>Show chosen Book</h2>
 
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
     <div>
         @Html.ActionLink("Edit", "EditBook", "Book", new { id = Model.ISBN }, null) || @Html.ActionLink("Delete", "DeleteBook", "Book", new { id = Model.ISBN }, null)
