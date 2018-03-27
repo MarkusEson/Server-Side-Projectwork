@@ -35,14 +35,20 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public RedirectToRouteResult EditAuthor( int aid, string fname, string lname, string byear)
+        public RedirectToRouteResult EditAuthor(Author editedAuthor )
         {
-            TempData["Aid"] = aid;
-            TempData["FirstName"] = fname;
-            TempData["LastName"] = lname;
-            TempData["BirthYear"] = byear;
-            return RedirectToAction("UpdateAuthor");
+            // int aid, string fname, string lname, string byear
+            if(ModelState.IsValid)
+            {
+                TempData["Aid"] = editedAuthor.Aid;
+                TempData["FirstName"] = editedAuthor.FirstName;
+                TempData["LastName"] = editedAuthor.LastName;
+                TempData["BirthYear"] = editedAuthor.BirthYear;
+                return RedirectToAction("UpdateAuthor");
+            }
+            TempData["Error"] = "Something went wrong!";
+            return RedirectToAction("ListAuthors");
+
         }
 
         public RedirectToRouteResult UpdateAuthor()
@@ -57,7 +63,6 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public RedirectToRouteResult AddAuthor(Author newAuthor)
         {
             // string fname, string lname, string byear

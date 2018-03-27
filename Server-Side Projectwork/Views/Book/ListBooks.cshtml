@@ -8,6 +8,12 @@
 }
 
 <div>
+    <div>
+        <h1 class="errorMessage">@TempData["Error"]</h1>
+    </div>
+</div>
+
+<div>
     <h2>Search for a Book</h2>  
     @using (Html.BeginForm("SearchBook", "Book", FormMethod.Post))
     {
@@ -28,8 +34,7 @@
      <div class="pagination">
         <a>@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount) </a>
      </div>
-     <div class="pagination">
-        
+     <div>
             @foreach(var book in Model)
             {
                 <div class="container">
@@ -41,8 +46,7 @@
                             @Html.ActionLink(@book.Title, "ShowBook", "Book", new { id = book.ISBN }, null)
                     </div>
                 </div>     
-            } 
-             
+            }    
      </div>
      <div class="pagination">
          <a>@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)</a>

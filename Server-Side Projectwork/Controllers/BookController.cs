@@ -40,16 +40,22 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public RedirectToRouteResult EditBook( string isbn, string title, string pyear, string pinfo, short? pages )
+        public RedirectToRouteResult EditBook(Book editedBook)
         {
-            TempData["ISBN"] = isbn;
-            TempData["Title"] = title;
-            TempData["PublicationYear"] = pyear;
-            TempData["publicationinfo"] = pinfo;
-            TempData["Pages"] = pages;
+            // string isbn, string title, string pyear, string pinfo, short? pages 
+            if (ModelState.IsValid)
+            {
+                TempData["ISBN"] = editedBook.ISBN;
+                TempData["Title"] = editedBook.Title;
+                TempData["PublicationYear"] = editedBook.PublicationYear;
+                TempData["publicationinfo"] = editedBook.publicationinfo;
+                TempData["Pages"] = editedBook.Pages;
 
-            return RedirectToAction("UpdateBook");
+                return RedirectToAction("UpdateBook");
+            }
+            TempData["Error"] = "Something went wrong!";
+            return RedirectToAction("ListBooks");
+
         }
 
         // update book sends the tempdata to the update func. then redirets to the book list again.

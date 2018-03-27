@@ -3,16 +3,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.AntiForgeryToken();
+@Html.AntiForgeryToken()
 
 @if (Session["UserSession"] == null)
 {
     using (Html.BeginForm("AddAuthor", "Author", FormMethod.Post))
     {
-        <div class="form-horizontal">
-            <h2>Add an Author to the database</h2>
-            <hr />
+        <h2>Add a new Author to the database</h2>
 
+        <div>
+            <h1 class="errorMessage">@TempData["Error"]</h1>
+        </div>
+
+        <hr />
+
+        <div class="form-horizontal">
+           
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.Label("fname", "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
