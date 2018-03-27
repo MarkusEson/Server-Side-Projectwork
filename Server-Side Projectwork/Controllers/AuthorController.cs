@@ -58,10 +58,16 @@ namespace Server_Side_Projectwork.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public RedirectToRouteResult AddAuthor(string fname, string lname, string byear)
+        public RedirectToRouteResult AddAuthor(Author newAuthor)
         {
-            AuthorManager.AddAnAuthor(fname, lname, byear);
-            return RedirectToAction("ListAuthors", "Author");
+            // string fname, string lname, string byear
+            if(ModelState.IsValid)
+            {
+                AuthorManager.AddAnAuthor(newAuthor);
+                return RedirectToAction("ListAuthors", "Author");
+            }
+            TempData["Error"] = "Something went wrong!";
+            return RedirectToAction("AddAuthor");
            
         }
 

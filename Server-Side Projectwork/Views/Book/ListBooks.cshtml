@@ -7,8 +7,6 @@
     ViewBag.Title = "Books";
 }
 
-
-
 <div>
     <h2>Search for a Book</h2>  
     @using (Html.BeginForm("SearchBook", "Book", FormMethod.Post))
@@ -18,12 +16,11 @@
     }
 </div>
 
-@if (Session["UserSession"] != null)
+
+@if (Session["UserSession"] == null)
 {
     <div>
-        <form>
-            <a href="/Book/AddBook">Add Book</a>
-        </form>
+        @Html.ActionLink("Add New Book", "AddBook", "Book", null, null)
     </div>
 }
 
@@ -41,12 +38,14 @@
                         <img src="~/Resources/bookicon2.png" class="iconDetails">
                     </div>
                     <div class="right">
-                        @Html.ActionLink(@book.Title, "ShowBook", "Book", new { id = book.ISBN }, null)
+                            @Html.ActionLink(@book.Title, "ShowBook", "Book", new { id = book.ISBN }, null)
                     </div>
                 </div>     
-            }     
+            } 
+             
      </div>
      <div class="pagination">
          <a>@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)</a>
      </div>
 </div>
+

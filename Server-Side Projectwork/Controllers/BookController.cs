@@ -65,15 +65,16 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddBook(string isbn, string title, string pyear, string pinfo, short pages)
+        public ActionResult AddBook(Book newBook)
         {
+            // string isbn, string title, string pyear, string pinfo, short pages
             if (ModelState.IsValid)
             {
-                BookManager.AddABook(isbn, title, pyear, pinfo, pages);
+                BookManager.AddABook(newBook);
                 return RedirectToAction("ListBooks", "Book");
             }
-            
-            return View("Error");
+            TempData["Error"] = "Something went wrong!";
+            return RedirectToAction("AddBook");
             
 
         }

@@ -113,14 +113,14 @@ namespace Service.Models
         }
 
 
-        static public void AddAnAuthor(string fname, string lname, string byear)
+        static public void AddAnAuthor(Author newAuthor)
         {
-            Author auth = new Author();
-            auth.Aid = getAuthorList().Count();
-            auth.FirstName = fname;
-            auth.LastName = lname;
-            auth.BirthYear = byear;
-            _eAuthorRepo.Add(MapNewAuthor(auth).authorobj);
+            Author addAuthObject = new Author();
+            addAuthObject.Aid = getAuthorList().Count();
+            addAuthObject.FirstName = newAuthor.FirstName;
+            addAuthObject.LastName = newAuthor.LastName;
+            addAuthObject.BirthYear = newAuthor.BirthYear;
+            _eAuthorRepo.Add(MapNewAuthor(addAuthObject).authorobj);
         }
 
         static private AuthorRepository MapNewAuthor(Author newAuthor)

@@ -3,53 +3,59 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.AntiForgeryToken();
 
-@if (Session["UserSession"] != null)
+
+@Html.AntiForgeryToken()
+
+@if (Session["UserSession"] == null)
 {
-    using (Html.BeginForm("AddBook", "Book", FormMethod.Post))
-    {
+    <h2>Add a Book to the database</h2>
+
+    <div>
+        <h1 class="errorMessage">@TempData["Error"]</h1>
+    </div>
+
+    <hr />
+
+        using (Html.BeginForm("AddBook", "Book", FormMethod.Post))
+        {
+
         <div class="form-horizontal">
-            <h2>Add a Book to the database</h2>
-            <hr />
-            <!-- 
-                ÄNDRA EditorFor(< => x.ISBN)
-                ÄNDRA ValidationMessageFor(x => x.ISBN)
-            -->
+          
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.Label("isbn", "ISBN", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("ISBN", "ISBN", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("isbn", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "ISBN" } })
-                    @Html.ValidationMessage("isbn", "", new { @class = "text-danger" })
+                    @Html.EditorFor(x => x.ISBN, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "ISBN" } })
+                    @Html.ValidationMessageFor(x => x.ISBN, "Please Enter ISBN", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.Label("title", "Title", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Title", "Title", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("title", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Title" } })
-                    @Html.ValidationMessage("title", "", new { @class = "text-danger" })
+                    @Html.EditorFor(x => x.Title, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Title" } })
+                    @Html.ValidationMessageFor(x => x.Title, "Please Enter a Title!", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.Label("pyear", "Publication Year", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("PublicationYear", "Publication Year", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("pyear", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Publication Year" } })
-                    @Html.ValidationMessage("pyear", "", new { @class = "text-danger" })
+                    @Html.EditorFor(x => x.PublicationYear, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Publication Year" } })
+                    @Html.ValidationMessageFor(x => x.PublicationYear, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.Label("pinfo", "Publication Info", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("publicationinfo", "Publication Info", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("pinfo", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Publication Info" } })
-                    @Html.ValidationMessage("pinfo", "", new { @class = "text-danger" })
+                    @Html.EditorFor(x => x.publicationinfo, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Publication Info" } })
+                    @Html.ValidationMessageFor(x => x.publicationinfo, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.Label("pages", "Pages", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Pages", "Pages", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("pages", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Pages" } })
-                    @Html.ValidationMessage("pages", "", new { @class = "text-danger" })
+                    @Html.EditorFor(x => x.Pages, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Pages" } })
+                    @Html.ValidationMessageFor(x => x.Pages, "Please Enter number of pages: 0-9999", new { @class = "text-danger" })
                 </div>
             </div>
             
@@ -67,4 +73,12 @@
     <div>
         @Html.ActionLink("Back to List", "../Book/ListBooks")
     </div>
+}
+
+
+@if (Session["UserSession"] != null)
+{
+    <h>
+        You are not authorized to view this page.
+    </h>
 }

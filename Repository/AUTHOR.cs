@@ -19,9 +19,11 @@ namespace Repository
         public int Aid { get; set; }
 
         [StringLength(50)]
+        [Required]
         public string FirstName { get; set; }
 
         [StringLength(50)]
+        [Required]
         public string LastName { get; set; }
 
         [StringLength(10)]
