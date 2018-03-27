@@ -24,14 +24,14 @@
                 @Html.Label("fname", "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Editor("fname", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "First Name" } })
-                    @Html.ValidationMessage("fname", "", new { @class = "text-danger" })
+                    @Html.ValidationMessage("fname", "Please enter a first name!", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.Label("lname", "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Editor("lname", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Last Name" } })
-                    @Html.ValidationMessage("lname", "", new { @class = "text-danger" })
+                    @Html.ValidationMessage("lname", "Please enter a last name!", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
