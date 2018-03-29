@@ -17,7 +17,8 @@
     <AssemblyName>Server-Side Projectwork</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44374</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -145,9 +146,6 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="CSS\Design.css" />
-    <Content Include=".ebextensions\install-certificate.config" />
-    <Content Include=".ebextensions\install-certificate.ps1" />
-    <Content Include=".ebextensions\certificate.pfx" />
     <None Include="Properties\PublishProfiles\WebKit.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
