@@ -5,6 +5,7 @@ using System.Web;
 using Repository.Support;
 using System.Security.Cryptography;
 using System.Text;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Service.Models
@@ -13,10 +14,18 @@ namespace Service.Models
     {
         public int AdminId { get; set; }    // Primary Key
         [Required]
+        [StringLength(20, ErrorMessage = "Max length is 20 characters!")]
+        [DisplayName("Username")]
         public string UserName { get; set; }
+        [Required]
+        [DisplayName("Password")]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$", ErrorMessage = "Password has to be 8 to 12 characters long, and contain at least one lower-case character, one upper-case character and one number")]
+        public string TempPass { get; set; }
         public string PassSalt { get; set; }
         public string PassHash { get; set; }
+        [StringLength(25, ErrorMessage = "Max length is 25 characters!")]
         public string FirstName { get; set; }
+        [StringLength(25, ErrorMessage = "Max length is 25 characters!")]
         public string LastName { get; set; }
         public string Description { get; set; }
 
@@ -50,13 +59,13 @@ namespace Service.Models
             return adminList;
         }
 
-        static public void CreateAdmin(Administrator newAdmin, string password)
+        static public void CreateAdmin(Administrator newAdmin)
         {
             Administrator adminObj = new Administrator();
             adminObj = newAdmin;
 
             var salt = GetSalt();
-            var saltedPassword = salt + password;
+            var saltedPassword = salt + adminObj.TempPass;
             var hash = HashPassword(saltedPassword);
 
             adminObj.PassSalt = salt;

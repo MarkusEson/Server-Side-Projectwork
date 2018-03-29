@@ -29,7 +29,7 @@ namespace Server_Side_Projectwork.Controllers
                     if (Administrator.IsPasswordMatch(uPass, admin.PassSalt, admin.PassHash))
                     {
 
-                        Session["UserSession"] = Session.SessionID;
+                        Session["UserSession"] = uName;
                         return View();
                     }
                 }

@@ -79,31 +79,36 @@ namespace Server_Side_Projectwork.Controllers
 
         public ActionResult Create()
         {
-            return View(Administrator.GetAdminList());
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Administrator newAdmin, string inPassword)
+        public ActionResult Create(Administrator newAdmin)
         {
             if (ModelState.IsValid)
             {
-                Administrator.CreateAdmin(newAdmin, inPassword);
+                Administrator.CreateAdmin(newAdmin);
 
-                return RedirectToAction("Details", new { id = newAdmin.AdminId });
+                var i = 0;
+                foreach (var admin in Administrator.GetAdminList()){ i = admin.AdminId; }
+
+                return RedirectToAction("Details", new { id = i});
             }
 
-            ViewBag.errorMessage("Could not make new admin account!");
-            return View("Error");
+            return View();
         }
 
         public ActionResult Delete(int id)
         {
             Administrator.DeleteAdmin(id);
 
-            Session.Abandon();
-            Session.Contents.Abandon();
-            Session.Contents.RemoveAll();
+            if(Session["UserSession"].Equals( Administrator.GetAdmin(id).UserName ))
+            {
+                Session.Abandon();
+                Session.Contents.Abandon();
+                Session.Contents.RemoveAll();
+            }
 
             return RedirectToAction("Index");
         }
