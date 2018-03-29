@@ -112,10 +112,17 @@ namespace Service.Models
             aBook.bookObj.PublicationYear = bookobj.PublicationYear;
             aBook.bookObj.publicationinfo = bookobj.publicationinfo;
             aBook.bookObj.pages = bookobj.Pages;
+            if(bookobj.BookAuth == null)
+            {
+                aBook.bookObj.AUTHOR = null;
+            }
+            else
+                aBook.bookObj.AUTHOR = bookobj.BookAuth.Select(x => new Repository.AUTHOR {Aid = x.Aid, FirstName = x.FirstName, LastName = x.LastName, BirthYear = x.BirthYear }).ToList();
+
             return aBook;
         }
    
-        static public void AddABook(Book newBook)
+        static public void AddABook(Book newBook, int aid)
         {
             // string isbn, string title, string pyear, string pinfo, short pages
             Book addBookObject = new Book();
@@ -124,21 +131,12 @@ namespace Service.Models
             addBookObject.PublicationYear = newBook.PublicationYear;
             addBookObject.publicationinfo = newBook.publicationinfo;
             addBookObject.Pages = newBook.Pages;
+            addBookObject.BookAuth = new List<Author> { new AuthorManager(aid) };
+          
 
-            _eBookRepo.Add(MapNewBook(addBookObject).bookObj);
-            // _eAuthorRepo.Add(MapNewAuthor(auth).authorobj);
+            _eBookRepo.Add(MapBook(addBookObject).bookObj);
         }
-
-        static private BookRepository MapNewBook(Book newBook)
-        {
-            BookRepository book = new BookRepository(newBook.ISBN);
-            book.bookObj.ISBN = newBook.ISBN;
-            book.bookObj.Title = newBook.Title;
-            book.bookObj.PublicationYear = newBook.PublicationYear;
-            book.bookObj.publicationinfo = newBook.publicationinfo;
-            book.bookObj.pages = newBook.Pages;
-            return book;
-        }
+        
 
         static public void RemoveBook(string isbn)
         {

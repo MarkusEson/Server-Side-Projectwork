@@ -116,22 +116,13 @@ namespace Service.Models
         static public void AddAnAuthor(Author newAuthor)
         {
             Author addAuthObject = new Author();
-            addAuthObject.Aid = getAuthorList().Count();
+            addAuthObject.Aid = newAuthor.Aid;
             addAuthObject.FirstName = newAuthor.FirstName;
             addAuthObject.LastName = newAuthor.LastName;
             addAuthObject.BirthYear = newAuthor.BirthYear;
-            _eAuthorRepo.Add(MapNewAuthor(addAuthObject).authorobj);
+            _eAuthorRepo.Add(MapAuthor(addAuthObject).authorobj);
         }
 
-        static private AuthorRepository MapNewAuthor(Author newAuthor)
-        {
-            AuthorRepository auth = new AuthorRepository();
-            auth.authorobj.Aid = newAuthor.Aid;
-            auth.authorobj.FirstName = newAuthor.FirstName;
-            auth.authorobj.LastName = newAuthor.LastName;
-            auth.authorobj.BirthYear = newAuthor.BirthYear;
-            return auth;
-        }
 
         
         static public void RemoveAuthor(int id)

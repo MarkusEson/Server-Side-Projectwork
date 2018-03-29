@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Session["UserSession"] == null)
+@if (Session["UserSession"] != null)
 {
     using (Html.BeginForm("EditBook", "Book", FormMethod.Post))
     {
@@ -73,7 +73,7 @@
     </div>
 }
 
-@if (Session["UserSession"] != null)
+@if (Session["UserSession"] == null)
 {
     <p>You are not Authorized to view this page!</p>
 }

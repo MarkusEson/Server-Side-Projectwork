@@ -9,7 +9,7 @@
 }
 
 <h2>Show Author</h2>
-@if (Session["UserSession"] == null)
+@if (Session["UserSession"] != null)
 {
     <div>
         @Html.ActionLink("Edit", "EditAuthor", "Author", new { id = Model.Aid }, null) || @Html.ActionLink("Delete", "DeleteAuthor", "Author", new { id = Model.Aid }, null)
@@ -48,7 +48,7 @@
     }
 </div>
     
-@if (Session["UserSession"] != null)
+@if (Session["UserSession"] == null)
 {
     <p>You are not Authorized to view this page!</p>
 }

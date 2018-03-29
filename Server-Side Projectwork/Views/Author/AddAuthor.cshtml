@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Session["UserSession"] == null)
+@if (Session["UserSession"] != null)
 {
     using (Html.BeginForm("AddAuthor", "Author", FormMethod.Post))
     {
@@ -21,24 +21,24 @@
            
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.Label("fname", "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("FirstName", "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("fname", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "First Name" } })
-                    @Html.ValidationMessage("fname", "Please enter a first name!", new { @class = "text-danger" })
+                    @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "First Name" } })
+                    @Html.ValidationMessageFor(x => x.FirstName, "Please enter a first name!", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.Label("lname", "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("LastName", "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("lname", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Last Name" } })
-                    @Html.ValidationMessage("lname", "Please enter a last name!", new { @class = "text-danger" })
+                    @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Last Name" } })
+                    @Html.ValidationMessageFor(x => x.LastName, "Please enter a last name!", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.Label("byear", "Birth Year", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("BirthYear", "Birth Year", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("byear", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Birth Year" } })
-                    @Html.ValidationMessage("byear", "", new { @class = "text-danger" })
+                    @Html.EditorFor(x => x.BirthYear, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Birth Year" } })
+                    @Html.ValidationMessageFor(x => x.BirthYear, "", new { @class = "text-danger" })
                 </div>
             </div>
             <hr />
@@ -57,7 +57,7 @@
     </div>
 }
 
-@if (Session["UserSession"] != null)
+@if (Session["UserSession"] == null)
 {
     <h>
         You are not authorized to view this page.
