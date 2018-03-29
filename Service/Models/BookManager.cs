@@ -122,17 +122,21 @@ namespace Service.Models
             return aBook;
         }
    
-        static public void AddABook(Book newBook, int aid)
+        static public void AddABook(Book newBook, int? aid)
         {
             // string isbn, string title, string pyear, string pinfo, short pages
+            
+                
             Book addBookObject = new Book();
             addBookObject.ISBN = newBook.ISBN;
             addBookObject.Title = newBook.Title;
             addBookObject.PublicationYear = newBook.PublicationYear;
             addBookObject.publicationinfo = newBook.publicationinfo;
             addBookObject.Pages = newBook.Pages;
-            addBookObject.BookAuth = new List<Author> { new AuthorManager(aid) };
-          
+            if (aid.HasValue)
+                addBookObject.BookAuth = new List<Author> { new AuthorManager(aid.Value) };
+            else
+                addBookObject.BookAuth = new List<Author>();
 
             _eBookRepo.Add(MapBook(addBookObject).bookObj);
         }

@@ -109,7 +109,11 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.AUTHOR.Include(x => x.BOOK).FirstOrDefault(x => x.Aid.Equals(aid)).BOOK.ToList();
+                var author = db.AUTHOR.Include(x => x.BOOK).FirstOrDefault(x => x.Aid.Equals(aid));
+                if (author != null)
+                    return author.BOOK.ToList();
+                else
+                    return new List<BOOK>();
             }
         }
     }
