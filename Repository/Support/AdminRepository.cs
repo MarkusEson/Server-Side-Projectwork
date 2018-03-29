@@ -30,17 +30,18 @@ namespace Repository.Support
             }
         }
 
-        public ADMINISTRATOR Read(int AdminId) // Find author by id
+        public ADMINISTRATOR Read(int AdminId) // Find admin by id
         {
             using (var db = new Libdb())
             {
                 db.ADMINISTRATOR.Load();
+                /*db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE AdminId=@0", AdminId).ToList();*/
 
                 return db.ADMINISTRATOR.Find(AdminId);
             }
         }
 
-        public List<ADMINISTRATOR> List() // retrieve all authors
+        public List<ADMINISTRATOR> List() // retrieve all admins
         {
             using (var db = new Libdb())
             {

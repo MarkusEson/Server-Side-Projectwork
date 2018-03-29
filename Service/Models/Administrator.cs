@@ -7,6 +7,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Service.Models
 {
@@ -14,11 +16,12 @@ namespace Service.Models
     {
         public int AdminId { get; set; }    // Primary Key
         [Required]
-        [StringLength(20, ErrorMessage = "Max length is 20 characters!")]
         [DisplayName("Username")]
+        [StringLength(20, ErrorMessage = "Max length is 20 characters!")]
         public string UserName { get; set; }
         [Required]
         [DisplayName("Password")]
+        [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$", ErrorMessage = "Password has to be 8 to 12 characters long, and contain at least one lower-case character, one upper-case character and one number")]
         public string TempPass { get; set; }
         public string PassSalt { get; set; }

@@ -32,7 +32,7 @@
             <div class="form-group">
                 @Html.Label("inPassword", "Password", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(m => m.TempPass, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Password", @type = "password" } })
+                    @Html.EditorFor(m => m.TempPass, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Password" } })
                     @Html.ValidationMessageFor(m => m.TempPass, "", new { @class = "text-danger" })
                 </div>
             </div>
