@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Session["UserSession"] == null)
+@if (Session["UserSession"] != null)
 {
     using (Html.BeginForm("AddAuthor", "Author", FormMethod.Post))
     {
@@ -57,7 +57,7 @@
     </div>
 }
 
-@if (Session["UserSession"] != null)
+@if (Session["UserSession"] == null)
 {
     <h>
         You are not authorized to view this page.

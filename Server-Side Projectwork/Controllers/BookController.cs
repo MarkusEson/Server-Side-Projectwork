@@ -72,8 +72,8 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddBook(Book newBook, int authorID)
         [ValidateAntiForgeryToken]
+        public ActionResult AddBook(Book newBook, int authorID)
         {
             // string isbn, string title, string pyear, string pinfo, short pages
             if (ModelState.IsValid)

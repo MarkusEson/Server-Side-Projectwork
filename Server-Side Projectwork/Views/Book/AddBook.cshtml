@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Session["UserSession"] == null)
+@if (Session["UserSession"] != null)
 {
     <h2>Add a Book to the database</h2>
 
@@ -55,23 +55,23 @@
                         @Html.ValidationMessageFor(x => x.Pages, "Please enter number of pages: 0-9999", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("authorID", "Author", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.Editor("authorID", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Pages" } })
-                    @Html.ValidationMessage("authorID", "Please enter the books author id", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("authorID", "Author", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.Editor("authorID", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Pages" } })
+                        @Html.ValidationMessage("authorID", "Please enter the books author id", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
+            
             <hr />
-
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Add" class="btn btn-default" formmethod="post" />
                     </div>
                 </div>
 
-            </div>
+            
     }
 
     <div>
@@ -80,7 +80,7 @@
 }
 
 
-@if (Session["UserSession"] != null)
+@if (Session["UserSession"] == null)
 {
     <h>
         You are not authorized to view this page.

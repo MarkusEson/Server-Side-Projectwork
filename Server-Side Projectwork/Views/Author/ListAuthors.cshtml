@@ -22,7 +22,7 @@
     }
 </div>
 
-@if (Session["UserSession"] == null)
+@if (Session["UserSession"] != null)
 {
     <div>
         @Html.ActionLink("Add New Author", "AddAuthor", "Author", null, null)
