@@ -35,6 +35,7 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public RedirectToRouteResult EditAuthor(Author editedAuthor )
         {
             // int aid, string fname, string lname, string byear
@@ -63,6 +64,7 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public RedirectToRouteResult AddAuthor(Author newAuthor)
         {
             // string fname, string lname, string byear

@@ -3,12 +3,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.AntiForgeryToken()
-
 @if (Session["UserSession"] == null)
 {
     using (Html.BeginForm("AddAuthor", "Author", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
+
         <h2>Add a new Author to the database</h2>
 
         <div>

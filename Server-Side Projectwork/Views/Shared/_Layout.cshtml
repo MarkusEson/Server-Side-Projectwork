@@ -44,6 +44,7 @@
                                     <div class="text-center"><h3><b></b></h3></div>
                                     @using (Html.BeginForm("Login", "Library", FormMethod.Post))
                                     {
+                                        @Html.AntiForgeryToken()
                                         <div class="form-group">
                                             <label for="username">Username</label>
                                             <input type="text" name="uName" id="uName" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">

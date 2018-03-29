@@ -4,12 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.AntiForgeryToken()
-
 @if (Session["UserSession"] == null)
 {
     using (Html.BeginForm("EditAuthor", "Author", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
+
         <h1>
             Edit Author.
         </h1>

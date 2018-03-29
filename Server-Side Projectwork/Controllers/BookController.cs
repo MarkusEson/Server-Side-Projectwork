@@ -40,6 +40,7 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public RedirectToRouteResult EditBook(Book editedBook)
         {
             // string isbn, string title, string pyear, string pinfo, short? pages 
@@ -71,6 +72,7 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddBook(Book newBook)
         {
             // string isbn, string title, string pyear, string pinfo, short pages

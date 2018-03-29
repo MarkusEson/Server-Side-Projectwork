@@ -4,14 +4,14 @@
     ViewBag.Title = "Edit";
 }
 <!--------BLOCK AREA----------->
-@Html.AntiForgeryToken();
 
-@if(Session["UserSession"] != null && Session["UserName"].Equals(Model.UserName))
+@if(Session["UserSession"] != null)
 {
     <p>Edit User:</p>
     using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
     {
-    
+        @Html.AntiForgeryToken()
+
         <div class="form-horizontal">
             <h4>Administrator</h4>
 
@@ -60,6 +60,7 @@
     <p>Change password:</p>
     using (Html.BeginForm("ChangePassword", "Admin", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
             <hr />

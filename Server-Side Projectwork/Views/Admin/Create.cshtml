@@ -5,12 +5,12 @@
     ViewBag.Title = "Create";
 }
 
-@Html.AntiForgeryToken()
-
 @if (Session["UserSession"] != null)
 {
     using (Html.BeginForm("Create", "Admin", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
+
         int i = 0;
 
         foreach (var item in Model)
