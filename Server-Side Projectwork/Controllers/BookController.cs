@@ -72,13 +72,13 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        public ActionResult AddBook(Book newBook, int authorID)
         [ValidateAntiForgeryToken]
-        public ActionResult AddBook(Book newBook)
         {
             // string isbn, string title, string pyear, string pinfo, short pages
             if (ModelState.IsValid)
             {
-                BookManager.AddABook(newBook);
+                BookManager.AddABook(newBook, authorID);
                 return RedirectToAction("ListBooks", "Book");
             }
             TempData["Error"] = "Something went wrong!";

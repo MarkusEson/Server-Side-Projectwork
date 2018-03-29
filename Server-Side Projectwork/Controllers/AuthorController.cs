@@ -67,6 +67,7 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult AddAuthor(Author newAuthor)
         {
+            newAuthor.Aid = AuthorManager.getAuthorList().Count();
             // string fname, string lname, string byear
             if(ModelState.IsValid)
             {

@@ -66,8 +66,15 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
+                var authors = bk.AUTHOR;
+                bk.AUTHOR = new List<AUTHOR>();
                 db.BOOK.Add(bk);
-                db.Entry(bk).State = EntityState.Added;
+                foreach(var author in authors)
+                {
+                    bk.AUTHOR.Add(author);
+                    db.Entry(author).State = EntityState.Unchanged;
+                }
+
                 db.SaveChanges();
 
             }
@@ -75,11 +82,13 @@ namespace Repository.Support
 
         public void Delete(BOOK book)
         {
+            
             using (var db = new Libdb())
             {
+                var bk = db.BOOK.FirstOrDefault(x => x.ISBN == book.ISBN);
+                bk.AUTHOR.Clear();
+                db.BOOK.Remove(bk);
                 
-                db.Entry(book).State = EntityState.Deleted;
-                db.BOOK.Remove(book);
                 db.SaveChanges();
             }
         }
