@@ -32,7 +32,7 @@ namespace Service.Models
         public string LastName { get; set; }
         public string Description { get; set; }
 
-        static private AdminRepository _eAdminObj = new AdminRepository();
+        static private AdminRepository _eAdminRepo = new AdminRepository();
         static private RNGCryptoServiceProvider generatedSalt = null;
         private const int SALT_SIZE = 24;
 
@@ -47,7 +47,7 @@ namespace Service.Models
         {
             List<Administrator> adminList = new List<Administrator>();
 
-            foreach (var elem in _eAdminObj.List())
+            foreach (var elem in _eAdminRepo.List())
             {
                 Administrator anAdmin = new Administrator();
                 anAdmin.AdminId = elem.AdminId;
@@ -74,14 +74,14 @@ namespace Service.Models
             adminObj.PassSalt = salt;
             adminObj.PassHash = hash;
 
-            _eAdminObj.Create(MapNewAdmin(adminObj).adminobj);
+            _eAdminRepo.Create(MapNewAdmin(adminObj).adminobj);
         }
 
         static public void DeleteAdmin(int id)
         {
             Administrator admin = Administrator.GetAdmin(id);
             GetAdminList().Remove(GetAdmin(id));
-            _eAdminObj.Delete(MapAdmin(admin).adminobj);
+            _eAdminRepo.Delete(MapAdmin(admin).adminobj);
 
         }
 
@@ -91,7 +91,7 @@ namespace Service.Models
             adminObj.FirstName = fName;
             adminObj.LastName = lName;
             adminObj.Description = aDesc;
-            _eAdminObj.Update(MapAdmin(adminObj).adminobj);
+            _eAdminRepo.Update(MapAdmin(adminObj).adminobj);
 
         }
 
@@ -110,7 +110,7 @@ namespace Service.Models
                     adminObj.PassHash = hash;
 
                 }
-                _eAdminObj.Update(MapAdmin(adminObj).adminobj);
+                _eAdminRepo.Update(MapAdmin(adminObj).adminobj);
             }
         }
 
@@ -118,14 +118,11 @@ namespace Service.Models
         {
             foreach (var admin in GetAdminList())
             {
-                if (_eAdminObj.UsernameExists(username))
+                if (_eAdminRepo.UsernameExists(username))
                 {
-                    /*if (DoPasswordMatch(password, admin.PassSalt, admin.PassHash)) { return true; }
-                    else { return false; }*/
-
                     var saltedInput = admin.PassSalt + password;
 
-                    if(_eAdminObj.DoHashMatch( HashPassword(saltedInput) )) { return true; }
+                    if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; }
                     else { return false; }
                 }
                 else { return false; }

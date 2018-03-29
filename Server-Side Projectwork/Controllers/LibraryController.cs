@@ -41,8 +41,8 @@ namespace Server_Side_Projectwork.Controllers
                 return View();
             }
 
-            ViewBag.errorMessage = "Wrong login credentials";
-            return View("Error");
+            ViewBag.errorMessage = "Login credentials wrong!";
+            return View("error");
         }
 
         public ActionResult Logout()
