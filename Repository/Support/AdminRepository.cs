@@ -85,5 +85,27 @@ namespace Repository.Support
             }
         }
 
+        public bool UsernameExists(string username)
+        {
+            using (var db = new Libdb())
+            {
+                var query = db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE UserName = {0}", username).ToList();
+
+                if(query.Count != 0) { return true; }
+                else { return false; }
+            }
+        }
+
+        public bool DoHashMatch(string dbHash)
+        {
+            using (var db = new Libdb())
+            {
+                var query = db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE PassHash = {0}", dbHash).ToList();
+
+                if(query.Count != 0) { return true; }
+                else { return false; }
+            }
+        }
+
     }
 }

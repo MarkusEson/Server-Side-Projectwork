@@ -100,7 +100,7 @@ namespace Service.Models
             if (np == cnp)
             {
                 Administrator adminObj = Administrator.GetAdmin(id);
-                if (IsPasswordMatch(op, adminObj.PassSalt, adminObj.PassHash))
+                if (DoPasswordMatch(op, adminObj.PassSalt, adminObj.PassHash))
                 {
                     var salt = GetSalt();
                     var saltedPassword = salt + np;
@@ -114,7 +114,27 @@ namespace Service.Models
             }
         }
 
-        static public bool IsPasswordMatch(string passwordInput, string salt, string hash)
+        static public bool IsLoginFine(string username, string password)
+        {
+            foreach (var admin in GetAdminList())
+            {
+                if (_eAdminObj.UsernameExists(username))
+                {
+                    /*if (DoPasswordMatch(password, admin.PassSalt, admin.PassHash)) { return true; }
+                    else { return false; }*/
+
+                    var saltedInput = admin.PassSalt + password;
+
+                    if(_eAdminObj.DoHashMatch( HashPassword(saltedInput) )) { return true; }
+                    else { return false; }
+                }
+                else { return false; }
+            }
+
+            return false;
+        }
+
+        static public bool DoPasswordMatch(string passwordInput, string salt, string hash)
         {
             var saltedInput = salt + passwordInput;
 
