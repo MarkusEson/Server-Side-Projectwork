@@ -36,8 +36,6 @@
                 <!------------------------------------------------------------- Login-dropdown Start ------------------------------------------------------------->
                 @if (Session["UserSession"] == null)
                 {
-                    Html.AntiForgeryToken();
-
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle login-text" data-toggle="dropdown">Log In<span class="caret"></span></a>

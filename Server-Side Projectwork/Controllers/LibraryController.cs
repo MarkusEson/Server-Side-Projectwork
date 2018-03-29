@@ -19,7 +19,6 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(string uName, string uPass)
         {
             foreach (var admin in Administrator.GetAdminList())

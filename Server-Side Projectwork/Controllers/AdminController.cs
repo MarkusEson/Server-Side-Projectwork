@@ -83,7 +83,6 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Administrator newAdmin, string inPassword)
         {
             if (ModelState.IsValid)

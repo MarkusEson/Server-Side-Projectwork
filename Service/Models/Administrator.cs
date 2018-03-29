@@ -5,12 +5,14 @@ using System.Web;
 using Repository.Support;
 using System.Security.Cryptography;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Service.Models
 {
     public class Administrator
     {
         public int AdminId { get; set; }    // Primary Key
+        [Required]
         public string UserName { get; set; }
         public string PassSalt { get; set; }
         public string PassHash { get; set; }
