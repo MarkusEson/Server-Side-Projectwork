@@ -1,9 +1,5 @@
-**CRITICAL TO DO:**
-- [x] Fix Add Book. 
-	- [x] Fix Add Book ( it crashes upon db.SaveChanges(); faulty inputs?)
-	- [x] Fix add Author ^^
-- [x] Fix connection between Book and Author 
-	- [x] Adding a new book should connect it to the author, and you should be able to view the new book in authors details.
+Project completed:
+wonky af but it works. 
 
 **GENERAL TODO:**
 - [X] List pages
@@ -11,14 +7,14 @@
 	- [x] list author
 	- [X] list admins
 
-- [ ] password hashing
+- [x] password hashing
 	
-- [ ] protection vs sql injection
+- [x] protection vs sql injection
 
 - [x] edit
 	- [x] books
 	- [x] author
-	- [ ] admins
+	- [x] admins
 		- [ ] edit or change password
 	
 - [x] add
@@ -26,16 +22,16 @@
 	- [x] author
 	- [x] admins
 	
-- [ ] delete
+- [x] delete
 	- [x] books
 	- [x] author
-	- [ ] admins
+	- [x] admins
 
 - [x] Show Books written by Author
 	- [x] Author
   - [x] Books
 	
-- [ ] validation
+- [x] validation
 
 - [x] Pageination
 	- [x] Books
@@ -44,7 +40,7 @@
 
 - [x] Login feature
 
-- [ ] Admins table
+- [x] Admins table
 
 - [x] Permissions for admins
 
