@@ -23,15 +23,15 @@ namespace Server_Side_Projectwork.Controllers
         
         public ActionResult ShowAuthor(int id)
         {
-            AuthorManager authorDetailObj = new AuthorManager(id);
+            AuthorManager author = new AuthorManager(id);
             
-            return View("ShowAuthor", authorDetailObj);
+            return View("ShowAuthor", author);
         }
         
         public ActionResult EditAuthor(int id)
         {
-            AuthorManager aobj = new AuthorManager(id);
-            return View(aobj);
+            AuthorManager author = new AuthorManager(id);
+            return View(author);
         }
 
         [HttpPost]
@@ -89,8 +89,8 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public ActionResult SearchAuthor(string searchString)
         {
-            var list = Service.Models.AuthorManager.SearchForAuthor(searchString);
-            return View("ListAuthors", list.ToPagedList(0, 10));
+            var searchResult = Service.Models.AuthorManager.SearchForAuthor(searchString);
+            return View("ListAuthors", searchResult.ToPagedList(0, 10));
         }
 
     }

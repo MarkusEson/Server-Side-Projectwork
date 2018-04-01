@@ -28,8 +28,8 @@ namespace Server_Side_Projectwork.Controllers
         // Shows the clicked book in detail, displaying information about pages, author, etc.
         public ActionResult ShowBook(string id)
         {
-            BookManager bookDetailObj = new BookManager(id);
-            return View("ShowBook", bookDetailObj);
+            BookManager book = new BookManager(id);
+            return View("ShowBook", book);
 
         }
         
@@ -101,8 +101,8 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public ActionResult SearchBook(string searchString)
         {
-            var list = Service.Models.BookManager.SearchForBook(searchString);
-            return View("ListBooks", list.ToPagedList(0,10));
+            var searchResult = Service.Models.BookManager.SearchForBook(searchString);
+            return View("ListBooks", searchResult.ToPagedList(0,10));
         }
         
 

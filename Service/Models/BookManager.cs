@@ -15,8 +15,8 @@ namespace Service.Models
         {
             this.id = id;
             
-            Book bookobj = BookManager.getBooks(id);
-            var bookAuthList = AuthorManager.GetAuthorByIsbn(id);
+            Book bookobj = BookManager.getBooks(id);                    // gets book by isbn
+            var bookAuthList = AuthorManager.GetAuthorByIsbn(id);       // gets the author(s) who wrote the book
 
             ISBN = bookobj.ISBN;
             Title = bookobj.Title;
@@ -25,8 +25,6 @@ namespace Service.Models
             Pages = bookobj.Pages;
             BookAuth = bookAuthList;
         }
-
-        public string AuthorName { get; set; }
 
         static private BookRepository _eBookRepo = new BookRepository();
 
@@ -69,38 +67,38 @@ namespace Service.Models
 
         static public void updateBook(string bISBN, string bTitle, string bPyear, string bpInfo, short? bPages)
         {
-            Book bookObj = BookManager.getBooks(bISBN);
-            bookObj.ISBN = bISBN;
-            bookObj.Title = bTitle;
-            bookObj.PublicationYear = bPyear;
-            bookObj.publicationinfo = bpInfo;
-            bookObj.Pages = bPages;
-            _eBookRepo.Update(MapBook(bookObj).bookObj);
+            Book book = BookManager.getBooks(bISBN);
+            book.ISBN = bISBN;
+            book.Title = bTitle;
+            book.PublicationYear = bPyear;
+            book.publicationinfo = bpInfo;
+            book.Pages = bPages;
+            _eBookRepo.Update(MapBook(book).bookObj);
 
         }
 
         static private Book MapBook(BookRepository bookobj)
         {
-            Book aBook = new Book();
-            aBook.ISBN = bookobj.bookObj.ISBN;
-            aBook.Title = bookobj.bookObj.Title;
-            aBook.PublicationYear = bookobj.bookObj.PublicationYear;
-            aBook.publicationinfo = bookobj.bookObj.publicationinfo;
-            aBook.Pages = bookobj.bookObj.pages;
-            return aBook;
+            Book book = new Book();
+            book.ISBN = bookobj.bookObj.ISBN;
+            book.Title = bookobj.bookObj.Title;
+            book.PublicationYear = bookobj.bookObj.PublicationYear;
+            book.publicationinfo = bookobj.bookObj.publicationinfo;
+            book.Pages = bookobj.bookObj.pages;
+            return book;
         }
 
 
         // TEST TEST
         static private Book MapBook(Repository.BOOK bookobj)
         {
-            Book aBook = new Book();
-            aBook.ISBN = bookobj.ISBN;
-            aBook.Title = bookobj.Title;
-            aBook.PublicationYear = bookobj.PublicationYear;
-            aBook.publicationinfo = bookobj.publicationinfo;
-            aBook.Pages = bookobj.pages;
-            return aBook;
+            Book book = new Book();
+            book.ISBN = bookobj.ISBN;
+            book.Title = bookobj.Title;
+            book.PublicationYear = bookobj.PublicationYear;
+            book.publicationinfo = bookobj.publicationinfo;
+            book.Pages = bookobj.pages;
+            return book;
         }
         // TEST TEST
 
@@ -112,7 +110,7 @@ namespace Service.Models
             aBook.bookObj.PublicationYear = bookobj.PublicationYear;
             aBook.bookObj.publicationinfo = bookobj.publicationinfo;
             aBook.bookObj.pages = bookobj.Pages;
-            if(bookobj.BookAuth == null)
+            if(bookobj.BookAuth == null)        // if book has no authors, manually sets book AUTHOR to null. 
             {
                 aBook.bookObj.AUTHOR = null;
             }
@@ -125,8 +123,6 @@ namespace Service.Models
         static public void AddABook(Book newBook, int? aid)
         {
             // string isbn, string title, string pyear, string pinfo, short pages
-            
-                
             Book addBookObject = new Book();
             addBookObject.ISBN = newBook.ISBN;
             addBookObject.Title = newBook.Title;
@@ -134,9 +130,9 @@ namespace Service.Models
             addBookObject.publicationinfo = newBook.publicationinfo;
             addBookObject.Pages = newBook.Pages;
             if (aid.HasValue)
-                addBookObject.BookAuth = new List<Author> { new AuthorManager(aid.Value) };
+                addBookObject.BookAuth = new List<Author> { new AuthorManager(aid.Value) };     // if book has author, add i author to bookAuth list.
             else
-                addBookObject.BookAuth = new List<Author>();
+                addBookObject.BookAuth = new List<Author>();                                    // else add empty list.
 
             _eBookRepo.Add(MapBook(addBookObject).bookObj);
         }
@@ -145,10 +141,10 @@ namespace Service.Models
         static public void RemoveBook(string isbn)
         {
         
-            Book book = BookManager.getBooks(isbn); 
-            _eBookRepo.Delete(MapBook(book).bookObj);
+            Book book = BookManager.getBooks(isbn);             // get book by isbn
+            _eBookRepo.Delete(MapBook(book).bookObj);           // delete this book from repo
 
-            getBookList().Remove(getBooks(isbn));
+            getBookList().Remove(getBooks(isbn));               // remove book from list
            
 
         } 
@@ -156,15 +152,15 @@ namespace Service.Models
         // returns a list of books based on the searchString 
         static public List<Book> SearchForBook(string searchString)
         {
-            List<Book> SearchList = new List<Book>();
+            List<Book> searchResult = new List<Book>();                 
             var repo = new BookRepository();
-            var booklist = repo.getSearchBookListFromDb(searchString);
+            var booklist = repo.getSearchBookListFromDb(searchString);      // adds the books that amtch with search result to a list
 
-            foreach (var book in booklist)
+            foreach (var book in booklist)                                  // map and add the results to a list and return the list
             {
-                SearchList.Add(MapBook(book));
+                searchResult.Add(MapBook(book));
             }
-            return SearchList;
+            return searchResult;
         }   
         
     }

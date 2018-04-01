@@ -19,7 +19,7 @@ namespace Service.Models
 
         public string BirthYear { get; set; }
 
-        public List<Book> AuthBooks { get; set; }
+        public List<Book> AuthBooks { get; set; }           // this is a list of the authors books.
 
     }
 }
