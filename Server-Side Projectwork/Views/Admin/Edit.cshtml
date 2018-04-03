@@ -7,13 +7,12 @@
 
 @if(Session["UserSession"] != null)
 {
-    <p>Edit User:</p>
     using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Administrator</h4>
+            <h4>Edit Admin</h4>
 
             <hr />
             @Html.ValidationSummary(true, "Fix errors")
@@ -21,31 +20,31 @@
                 @Html.Label("adminId", "ID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.AdminId, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width: 50px" } })
-                    @Html.ValidationMessageFor(model => model.AdminId, "")
+                    @Html.ValidationMessageFor(m => m.AdminId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.Label("FirstName", "Firstname", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(m => m.FirstName, "Firstname", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Firstname" } })
-                    @Html.ValidationMessageFor(model => model.FirstName, "")
+                    @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Firstname" } })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.Label("LastName", "Lastname", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(m => m.LastName, "Lastname", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Lastname" } })
-                    @Html.ValidationMessageFor(model => model.LastName, "")
+                    @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Lastname" } })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @style = "width: 400px", @rows = "5", @placeholder = "Description" })
-                    @Html.ValidationMessageFor(model => model.Description, "")
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @style = "width: 400px", @rows = "5", @placeholder = "Description" })
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -56,48 +55,8 @@
             </div>
         </div>
     }
-
-    <p>Change password:</p>
-    using (Html.BeginForm("ChangePassword", "Admin", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <hr />
-
-            <input type="hidden" name="id" value="@Model.AdminId">
-
-            <div class="form-group">
-                @Html.Label("OldPassword", "Old Password", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.Editor("OldPassword",new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Old Password" } })
-                    @Html.ValidationMessageFor(model => model.PassHash, "")
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("NewPassword", "New Password", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.Editor("NewPassword", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "New Password" } })
-                    @Html.ValidationMessageFor(model => model.PassHash, "")
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("ConfirmNewPassword", "Confirm New Password", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.Editor("ConfirmNewPassword", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Confirm New Password" } })
-                    @Html.ValidationMessageFor(model => model.PassHash, "")
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "../Admin")
-    </div>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "../Admin")
+</div>

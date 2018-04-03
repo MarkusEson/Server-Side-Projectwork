@@ -47,36 +47,6 @@ namespace Server_Side_Projectwork.Controllers
 
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(int id, FormCollection formValues)
-        {
-            Administrator admin = Administrator.GetAdmin(id);
-            
-            try
-            {
-                UpdateModel(admin);
-                if(formValues["NewPassword"] == formValues["ConfirmNewPassword"])
-                {
-                    Administrator.changePassword(id, formValues["OldPassword"], formValues["NewPassword"], formValues["ConfirmNewPassword"]);
-
-                    return RedirectToAction("Details");
-                }
-                else
-                {
-                    return View("Error");
-                } 
-            }
-            catch(Exception ex)
-            {
-                ViewBag.errorMessage(ex);
-                ViewBag.innerMessage(ex.InnerException);
-                return View("Error");
-            }
-            
-            
-        }
-
         public ActionResult Create()
         {
             return View();

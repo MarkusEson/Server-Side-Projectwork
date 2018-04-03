@@ -109,25 +109,6 @@ namespace Service.Models
 
         }
 
-        static public void changePassword(int id, string op, string np, string cnp)
-        {
-            if (np == cnp) // if the [new password] is equal to the [second new password]
-            {
-                Administrator adminObj = Administrator.GetAdmin(id);
-                if (DoPasswordMatch(op, adminObj.PassSalt, adminObj.PassHash))
-                {
-                    var salt = GetSalt();
-                    var saltedPassword = salt + np;
-                    var hash = HashPassword(saltedPassword);
-
-                    adminObj.PassSalt = salt;
-                    adminObj.PassHash = hash;
-
-                }
-                _eAdminRepo.Update(MapAdmin(adminObj).adminobj);
-            }
-        }
-
         static public bool IsLoginFine(string username, string password)
         {
             foreach (var admin in GetAdminList())
@@ -145,12 +126,12 @@ namespace Service.Models
             return false;
         }
 
-        static public bool DoPasswordMatch(string passwordInput, string salt, string hash)
+        /*static public bool DoPasswordMatch(string passwordInput, string salt, string hash)
         {
             var saltedInput = salt + passwordInput;
 
             return hash == HashPassword(saltedInput);
-        }
+        }*/
 
         /*** Map a AdminRepository-object to an Administrator-object ***/
         static private Administrator MapAdmin(AdminRepository adminObj)
