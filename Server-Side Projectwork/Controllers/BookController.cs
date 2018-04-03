@@ -76,11 +76,14 @@ namespace Server_Side_Projectwork.Controllers
         public ActionResult AddBook(Book newBook, int? authorID)
         {
             // string isbn, string title, string pyear, string pinfo, short pages
-            
-            if (ModelState.IsValid)
+            if (BookManager.doesIsbnExist(newBook.ISBN))
             {
-                BookManager.AddABook(newBook, authorID);
-                return RedirectToAction("ListBooks", "Book");
+                if(ModelState.IsValid)
+                {
+                    BookManager.AddABook(newBook, authorID);
+                    return RedirectToAction("ListBooks", "Book");
+                }
+                
             }
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("AddBook");

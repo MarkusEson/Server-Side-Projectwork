@@ -162,6 +162,16 @@ namespace Service.Models
             }
             return searchResult;
         }   
-        
+
+        static public bool doesIsbnExist(string isbn)
+        {
+            BookRepository repo = new BookRepository();
+            if (repo.doesIsbnExist(isbn))
+                return true;
+            else
+                return false;
+        }
+
+
     }
 }
