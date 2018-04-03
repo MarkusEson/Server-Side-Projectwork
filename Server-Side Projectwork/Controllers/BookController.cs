@@ -76,7 +76,7 @@ namespace Server_Side_Projectwork.Controllers
         public ActionResult AddBook(Book newBook, int? authorID)
         {
             // string isbn, string title, string pyear, string pinfo, short pages
-            if (BookManager.doesIsbnExist(newBook.ISBN))
+            if (!BookManager.doesIsbnExist(newBook.ISBN))
             {
                 if(ModelState.IsValid)
                 {
@@ -85,6 +85,7 @@ namespace Server_Side_Projectwork.Controllers
                 }
                 
             }
+
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("AddBook");
             

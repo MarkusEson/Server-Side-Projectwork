@@ -123,11 +123,11 @@ namespace Repository.Support
             {
                 db.Configuration.LazyLoadingEnabled = false;
                 //var book = db.BOOK.Include(x => x.ISBN).FirstOrDefault(x => x.ISBN.Equals(isbn));
-                var book = db.BOOK.Where(x => x.ISBN.Equals(isbn));
+                var book = db.BOOK.FirstOrDefault(x => x.ISBN.Equals(isbn));
                 if (book == null)
-                    return true;        // isbn does not exist on db
+                    return false;        // isbn does not exist on db
                 else
-                    return false;       // isbn is not unique, so isbn is already on server
+                    return true;       // isbn is not unique, so isbn is already on server
             }
         }
     }
