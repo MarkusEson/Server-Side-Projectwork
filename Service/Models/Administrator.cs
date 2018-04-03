@@ -15,29 +15,35 @@ namespace Service.Models
     public class Administrator
     {
         public int AdminId { get; set; }    // Primary Key
+
         [Required]
         [DisplayName("Username")]
         [StringLength(20, ErrorMessage = "Max length is 20 characters!")]
         public string UserName { get; set; }
+
         [Required]
-        [DisplayName("Password")]
         [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$", ErrorMessage = "Password has to be 8 to 12 characters long, and contain at least one lower-case character, one upper-case character and one number")]
         public string TempPass { get; set; }
         public string PassSalt { get; set; }
         public string PassHash { get; set; }
+
         [StringLength(25, ErrorMessage = "Max length is 25 characters!")]
         public string FirstName { get; set; }
+
         [StringLength(25, ErrorMessage = "Max length is 25 characters!")]
         public string LastName { get; set; }
         public string Description { get; set; }
 
         static private AdminRepository _eAdminRepo = new AdminRepository();
-        static private RNGCryptoServiceProvider generatedSalt = null;
+        static private RNGCryptoServiceProvider generatedSalt = null; // The salt variable
         private const int SALT_SIZE = 24;
 
         static Administrator() { generatedSalt = new RNGCryptoServiceProvider(); }
 
+        /****************************/
+        /*********** READ ***********/
+        /****************************/
         static public Administrator GetAdmin(int aAdminId)
         {
             return MapAdmin(new AdminRepository(aAdminId));
@@ -62,6 +68,9 @@ namespace Service.Models
             return adminList;
         }
 
+        /****************************/
+        /********** CREATE **********/
+        /****************************/
         static public void CreateAdmin(Administrator newAdmin)
         {
             Administrator adminObj = new Administrator();
@@ -77,14 +86,19 @@ namespace Service.Models
             _eAdminRepo.Create(MapNewAdmin(adminObj).adminobj);
         }
 
+        /****************************/
+        /********** DELETE **********/
+        /****************************/
         static public void DeleteAdmin(int id)
         {
             Administrator admin = Administrator.GetAdmin(id);
             GetAdminList().Remove(GetAdmin(id));
             _eAdminRepo.Delete(MapAdmin(admin).adminobj);
-
         }
 
+        /****************************/
+        /********** UPDATE **********/
+        /****************************/
         static public void UpdateAdmin(int aAdminId, string fName, string lName, string aDesc)
         {
             Administrator adminObj = Administrator.GetAdmin(aAdminId);
@@ -97,7 +111,7 @@ namespace Service.Models
 
         static public void changePassword(int id, string op, string np, string cnp)
         {
-            if (np == cnp)
+            if (np == cnp) // if the [new password] is equal to the [second new password]
             {
                 Administrator adminObj = Administrator.GetAdmin(id);
                 if (DoPasswordMatch(op, adminObj.PassSalt, adminObj.PassHash))
@@ -118,11 +132,11 @@ namespace Service.Models
         {
             foreach (var admin in GetAdminList())
             {
-                if (_eAdminRepo.UsernameExists(username))
+                if (_eAdminRepo.UsernameExists(username)) // Try username with existing users (using raw SQL)
                 {
                     var saltedInput = admin.PassSalt + password;
 
-                    if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; }
+                    if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
                     else { return false; }
                 }
                 else { return false; }
@@ -138,6 +152,7 @@ namespace Service.Models
             return hash == HashPassword(saltedInput);
         }
 
+        /*** Map a AdminRepository-object to an Administrator-object ***/
         static private Administrator MapAdmin(AdminRepository adminObj)
         {
             Administrator theAdmin = new Administrator();
@@ -151,6 +166,7 @@ namespace Service.Models
             return theAdmin;
         }
 
+        /*** Map a Administrator-object to an AdminRepository-object ***/
         static private AdminRepository MapAdmin(Administrator adminObj)
         {
             AdminRepository theAdmin = new AdminRepository(adminObj.AdminId);
@@ -164,6 +180,7 @@ namespace Service.Models
             return theAdmin;
         }
 
+        /*** Map a non-existing Administrator-object to an AdminRepository-object ***/
         static private AdminRepository MapNewAdmin(Administrator adminObj)
         {
             AdminRepository theAdmin = new AdminRepository();
@@ -181,19 +198,19 @@ namespace Service.Models
         {
             byte[] saltBytes = new byte[SALT_SIZE];
 
-            generatedSalt.GetNonZeroBytes(saltBytes); // generate salt in the byte array
+            generatedSalt.GetNonZeroBytes(saltBytes); // generate salt in the byte-array
 
-            return Convert.ToBase64String(saltBytes);
+            return Convert.ToBase64String(saltBytes); // Convert byte-array to normal string
         }
 
         static private string HashPassword(string saltedPassword)
         {
             SHA512 SHA = new SHA512CryptoServiceProvider();
 
-            Byte[] dataBytes = Encoding.Default.GetBytes(saltedPassword);
-            Byte[] resultBytes = SHA.ComputeHash(dataBytes);
+            Byte[] dataBytes = Encoding.Default.GetBytes(saltedPassword); // Turn the salted password into a byte-array
+            Byte[] resultBytes = SHA.ComputeHash(dataBytes); // Hash the salted password byte-array
 
-            return Convert.ToBase64String(resultBytes);
+            return Convert.ToBase64String(resultBytes); // Convert byte-array to normal string
         }
     }
 }

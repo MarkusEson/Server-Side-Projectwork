@@ -30,22 +30,20 @@ namespace Repository.Support
             }
         }
 
-        public ADMINISTRATOR Read(int AdminId) // Find admin by id
+        public ADMINISTRATOR Read(int AdminId)
         {
             using (var db = new Libdb())
             {
                 db.ADMINISTRATOR.Load();
-                /*db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE AdminId=@0", AdminId).ToList();*/
 
                 return db.ADMINISTRATOR.Find(AdminId);
             }
         }
 
-        public List<ADMINISTRATOR> List() // retrieve all admins
+        public List<ADMINISTRATOR> List()
         {
             using (var db = new Libdb())
             {
-                // return 
                 var query = db.ADMINISTRATOR.OrderBy(x => x.AdminId);
                 return query.ToList();
             }
@@ -85,6 +83,7 @@ namespace Repository.Support
             }
         }
 
+        /* Check for username-match using raw SQL */
         public bool UsernameExists(string username)
         {
             using (var db = new Libdb())
@@ -96,6 +95,7 @@ namespace Repository.Support
             }
         }
 
+        /* Check for username-match using raw SQL */
         public bool DoHashMatch(string dbHash)
         {
             using (var db = new Libdb())

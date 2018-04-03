@@ -103,7 +103,7 @@ namespace Server_Side_Projectwork.Controllers
         {
             Administrator.DeleteAdmin(id);
 
-            if(Session["UserSession"].Equals( Administrator.GetAdmin(id).UserName ))
+            if(Session["UserSession"].Equals( Administrator.GetAdmin(id).UserName )) // Check if the deleted admin is currently logged in
             {
                 Session.Abandon();
                 Session.Contents.Abandon();
