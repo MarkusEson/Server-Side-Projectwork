@@ -15,7 +15,6 @@ wonky af but it works.
 	- [x] books
 	- [x] author
 	- [x] admins
-		- [ ] edit or change password
 	
 - [x] add
 	- [x] books
