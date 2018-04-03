@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -125,13 +126,6 @@ namespace Service.Models
 
             return false;
         }
-
-        /*static public bool DoPasswordMatch(string passwordInput, string salt, string hash)
-        {
-            var saltedInput = salt + passwordInput;
-
-            return hash == HashPassword(saltedInput);
-        }*/
 
         /*** Map a AdminRepository-object to an Administrator-object ***/
         static private Administrator MapAdmin(AdminRepository adminObj)

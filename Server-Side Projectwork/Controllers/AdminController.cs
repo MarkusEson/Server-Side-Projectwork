@@ -56,6 +56,14 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Administrator newAdmin)
         {
+            foreach (var admin in Administrator.GetAdminList())
+            {
+                if (admin.UserName == newAdmin.UserName)
+                {
+                    ModelState.AddModelError("UsernameExists", "Username already exists!");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 Administrator.CreateAdmin(newAdmin);
