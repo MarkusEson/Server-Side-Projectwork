@@ -1,5 +1,5 @@
 ﻿
-    body
+    #body
     {
         position: relative;
     }
@@ -28,10 +28,11 @@
     }
 
     /* Set black background color, white text and some padding */
-    footer {
+    #footer {
       background-color: #555;
-      color: white;
-      padding: 15px;
+      color: lightgrey;
+      padding: 5px;
+      font-size: small;
     }
     
 
