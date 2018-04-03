@@ -27,24 +27,11 @@ namespace Server_Side_Projectwork.Controllers
         {
             Administrator admin = Administrator.GetAdmin(id);
 
-            try
-            {
-                UpdateModel(admin);
+            Administrator.UpdateAdmin(id , formValues["FirstName"],
+                                           formValues["LastName"],
+                                           formValues["Description"]);
 
-                Administrator.UpdateAdmin(id , formValues["FirstName"],
-                                               formValues["LastName"],
-                                               formValues["Description"]);
-
-                return RedirectToAction("Details", new { id = admin.AdminId });
-            }
-            catch (Exception ex)
-            {
-                ViewBag.errorMessage(ex);
-                ViewBag.innerMessage(ex.InnerException);
-
-                return View("Error");
-            }
-
+            return RedirectToAction("Details", new { id = admin.AdminId });
         }
 
         public ActionResult Create()

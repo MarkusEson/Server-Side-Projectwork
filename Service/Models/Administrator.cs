@@ -40,7 +40,7 @@ namespace Service.Models
         static private RNGCryptoServiceProvider generatedSalt = null; // The salt variable
         private const int SALT_SIZE = 24;
 
-        static Administrator() { generatedSalt = new RNGCryptoServiceProvider(); }
+        static Administrator() { generatedSalt = new RNGCryptoServiceProvider(); } // New salt based on RNG
 
         /****************************/
         /*********** READ ***********/
