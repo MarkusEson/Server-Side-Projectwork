@@ -22,19 +22,6 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string uName, string uPass)
         {
-            /*foreach (var admin in Administrator.GetAdminList())
-            {
-                if (admin.UserName == uName)
-                {
-                    if (Administrator.IsPasswordMatch(uPass, admin.PassSalt, admin.PassHash))
-                    {
-
-                        Session["UserSession"] = uName;
-                        return View();
-                    }
-                }
-            }*/
-
             if( Administrator.IsLoginFine(uName, uPass) )
             {
                 Session["UserSession"] = uName;
