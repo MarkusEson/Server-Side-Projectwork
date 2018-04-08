@@ -80,9 +80,16 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpGet]
-        public RedirectToRouteResult DeleteAuthor(int id)
+        public ActionResult DeleteAuthor(int id)
         {
-            AuthorManager.RemoveAuthor(id);
+            AuthorManager authToDelete = new AuthorManager(id);
+            return View("DeleteAuthor", authToDelete);
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult DeleteAuthor(Author auth)
+        {
+            AuthorManager.RemoveAuthor(auth);
             return RedirectToAction("ListAuthors", 0);
         }
 
