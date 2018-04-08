@@ -1,0 +1,22 @@
+﻿@model Service.Models.Book
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    
+    <div class="form-horizontal">
+        <div>
+            <p> Are you sure you want to delete this book?</p>
+
+            <form method="post" action="/Book/DeleteBook">
+                <input type="hidden" name="ISBN" value="@Model.ISBN">
+                <input type="hidden" name="Title" value="@Model.Title">
+                <input type="hidden" name="Pages" value="@Model.Pages">
+                <input type="hidden" name="Publicationyear" value="@Model.PublicationYear">
+                <button type="submit" class="btn btn-danger">Delete Book</button>
+            </form>
+            
+        </div>
+
+    </div>
