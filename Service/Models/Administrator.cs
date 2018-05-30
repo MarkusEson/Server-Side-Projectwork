@@ -112,19 +112,16 @@ namespace Service.Models
 
         static public bool IsLoginFine(string username, string password)
         {
-            foreach (var admin in GetAdminList())
+            if (_eAdminRepo.UsernameExists(username)) // Try username with existing users (using raw SQL)
             {
-                if (_eAdminRepo.UsernameExists(username)) // Try username with existing users (using raw SQL)
-                {
-                    var saltedInput = admin.PassSalt + password;
+                AdminRepository admin = new AdminRepository( _eAdminRepo.GetIdByUsername(username) );
 
-                    if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
-                    else { return false; }
-                }
+                var saltedInput = admin.adminobj.PassSalt + password;
+
+                if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
                 else { return false; }
             }
-
-            return false;
+            else { return false; }
         }
 
         /*** Map a AdminRepository-object to an Administrator-object ***/
