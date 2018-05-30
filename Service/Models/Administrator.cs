@@ -78,8 +78,8 @@ namespace Service.Models
             adminObj = newAdmin;
 
             var salt = GetSalt();
-            //var saltedPassword = salt + adminObj.TempPass;
-            var hash = HashPassword(adminObj.TempPass, salt);
+            var saltedPassword = salt + adminObj.TempPass;
+            var hash = HashPassword(saltedPassword);
 
             adminObj.PassSalt = salt;
             adminObj.PassHash = hash;
@@ -116,15 +116,9 @@ namespace Service.Models
             {
                 AdminRepository admin = new AdminRepository( _eAdminRepo.GetIdByUsername(username) );
 
-<<<<<<< Updated upstream
                 var saltedInput = admin.adminobj.PassSalt + password;
 
                 if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
-=======
-                    if(_eAdminRepo.DoHashMatch( HashPassword(password, admin.PassSalt) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
-                    else { return false; }
-                }
->>>>>>> Stashed changes
                 else { return false; }
             }
             else { return false; }
@@ -174,29 +168,21 @@ namespace Service.Models
 
         static private string GetSalt()
         {
-            
             byte[] saltBytes = new byte[SALT_SIZE];
 
             generatedSalt.GetNonZeroBytes(saltBytes); // generate salt in the byte-array
 
             return Convert.ToBase64String(saltBytes); // Convert byte-array to normal string
-            
         }
 
-        static private string HashPassword(string password, string salt)
+        static private string HashPassword(string saltedPassword)
         {
-            byte[] byteSalt = Convert.FromBase64String(salt);
-            Rfc2898DeriveBytes hasher = new Rfc2898DeriveBytes(password, byteSalt);
-            return Convert.ToBase64String(hasher.GetBytes(32));
-
-            /*
             SHA512 SHA = new SHA512CryptoServiceProvider();
 
             Byte[] dataBytes = Encoding.Default.GetBytes(saltedPassword); // Turn the salted password into a byte-array
             Byte[] resultBytes = SHA.ComputeHash(dataBytes); // Hash the salted password byte-array
 
             return Convert.ToBase64String(resultBytes); // Convert byte-array to normal string
-            */
         }
     }
 }

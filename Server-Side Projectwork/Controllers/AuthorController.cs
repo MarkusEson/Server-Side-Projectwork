@@ -42,6 +42,12 @@ namespace Server_Side_Projectwork.Controllers
             // int aid, string fname, string lname, string byear
             if(ModelState.IsValid)
             {
+                /*
+                TempData["Aid"] = editedAuthor.Aid;
+                TempData["FirstName"] = editedAuthor.FirstName;
+                TempData["LastName"] = editedAuthor.LastName;
+                TempData["BirthYear"] = editedAuthor.BirthYear;
+                */
                 return RedirectToAction("UpdateAuthor", editedAuthor);
             }
             TempData["Error"] = "Something went wrong!";

@@ -47,6 +47,13 @@ namespace Server_Side_Projectwork.Controllers
             // string isbn, string title, string pyear, string pinfo, short? pages 
             if (ModelState.IsValid)
             {
+               /*
+                TempData["ISBN"] = editedBook.ISBN;
+                TempData["Title"] = editedBook.Title;
+                TempData["PublicationYear"] = editedBook.PublicationYear;
+                TempData["publicationinfo"] = editedBook.publicationinfo;
+                TempData["Pages"] = editedBook.Pages;
+                */
                 return RedirectToAction("UpdateBook", editedBook);
             }
             TempData["Error"] = "Something went wrong!";
