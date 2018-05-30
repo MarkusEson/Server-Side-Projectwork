@@ -72,26 +72,25 @@ namespace Server_Side_Projectwork.Controllers
         {
             try
             {
-                BookManager.AddABook(newBook, authorID);
-                return RedirectToAction("ListBooks", "Book");
+                if (!BookManager.DoesIsbnExist(newBook.ISBN))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        BookManager.AddABook(newBook, authorID);
+                        return RedirectToAction("ListBooks", "Book");
+                    }
+                }
+                else {
+
+                    TempData["Error"] = "Something went wrong!";
+                    return RedirectToAction("AddBook");
+                }
             }
             catch(Exception ex)
             {
-                ViewBag.errorMessage(ex);
-                ViewBag.innerMessage(ex.InnerException);
+                TempData["Error"] = "Something went wrong!";
                 return RedirectToAction("listBooks", "Book");
             }
-            // string isbn, string title, string pyear, string pinfo, short pages
-            if (!BookManager.DoesIsbnExist(newBook.ISBN))
-            {
-                if(ModelState.IsValid)
-                {
-                    BookManager.AddABook(newBook, authorID);
-                    return RedirectToAction("ListBooks", "Book");
-                }
-                
-            }
-
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("AddBook");
             
