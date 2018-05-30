@@ -47,13 +47,6 @@ namespace Server_Side_Projectwork.Controllers
             // string isbn, string title, string pyear, string pinfo, short? pages 
             if (ModelState.IsValid)
             {
-               /*
-                TempData["ISBN"] = editedBook.ISBN;
-                TempData["Title"] = editedBook.Title;
-                TempData["PublicationYear"] = editedBook.PublicationYear;
-                TempData["publicationinfo"] = editedBook.publicationinfo;
-                TempData["Pages"] = editedBook.Pages;
-                */
                 return RedirectToAction("UpdateBook", editedBook);
             }
             TempData["Error"] = "Something went wrong!";
@@ -64,16 +57,6 @@ namespace Server_Side_Projectwork.Controllers
         // update book sends the tempdata to the update func. then redirets to the book list again.
         public RedirectToRouteResult UpdateBook(Book editedBook)
         {
-            
-            /*
-            Book uBook = new Book();
-            uBook.ISBN = Convert.ToString(TempData["ISBN"]);
-            uBook.Title = Convert.ToString(TempData["Title"]);
-            uBook.PublicationYear = Convert.ToString(TempData["PublicationYear"]);
-            uBook.publicationinfo = Convert.ToString(TempData["publicationinfo"]);
-            uBook.Pages = Convert.ToInt16(TempData["Pages"]);
-            */
-
             BookManager.updateBook(editedBook);
             return RedirectToAction("ListBooks", "Book");
         }
