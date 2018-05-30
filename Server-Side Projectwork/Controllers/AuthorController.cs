@@ -11,13 +11,14 @@ namespace Server_Side_Projectwork.Controllers
     public class AuthorController : Controller
     {
         private const int DefaultPageSize = 10;
-        private IList<Author> allAuthors = AuthorManager.getAuthorList();
+        
         
         // lists all the authors on the db and sends as paged list
         public ActionResult ListAuthors(int? page)
         {
+            IList<Author> allAuthors = AuthorManager.getAuthorList();
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            return View("ListAuthors", this.allAuthors.ToPagedList(currentPageIndex, DefaultPageSize));
+            return View("ListAuthors", allAuthors.ToPagedList(currentPageIndex, DefaultPageSize));
         }
 
         
@@ -41,20 +42,22 @@ namespace Server_Side_Projectwork.Controllers
             // int aid, string fname, string lname, string byear
             if(ModelState.IsValid)
             {
+                /*
                 TempData["Aid"] = editedAuthor.Aid;
                 TempData["FirstName"] = editedAuthor.FirstName;
                 TempData["LastName"] = editedAuthor.LastName;
                 TempData["BirthYear"] = editedAuthor.BirthYear;
-                return RedirectToAction("UpdateAuthor");
+                */
+                return RedirectToAction("UpdateAuthor", editedAuthor);
             }
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("ListAuthors");
 
         }
 
-        public RedirectToRouteResult UpdateAuthor()
+        public RedirectToRouteResult UpdateAuthor(Author editedAuthor)
         {
-            AuthorManager.updateAuthor(Convert.ToInt32(TempData["Aid"]), Convert.ToString(TempData["FirstName"]), Convert.ToString(TempData["LastName"]), Convert.ToString(TempData["BirthYear"]));
+            AuthorManager.UpdateAuthor(editedAuthor);
             return RedirectToAction("ListAuthors", "Author");
         }
 
