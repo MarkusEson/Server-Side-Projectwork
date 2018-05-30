@@ -115,10 +115,9 @@ namespace Service.Models
             if (_eAdminRepo.UsernameExists(username)) // Try username with existing users (using raw SQL)
             {
                 AdminRepository admin = new AdminRepository( _eAdminRepo.GetIdByUsername(username) );
-
                 var saltedInput = admin.adminobj.PassSalt + password;
 
-                if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
+                if(_eAdminRepo.DoHashMatch( HashPassword(password, admin.adminobj.PassSalt) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
                 else { return false; }
             }
             else { return false; }
