@@ -205,6 +205,8 @@
     <Content Include="Views\Author\EditAuthor.cshtml" />
     <Content Include="Views\Library\Logout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Book\DeleteBook.cshtml" />
+    <Content Include="Views\Author\DeleteAuthor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

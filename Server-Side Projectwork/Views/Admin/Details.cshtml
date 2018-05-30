@@ -16,8 +16,13 @@
 
 @if (Session["UserSession"] != null)
 {
-    <a href="/Admin/Edit/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default">Edit</a>
-    <a href="/Admin/Delete/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default">Delete</a>
+    <a href="/Admin/Edit/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default pull-left">Edit</a>
+
+    using (Html.BeginForm("Delete", "Admin", FormMethod.Post))
+    {
+        <input type="hidden" name="id" value="@Model.AdminId"/>
+        <input type="submit" value="Delete" style="margin-top: 10px; margin-left: 5px" class="btn btn-default" />
+    }
 }
 
 <div>

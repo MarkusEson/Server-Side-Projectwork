@@ -27,11 +27,17 @@ namespace Server_Side_Projectwork.Controllers
         {
             Administrator admin = Administrator.GetAdmin(id);
 
-            Administrator.UpdateAdmin(id , formValues["FirstName"],
+            if(ModelState.IsValid)
+            {
+                Administrator.UpdateAdmin(id, formValues["FirstName"],
                                            formValues["LastName"],
                                            formValues["Description"]);
 
-            return RedirectToAction("Details", new { id = admin.AdminId });
+                return RedirectToAction("Details", new { id = admin.AdminId });
+            }
+
+            return View();
+
         }
 
         public ActionResult Create()
@@ -64,6 +70,7 @@ namespace Server_Side_Projectwork.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             Administrator.DeleteAdmin(id);

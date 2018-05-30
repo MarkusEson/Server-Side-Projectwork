@@ -81,9 +81,9 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 var au = db.AUTHOR.FirstOrDefault(x => x.Aid == auth.Aid);
+                
                 au.BOOK.Clear();
                 
-               
                 db.AUTHOR.Remove(au);
                 db.SaveChanges();
             }

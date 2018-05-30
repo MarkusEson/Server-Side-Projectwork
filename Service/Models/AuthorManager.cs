@@ -119,10 +119,10 @@ namespace Service.Models
 
 
         
-        static public void RemoveAuthor(int id)
+        static public void RemoveAuthor(Author auth)
         {
-            Author auth = AuthorManager.getAuthor(id);              // get the author by id
-            getAuthorList().Remove(getAuthor(id));                  // remove author from author list
+            //Author auth = AuthorManager.getAuthor(id);              // get the author by id
+            getAuthorList().Remove(getAuthor(auth.Aid));                  // remove author from author list
             _eAuthorRepo.Remove(MapAuthor(auth).authorobj);         // map to entity and remove author from db
         }
 

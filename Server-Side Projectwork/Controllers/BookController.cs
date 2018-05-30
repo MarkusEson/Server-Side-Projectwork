@@ -93,14 +93,20 @@ namespace Server_Side_Projectwork.Controllers
         }
         
         [HttpGet]
-        public RedirectToRouteResult DeleteBook(string id)
+        public ActionResult DeleteBook(string id)
         {
-            BookManager.RemoveBook(id);
+            BookManager bookToDelete = new BookManager(id);
+            return View("DeleteBook", bookToDelete);
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult DeleteBook(Book book)
+        {
+            BookManager.RemoveBook(book.ISBN);
             return RedirectToAction("ListBooks", 0);
         }
 
 
-        
         // fetches a new list of books based on the search word user entered, ends to listbooks view.
         [HttpPost]
         public ActionResult SearchBook(string searchString)
