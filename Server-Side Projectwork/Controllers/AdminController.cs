@@ -49,25 +49,28 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Administrator newAdmin)
         {
-            foreach (var admin in Administrator.GetAdminList())
+            if(Session["UserSession"] != null) //"Auth"
             {
-                if (admin.UserName == newAdmin.UserName)
+                foreach (var admin in Administrator.GetAdminList())
                 {
-                    ModelState.AddModelError("UsernameExists", "Username already exists!");
+                    if (admin.UserName == newAdmin.UserName)
+                    {
+                        ModelState.AddModelError("UsernameExists", "Username already exists!");
+                    }
+                }
+
+                if (ModelState.IsValid)
+                {
+                    Administrator.CreateAdmin(newAdmin);
+
+                    var i = 0;
+                    foreach (var admin in Administrator.GetAdminList()){ i = admin.AdminId; }
+
+                    return RedirectToAction("Details", new { id = i});
                 }
             }
 
-            if (ModelState.IsValid)
-            {
-                Administrator.CreateAdmin(newAdmin);
-
-                var i = 0;
-                foreach (var admin in Administrator.GetAdminList()){ i = admin.AdminId; }
-
-                return RedirectToAction("Details", new { id = i});
-            }
-
-            return View();
+            return View("AccessDenied");
         }
 
         [HttpPost]

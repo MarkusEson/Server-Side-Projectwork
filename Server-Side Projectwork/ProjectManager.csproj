@@ -17,8 +17,7 @@
     <AssemblyName>Server-Side Projectwork</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44374</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -207,6 +206,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Book\DeleteBook.cshtml" />
     <Content Include="Views\Author\DeleteAuthor.cshtml" />
+    <Content Include="Views\Admin\Web.config" />
+    <Content Include="Views\Admin\AccessDenied.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
