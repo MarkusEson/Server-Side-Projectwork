@@ -9,6 +9,7 @@ namespace Service.Models
     public class BookManager:Book
     {
         private string id;
+        private BookRepository BookRepo = new BookRepository();
 
         // constructor for bookmanager. sets book info and a list of the books autor(s)
         public BookManager(string id)
