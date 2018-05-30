@@ -78,8 +78,7 @@ namespace Service.Models
             adminObj = newAdmin;
 
             var salt = GetSalt();
-            var saltedPassword = salt + adminObj.TempPass;
-            var hash = HashPassword(saltedPassword);
+            var hash = HashPassword(adminObj.TempPass, salt);
 
             adminObj.PassSalt = salt;
             adminObj.PassHash = hash;
@@ -115,10 +114,8 @@ namespace Service.Models
             if (_eAdminRepo.UsernameExists(username)) // Try username with existing users (using raw SQL)
             {
                 AdminRepository admin = new AdminRepository( _eAdminRepo.GetIdByUsername(username) );
-
-                var saltedInput = admin.adminobj.PassSalt + password;
-
-                if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
+                var salt = admin.adminobj.PassSalt;
+                if (_eAdminRepo.DoHashMatch( HashPassword(password, salt) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
                 else { return false; }
             }
             else { return false; }
@@ -175,14 +172,12 @@ namespace Service.Models
             return Convert.ToBase64String(saltBytes); // Convert byte-array to normal string
         }
 
-        static private string HashPassword(string saltedPassword)
+        static private string HashPassword(string password, string salt)
         {
-            SHA512 SHA = new SHA512CryptoServiceProvider();
+            byte[] byteSalt = Convert.FromBase64String(salt);
+            Rfc2898DeriveBytes hasher = new Rfc2898DeriveBytes(password, byteSalt);
+            return Convert.ToBase64String(hasher.GetBytes(32));
 
-            Byte[] dataBytes = Encoding.Default.GetBytes(saltedPassword); // Turn the salted password into a byte-array
-            Byte[] resultBytes = SHA.ComputeHash(dataBytes); // Hash the salted password byte-array
-
-            return Convert.ToBase64String(resultBytes); // Convert byte-array to normal string
         }
     }
 }
