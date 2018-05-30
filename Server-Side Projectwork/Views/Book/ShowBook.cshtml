@@ -10,13 +10,14 @@
 
 <h2>Show chosen Book</h2>
 
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
     <div>
         @Html.ActionLink("Edit", "EditBook", "Book", new { id = Model.ISBN }, null) || @Html.ActionLink("Delete", "DeleteBook", "Book", new { id = Model.ISBN }, null)
     </div>
 }
 
+<<<<<<< HEAD
 <dl>
     <dt>ISBN</dt>
     <dd>@Model.ISBN</dd>
@@ -36,3 +37,42 @@
     <dt>Pages</dt>
     <dd>@Model.Pages</dd>
 </dl>
+=======
+<div class="containerBook">
+    <div class="left">
+        <img src="~/Resources/bookicon2.png" class="iconDetails">
+    </div>
+    <div class="right">
+        <dt>ISBN</dt>
+        <p>@Model.ISBN</p>
+
+        <dt>Title</dt>
+        <p>@Model.Title</p>
+
+        <dt>Publication Year</dt>
+        <p>@Model.PublicationYear</p>
+
+        <dt>Publication Info</dt>
+        <p>@Model.publicationinfo</p>
+
+        <dt>Pages</dt>
+        <p>@Model.Pages</p>
+    </div>
+</div>
+
+
+<div class="container">
+    <hr>
+    <dt>
+        Author of @Model.Title:
+    </dt>
+
+    @foreach (var item in Model.BookAuth)
+    {
+        var FullName = @item.FirstName + " " + @item.LastName;
+        <li>
+            @Html.ActionLink(@FullName, "ShowAuthor", "Author", new { id = item.Aid }, null)
+        </li>
+    }
+</div>
+>>>>>>> master

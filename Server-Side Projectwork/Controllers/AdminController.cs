@@ -4,75 +4,83 @@ using Service.Models;
 
 namespace Server_Side_Projectwork.Controllers
 {
-    
     public class AdminController : Controller
     {
         public ActionResult Index()
         {
-            return View(Administrator.getAdminList());
+            return View(Administrator.GetAdminList());
         }
 
         public ActionResult Details(int id)
         {
-            return View(Administrator.getAdmin(id));
+            return View(Administrator.GetAdmin(id));
         }
 
         public ActionResult Edit(int id)
         {
-            return View(Administrator.getAdmin(id));
+            return View(Administrator.GetAdmin(id));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, FormCollection formValues)
         {
-            Administrator admin = Administrator.getAdmin(id);
+            Administrator admin = Administrator.GetAdmin(id);
 
-            try
+            if(ModelState.IsValid)
             {
-                UpdateModel(admin);
-
-                Administrator.updateAdmin(id , formValues["FirstName"],
-                                               formValues["LastName"],
-                                               formValues["Description"]);
+                Administrator.UpdateAdmin(id, formValues["FirstName"],
+                                           formValues["LastName"],
+                                           formValues["Description"]);
 
                 return RedirectToAction("Details", new { id = admin.AdminId });
             }
-            catch (Exception ex)
-            {
-                ViewBag.errorMessage(ex);
-                ViewBag.innerMessage(ex.InnerException);
 
-                return View("Error");
-            }
+            return View();
 
         }
 
         public ActionResult Create()
         {
-            return View(Administrator.getAdminList());
+            return View();
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Administrator newAdmin)
         {
-            if (ModelState.IsValid)
+            foreach (var admin in Administrator.GetAdminList())
             {
-                Administrator.createAdmin(newAdmin);
-
-                return RedirectToAction("Details", new { id = newAdmin.AdminId });
+                if (admin.UserName == newAdmin.UserName)
+                {
+                    ModelState.AddModelError("UsernameExists", "Username already exists!");
+                }
             }
 
-            ViewBag.errorMessage("Could not make new admin account!");
-            return View("Error");
+            if (ModelState.IsValid)
+            {
+                Administrator.CreateAdmin(newAdmin);
+
+                var i = 0;
+                foreach (var admin in Administrator.GetAdminList()){ i = admin.AdminId; }
+
+                return RedirectToAction("Details", new { id = i});
+            }
+
+            return View();
         }
 
+        [HttpPost]
         public ActionResult Delete(int id)
         {
-            Administrator.removeAdmin(id);
+            Administrator.DeleteAdmin(id);
 
-            Session.Abandon();
-            Session.Contents.Abandon();
-            Session.Contents.RemoveAll();
+            if(Session["UserSession"].Equals( Administrator.GetAdmin(id).UserName )) // Check if the deleted admin is currently logged in
+            {
+                Session.Abandon();
+                Session.Contents.Abandon();
+                Session.Contents.RemoveAll();
+            }
 
             return RedirectToAction("Index");
         }

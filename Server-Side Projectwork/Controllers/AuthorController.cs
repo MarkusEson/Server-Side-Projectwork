@@ -12,7 +12,8 @@ namespace Server_Side_Projectwork.Controllers
     {
         private const int DefaultPageSize = 10;
         private IList<Author> allAuthors = AuthorManager.getAuthorList();
-        // GET: 
+        
+        // lists all the authors on the db and sends as paged list
         public ActionResult ListAuthors(int? page)
         {
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
@@ -22,25 +23,33 @@ namespace Server_Side_Projectwork.Controllers
         
         public ActionResult ShowAuthor(int id)
         {
-            AuthorManager authorDetailObj = new AuthorManager(id);
+            AuthorManager author = new AuthorManager(id);
             
-            return View("ShowAuthor", authorDetailObj);
+            return View("ShowAuthor", author);
         }
         
         public ActionResult EditAuthor(int id)
         {
-            AuthorManager aobj = new AuthorManager(id);
-            return View(aobj);
+            AuthorManager author = new AuthorManager(id);
+            return View(author);
         }
 
         [HttpPost]
-        public RedirectToRouteResult EditAuthor( int aid, string fname, string lname, string byear)
+        [ValidateAntiForgeryToken]
+        public RedirectToRouteResult EditAuthor(Author editedAuthor )
         {
-            TempData["Aid"] = aid;
-            TempData["FirstName"] = fname;
-            TempData["LastName"] = lname;
-            TempData["BirthYear"] = byear;
-            return RedirectToAction("UpdateAuthor");
+            // int aid, string fname, string lname, string byear
+            if(ModelState.IsValid)
+            {
+                TempData["Aid"] = editedAuthor.Aid;
+                TempData["FirstName"] = editedAuthor.FirstName;
+                TempData["LastName"] = editedAuthor.LastName;
+                TempData["BirthYear"] = editedAuthor.BirthYear;
+                return RedirectToAction("UpdateAuthor");
+            }
+            TempData["Error"] = "Something went wrong!";
+            return RedirectToAction("ListAuthors");
+
         }
 
         public RedirectToRouteResult UpdateAuthor()
@@ -55,25 +64,40 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult AddAuthor(string fname, string lname, string byear)
+        [ValidateAntiForgeryToken]
+        public RedirectToRouteResult AddAuthor(Author newAuthor)
         {
-            AuthorManager.AddAnAuthor(fname, lname, byear);
-            return RedirectToAction("ListAuthors", "Author");
+            newAuthor.Aid = AuthorManager.getAuthorList().Count();
+            // string fname, string lname, string byear
+            if(ModelState.IsValid)
+            {
+                AuthorManager.AddAnAuthor(newAuthor);
+                return RedirectToAction("ListAuthors", "Author");
+            }
+            TempData["Error"] = "Something went wrong!";
+            return RedirectToAction("AddAuthor");
            
         }
 
         [HttpGet]
-        public RedirectToRouteResult DeleteAuthor(int id)
+        public ActionResult DeleteAuthor(int id)
         {
-            AuthorManager.RemoveAuthor(id);
+            AuthorManager authToDelete = new AuthorManager(id);
+            return View("DeleteAuthor", authToDelete);
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult DeleteAuthor(Author auth)
+        {
+            AuthorManager.RemoveAuthor(auth);
             return RedirectToAction("ListAuthors", 0);
         }
 
         [HttpPost]
         public ActionResult SearchAuthor(string searchString)
         {
-            var list = Service.Models.AuthorManager.SearchForAuthor(searchString);
-            return View("ListAuthors", list.ToPagedList(0, 10));
+            var searchResult = Service.Models.AuthorManager.SearchForAuthor(searchString);
+            return View("ListAuthors", searchResult.ToPagedList(0, 10));
         }
 
     }

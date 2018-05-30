@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Service.Models;
 using MvcPaging;
 
+using System.ComponentModel.DataAnnotations;
+
 
 
 namespace Server_Side_Projectwork.Controllers
@@ -16,47 +18,51 @@ namespace Server_Side_Projectwork.Controllers
         private IList<Book> allBooks = BookManager.getBookList();
         
 
-        // GET:
+        // ListBooks sends the user to the "ListBooks" view where all the books in the databse are listen and separated by pagination
         public ActionResult ListBooks(int? page)
         {
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
             return View("ListBooks", this.allBooks.ToPagedList(currentPageIndex, DefaultPageSize));
         }
 
-
+        // Shows the clicked book in detail, displaying information about pages, author, etc.
         public ActionResult ShowBook(string id)
         {
-            BookManager bookDetailObj = new BookManager(id);
-            return View("ShowBook", bookDetailObj);
+            BookManager book = new BookManager(id);
+            return View("ShowBook", book);
 
         }
-
-
+        
         public ActionResult EditBook(string id)
         {
-            BookManager bookObj = new BookManager(id); // id == ISBN
-            //ViewBag.isbn = bookObj.BookAuthor.FindIndex(x => x.Aid == bookObj.SignId);
+            BookManager bookObj = new BookManager(id);
             return View(bookObj);
         }
 
         [HttpPost]
-        public RedirectToRouteResult EditBook( string isbn, string title, int? signid, string pubyear, string pubinfo, short? pages )
+        [ValidateAntiForgeryToken]
+        public RedirectToRouteResult EditBook(Book editedBook)
         {
-            // string isbn, string title, int? signid, string pubyear, string pubinfo, short? pages 
-            TempData["ISBN"] = isbn;
-            TempData["Title"] = title;
-            TempData["SignId"] = signid;
-            TempData["PublicationYear"] = pubyear;
-            TempData["publicationinfo"] = pubinfo;
-            TempData["Pages"] = pages;
+            // string isbn, string title, string pyear, string pinfo, short? pages 
+            if (ModelState.IsValid)
+            {
+                TempData["ISBN"] = editedBook.ISBN;
+                TempData["Title"] = editedBook.Title;
+                TempData["PublicationYear"] = editedBook.PublicationYear;
+                TempData["publicationinfo"] = editedBook.publicationinfo;
+                TempData["Pages"] = editedBook.Pages;
 
-            return RedirectToAction("UpdateBook");
+                return RedirectToAction("UpdateBook");
+            }
+            TempData["Error"] = "Something went wrong!";
+            return RedirectToAction("ListBooks");
+
         }
 
+        // update book sends the tempdata to the update func. then redirets to the book list again.
         public RedirectToRouteResult UpdateBook()
         {
-            //string bISBN, string bTitle, int bsignId, string bPyear, string bpInfo, short? bPages
-            BookManager.updateBook(Convert.ToString(TempData["ISBN"]), Convert.ToString(TempData["Title"]), Convert.ToInt32(TempData["SignId"]), Convert.ToString(TempData["PublicationYear"]), Convert.ToString(TempData["publicationinfo"]), Convert.ToInt16(TempData["Pages"]));
+            BookManager.updateBook(Convert.ToString(TempData["ISBN"]), Convert.ToString(TempData["Title"]), Convert.ToString(TempData["PublicationYear"]), Convert.ToString(TempData["publicationinfo"]), Convert.ToInt16(TempData["Pages"]));
             return RedirectToAction("ListBooks", "Book");
         }
 
@@ -66,8 +72,10 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult AddBook(string isbn, string title, int? signid, string pyear, string pinfo, short pages)
+        [ValidateAntiForgeryToken]
+        public ActionResult AddBook(Book newBook, int? authorID)
         {
+<<<<<<< HEAD
             try
             {
                 BookManager.AddABook(isbn, title, signid, pyear, pinfo, pages);
@@ -80,23 +88,46 @@ namespace Server_Side_Projectwork.Controllers
                 return RedirectToAction("listBooks", "Book");
             }
             
+=======
+            // string isbn, string title, string pyear, string pinfo, short pages
+            if (!BookManager.doesIsbnExist(newBook.ISBN))
+            {
+                if(ModelState.IsValid)
+                {
+                    BookManager.AddABook(newBook, authorID);
+                    return RedirectToAction("ListBooks", "Book");
+                }
+                
+            }
+
+            TempData["Error"] = "Something went wrong!";
+            return RedirectToAction("AddBook");
+            
+
+>>>>>>> master
         }
         
         [HttpGet]
-        public RedirectToRouteResult DeleteBook(string id)
+        public ActionResult DeleteBook(string id)
         {
-            BookManager.RemoveBook(id);
+            BookManager bookToDelete = new BookManager(id);
+            return View("DeleteBook", bookToDelete);
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult DeleteBook(Book book)
+        {
+            BookManager.RemoveBook(book.ISBN);
             return RedirectToAction("ListBooks", 0);
         }
 
 
-        
-
+        // fetches a new list of books based on the search word user entered, ends to listbooks view.
         [HttpPost]
         public ActionResult SearchBook(string searchString)
         {
-            var list = Service.Models.BookManager.SearchForBook(searchString);
-            return View("ListBooks", list.ToPagedList(0,10));
+            var searchResult = Service.Models.BookManager.SearchForBook(searchString);
+            return View("ListBooks", searchResult.ToPagedList(0,10));
         }
         
 

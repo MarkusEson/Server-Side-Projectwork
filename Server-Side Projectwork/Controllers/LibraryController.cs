@@ -19,23 +19,17 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(string uName, string uPass)
         {
-            foreach (var admin in Administrator.getAdminList())
+            if( Administrator.IsLoginFine(uName, uPass) )
             {
-                if (admin.UserName == uName)
-                {
-                    if (admin.UserPass == uPass)
-                    {
-
-                        Session["UserName"] = admin.UserName;
-                        return View();
-                    }
-                }
+                Session["UserSession"] = uName;
+                return View();
             }
 
-            ViewBag.errorMessage = "Wrong login credentials";
-            return View("Error");
+            ViewBag.errorMessage = "Login credentials wrong!";
+            return View("error");
         }
 
         public ActionResult Logout()

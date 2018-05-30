@@ -7,32 +7,34 @@
     ViewBag.Title = "Books";
 }
 
-@if (Session["UserName"] != null)
-{
+<div>
     <div>
-        <form>
-            <a href="/Book/AddBook">Add Book</a>
-        </form>
+        <h1 class="errorMessage">@TempData["Error"]</h1>
     </div>
-}
+</div>
 
 <div>
     <h2>Search for a Book</h2>  
     @using (Html.BeginForm("SearchBook", "Book", FormMethod.Post))
     {
         @Html.TextBox("searchString")
-        <input type="Submit" />
+        <input type="Submit" value="Search" />
     }
 </div>
 
- <div>
-     <h2>Result</h2>
 
+@if (Session["UserSession"] != null)
+{
+    <div>
+        @Html.ActionLink("Add New Book", "AddBook", "Book", null, null)
+    </div>
+}
+
+ <div>
      <div class="pagination">
         <a>@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount) </a>
      </div>
-     <div class="pagination">
-        
+     <div>
             @foreach(var book in Model)
             {
                 <div class="container">
@@ -41,14 +43,15 @@
                         <img src="~/Resources/bookicon2.png" class="iconDetails">
                     </div>
                     <div class="right">
-                        @Html.ActionLink(@book.Title, "ShowBook", "Book", new { id = book.ISBN }, null)
+                            @Html.ActionLink(@book.Title, "ShowBook", "Book", new { id = book.ISBN }, null)
                     </div>
                 </div>     
-            }     
+            }    
      </div>
      <div class="pagination">
          <a>@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)</a>
      </div>
+<<<<<<< HEAD
 
 
 <!--
@@ -64,3 +67,7 @@
     </div>
 -->
 </div>
+=======
+</div>
+
+>>>>>>> master

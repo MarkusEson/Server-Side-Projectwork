@@ -17,7 +17,8 @@
     <AssemblyName>Server-Side Projectwork</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -145,7 +146,7 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="CSS\Design.css" />
-    <None Include="Properties\PublishProfiles\Projectweb.pubxml" />
+    <None Include="Properties\PublishProfiles\WebKit.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -204,6 +205,8 @@
     <Content Include="Views\Author\EditAuthor.cshtml" />
     <Content Include="Views\Library\Logout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Book\DeleteBook.cshtml" />
+    <Content Include="Views\Author\DeleteAuthor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -43,7 +43,7 @@ namespace Repository.Support
             }
         }
 
-        public List<BOOK> List() // retrieve all authors
+        public List<BOOK> List() 
         {
             using (var db = new Libdb())
             {
@@ -66,8 +66,15 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
+                var authors = bk.AUTHOR;
+                bk.AUTHOR = new List<AUTHOR>();
                 db.BOOK.Add(bk);
-                db.Entry(bk).State = EntityState.Added;
+                foreach(var author in authors)
+                {
+                    bk.AUTHOR.Add(author);
+                    db.Entry(author).State = EntityState.Unchanged;
+                }
+
                 db.SaveChanges();
 
             }
@@ -75,15 +82,18 @@ namespace Repository.Support
 
         public void Delete(BOOK book)
         {
+            
             using (var db = new Libdb())
             {
-                db.BOOK.Remove(book);
-                db.Entry(book).State = EntityState.Deleted;
+                var bk = db.BOOK.FirstOrDefault(x => x.ISBN == book.ISBN);
+                bk.AUTHOR.Clear();
+                db.BOOK.Remove(bk);
                 
                 db.SaveChanges();
             }
         }
 
+        // returns a list of books where the title contains the search string
         public List<BOOK> getSearchBookListFromDb(string searchString)
         {
             using (var db = new Libdb())
@@ -93,12 +103,31 @@ namespace Repository.Support
             }
         }
 
+        // returns list of books written by the author aid from db
         public List<BOOK> GetBookByAid(int aid)
         {
             using (var db = new Libdb())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.AUTHOR.Include(x => x.BOOK).FirstOrDefault(x => x.Aid.Equals(aid)).BOOK.ToList();
+                var author = db.AUTHOR.Include(x => x.BOOK).FirstOrDefault(x => x.Aid.Equals(aid));
+                if (author != null)
+                    return author.BOOK.ToList();
+                else
+                    return new List<BOOK>();
+            }
+        }
+
+        public bool doesIsbnExist(string isbn)
+        {
+            using (var db = new Libdb())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                //var book = db.BOOK.Include(x => x.ISBN).FirstOrDefault(x => x.ISBN.Equals(isbn));
+                var book = db.BOOK.FirstOrDefault(x => x.ISBN.Equals(isbn));
+                if (book == null)
+                    return false;        // isbn does not exist on db
+                else
+                    return true;       // isbn is not unique, so isbn is already on server
             }
         }
     }

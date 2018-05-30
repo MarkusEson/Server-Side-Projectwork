@@ -14,12 +14,14 @@
     <a id="desc">@Model.Description</a>
 </div>
 
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
-    if (Session["UserName"].Equals(Model.UserName))
+    <a href="/Admin/Edit/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default pull-left">Edit</a>
+
+    using (Html.BeginForm("Delete", "Admin", FormMethod.Post))
     {
-        <a href="/Admin/Edit/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default">Edit</a>
-        <a href="/Admin/Delete/@Model.AdminId" style="margin-top: 10px;" class="btn btn-default">Delete</a>
+        <input type="hidden" name="id" value="@Model.AdminId"/>
+        <input type="submit" value="Delete" style="margin-top: 10px; margin-left: 5px" class="btn btn-default" />
     }
 }
 

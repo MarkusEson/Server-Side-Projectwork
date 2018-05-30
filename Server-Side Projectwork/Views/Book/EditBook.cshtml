@@ -4,22 +4,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{
-    ViewBag.Title = "EditBook";
-}
-
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
-    <h2>Edit Book</h2>
-
-    using (Html.BeginForm())
+    using (Html.BeginForm("EditBook", "Book", FormMethod.Post))
     {
-        @:ISBN: @Html.TextBox("isbn", Model.ISBN)<br>
-        @:Title: @Html.TextBox("title", Model.Title)<br>
-        @:Sign Id: @Html.TextBox("signid", Model.SignId)<br>
-        @:Publication year: @Html.TextBox("publicationyear", Model.PublicationYear)<br>
-        @:Publication info: @Html.TextBox("Publicationinfo", Model.publicationinfo)<br>
-        @:Pages: @Html.TextBox("pages", Model.Pages)<br>
-        <input type="submit" value="Add" formmethod="post"/><br>
+        @Html.AntiForgeryToken()
+
+        <h1>
+            Edit Book.
+        </h1>
+        <div>
+            <h1 class="errorMessage">@TempData["Error"]</h1>
+        </div>
+
+        <hr />
+
+        <div class="form-horizontal">
+        
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("ISBN", "ISBN", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.ISBN, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "ISBN" } })
+                    @Html.ValidationMessageFor(x => x.ISBN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Title", "Title", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.Title, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Title" } })
+                    @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("PublicationYear", "Publication Year", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.PublicationYear, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Publication Year" } })
+                    @Html.ValidationMessageFor(x => x.PublicationYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("publicationinfo", "Publication Info", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.publicationinfo, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Publication Info" } })
+                    @Html.ValidationMessageFor(x => x.publicationinfo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Pages", "Pages", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.Pages, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Pages" } })
+                    @Html.ValidationMessageFor(x => x.Pages, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add" class="btn btn-default" formmethod="post" />
+                </div>
+            </div>
+
+        </div>
     }
+
+    <div>
+        @Html.ActionLink("Back to List", "../Book/ListBooks")
+    </div>
 }
+
+
+
+
+
+
+
+

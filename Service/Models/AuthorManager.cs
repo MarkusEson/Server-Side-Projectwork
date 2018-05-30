@@ -10,14 +10,13 @@ namespace Service.Models
     {
         private int id;
 
+        // Constructor - sets all info about object and list of the books author has written
         public AuthorManager(int id)
         {
             this.id = id;
 
-            Author authobj = AuthorManager.getAuthor(id);
-            var authorBookList = BookManager.GetBooksByAid(id);
-
-            //Book authBookObj = authorBookList.Find(x => x.SignId == authobj.Aid);
+            Author authobj = AuthorManager.getAuthor(id);           // gets the author by id
+            var authorBookList = BookManager.GetBooksByAid(id);     // gets the books the author has written
 
             Aid = authobj.Aid;
             FirstName = authobj.FirstName;
@@ -26,6 +25,7 @@ namespace Service.Models
 
             AuthBooks = authorBookList;
         }
+<<<<<<< HEAD
 
         static public List<Author> GetAuthorByIsbn(string id)
         {
@@ -46,6 +46,9 @@ namespace Service.Models
 
         public List<Book> ListofAuthorsBooks { get; set; }
 
+=======
+       
+>>>>>>> master
         static private AuthorRepository _eAuthorRepo = new AuthorRepository();
 
         static public Author getAuthor(int aAid)
@@ -53,6 +56,23 @@ namespace Service.Models
             return MapAuthor(new AuthorRepository(aAid));
         }
 
+<<<<<<< HEAD
+=======
+        // gets the author by the books isbn
+        static public List<Author> GetAuthorByIsbn(string id)
+        {
+            List<Author> returnAuthList = new List<Author>();
+            var repo = new AuthorRepository();
+            var authbyisbn = repo.GetAuthorByIsbn(id);
+
+            foreach (var auth in authbyisbn)
+            {
+                returnAuthList.Add(MapAuthor(auth));
+            }
+            return returnAuthList;
+        }
+
+>>>>>>> master
         static public List<Author> getAuthorList()
         {
             List<Author> authorList = new List<Author>();
@@ -113,46 +133,36 @@ namespace Service.Models
         }
 
 
-        static public void AddAnAuthor(string fname, string lname, string byear)
+        static public void AddAnAuthor(Author newAuthor)
         {
-            Author auth = new Author();
-            auth.Aid = getAuthorList().Count();
-            auth.FirstName = fname;
-            auth.LastName = lname;
-            auth.BirthYear = byear;
-            _eAuthorRepo.Add(MapNewAuthor(auth).authorobj);
+            Author addAuthObject = new Author();
+            addAuthObject.Aid = newAuthor.Aid;
+            addAuthObject.FirstName = newAuthor.FirstName;
+            addAuthObject.LastName = newAuthor.LastName;
+            addAuthObject.BirthYear = newAuthor.BirthYear;
+            _eAuthorRepo.Add(MapAuthor(addAuthObject).authorobj);
         }
 
-        static private AuthorRepository MapNewAuthor(Author newAuthor)
-        {
-            AuthorRepository auth = new AuthorRepository();
-            auth.authorobj.Aid = newAuthor.Aid;
-            auth.authorobj.FirstName = newAuthor.FirstName;
-            auth.authorobj.LastName = newAuthor.LastName;
-            auth.authorobj.BirthYear = newAuthor.BirthYear;
-            return auth;
-        }
 
         
-        static public void RemoveAuthor(int id)
+        static public void RemoveAuthor(Author auth)
         {
-            Author auth = AuthorManager.getAuthor(id);
-            getAuthorList().Remove(getAuthor(id));
-            _eAuthorRepo.Remove(MapAuthor(auth).authorobj);
-
+            //Author auth = AuthorManager.getAuthor(id);              // get the author by id
+            getAuthorList().Remove(getAuthor(auth.Aid));                  // remove author from author list
+            _eAuthorRepo.Remove(MapAuthor(auth).authorobj);         // map to entity and remove author from db
         }
 
         static public List<Author> SearchForAuthor(string searchString)
         {
-            List<Author> SearchList = new List<Author>();
+            List<Author> searchResult = new List<Author>();                     
             var repo = new AuthorRepository();
-            var authorlist = repo.getSearchAuthorListFromDb(searchString);
+            var authorlist = repo.getSearchAuthorListFromDb(searchString);          // get all authors with the searchstring keyword
 
-            foreach (var auth in authorlist)
+            foreach (var auth in authorlist)                                        // map and add the objects to list, then return list.
             {
-                SearchList.Add(MapAuthor(auth));
+                searchResult.Add(MapAuthor(auth));
             }
-            return SearchList;
+            return searchResult;
         }
 
         

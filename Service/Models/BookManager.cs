@@ -10,26 +10,32 @@ namespace Service.Models
     {
         private string id;
 
+        // constructor for bookmanager. sets book info and a list of the books autor(s)
         public BookManager(string id)
         {
             this.id = id;
             
+<<<<<<< HEAD
             Book bookobj = BookManager.getBooks(id);
             var bookAuthorList = AuthorManager.GetAuthorByIsbn(id);
+=======
+            Book bookobj = BookManager.getBooks(id);                    // gets book by isbn
+            var bookAuthList = AuthorManager.GetAuthorByIsbn(id);       // gets the author(s) who wrote the book
+>>>>>>> master
 
             ISBN = bookobj.ISBN;
             Title = bookobj.Title;
-            SignId = bookobj.SignId;
             PublicationYear = bookobj.PublicationYear;
             publicationinfo = bookobj.publicationinfo;
             Pages = bookobj.Pages;
+<<<<<<< HEAD
 
             BookAuthor = bookAuthorList;
             
+=======
+            BookAuth = bookAuthList;
+>>>>>>> master
         }
-
-        public string AuthorName { get; set; }
-        public List<Author> BookAuthor { get; set; }
 
         static private BookRepository _eBookRepo = new BookRepository();
 
@@ -38,6 +44,7 @@ namespace Service.Models
             return MapBook(new BookRepository(id));
         }
 
+        // gets the book list from db
         static public List<Book> getBookList()
         {
             List<Book> BookList = new List<Book>();
@@ -47,7 +54,6 @@ namespace Service.Models
                 Book aBook = new Book();
                 aBook.ISBN = elem.ISBN;
                 aBook.Title = elem.Title;
-                aBook.SignId = elem.SignId;
                 aBook.PublicationYear = elem.PublicationYear;
                 aBook.publicationinfo = elem.publicationinfo;
                 aBook.Pages = elem.pages;
@@ -56,6 +62,7 @@ namespace Service.Models
             return BookList;
         }
 
+        // gets a lit of books by author id
         static public List<Book> GetBooksByAid(int aid)
         {
             List<Book> returnbooklist = new List<Book>();
@@ -69,43 +76,40 @@ namespace Service.Models
             return returnbooklist;
         }
 
-        static public void updateBook(string bISBN, string bTitle, int bsignId, string bPyear, string bpInfo, short? bPages)
+        static public void updateBook(string bISBN, string bTitle, string bPyear, string bpInfo, short? bPages)
         {
-            Book bookObj = BookManager.getBooks(bISBN);
-            bookObj.ISBN = bISBN;
-            bookObj.Title = bTitle;
-            bookObj.SignId = bsignId;
-            bookObj.PublicationYear = bPyear;
-            bookObj.publicationinfo = bpInfo;
-            bookObj.Pages = bPages;
-            _eBookRepo.Update(MapBook(bookObj).bookObj);
+            Book book = BookManager.getBooks(bISBN);
+            book.ISBN = bISBN;
+            book.Title = bTitle;
+            book.PublicationYear = bPyear;
+            book.publicationinfo = bpInfo;
+            book.Pages = bPages;
+            _eBookRepo.Update(MapBook(book).bookObj);
 
         }
 
         static private Book MapBook(BookRepository bookobj)
         {
-            Book aBook = new Book();
-            aBook.ISBN = bookobj.bookObj.ISBN;
-            aBook.Title = bookobj.bookObj.Title;
-            aBook.SignId = bookobj.bookObj.SignId;
-            aBook.PublicationYear = bookobj.bookObj.PublicationYear;
-            aBook.publicationinfo = bookobj.bookObj.publicationinfo;
-            aBook.Pages = bookobj.bookObj.pages;
-            return aBook;
+            Book book = new Book();
+            book.ISBN = bookobj.bookObj.ISBN;
+            book.Title = bookobj.bookObj.Title;
+            book.PublicationYear = bookobj.bookObj.PublicationYear;
+            book.publicationinfo = bookobj.bookObj.publicationinfo;
+            book.Pages = bookobj.bookObj.pages;
+            return book;
         }
 
 
         // TEST TEST
         static private Book MapBook(Repository.BOOK bookobj)
         {
-            Book aBook = new Book();
-            aBook.ISBN = bookobj.ISBN;
-            aBook.Title = bookobj.Title;
-            aBook.SignId = bookobj.SignId;
-            aBook.PublicationYear = bookobj.PublicationYear;
-            aBook.publicationinfo = bookobj.publicationinfo;
-            aBook.Pages = bookobj.pages;
-            return aBook;
+            Book book = new Book();
+            book.ISBN = bookobj.ISBN;
+            book.Title = bookobj.Title;
+            book.PublicationYear = bookobj.PublicationYear;
+            book.publicationinfo = bookobj.publicationinfo;
+            book.Pages = bookobj.pages;
+            return book;
         }
         // TEST TEST
 
@@ -114,64 +118,70 @@ namespace Service.Models
             BookRepository aBook = new BookRepository(bookobj.ISBN);
             aBook.bookObj.ISBN = bookobj.ISBN;
             aBook.bookObj.Title = bookobj.Title;
-            aBook.bookObj.SignId = bookobj.SignId;
             aBook.bookObj.PublicationYear = bookobj.PublicationYear;
             aBook.bookObj.publicationinfo = bookobj.publicationinfo;
             aBook.bookObj.pages = bookobj.Pages;
+            if(bookobj.BookAuth == null)        // if book has no authors, manually sets book AUTHOR to null. 
+            {
+                aBook.bookObj.AUTHOR = null;
+            }
+            else
+                aBook.bookObj.AUTHOR = bookobj.BookAuth.Select(x => new Repository.AUTHOR {Aid = x.Aid, FirstName = x.FirstName, LastName = x.LastName, BirthYear = x.BirthYear }).ToList();
+
             return aBook;
         }
    
-        static public void AddABook(string isbn, string title, int? signid, string pyear, string pinfo, short pages)
+        static public void AddABook(Book newBook, int? aid)
         {
-            Book book = new Book();
-            book.ISBN = isbn;
-            book.Title = title;
-            book.SignId = signid;
-            book.PublicationYear = pyear;
-            book.publicationinfo = pinfo;
-            book.Pages = pages;
+            // string isbn, string title, string pyear, string pinfo, short pages
+            Book addBookObject = new Book();
+            addBookObject.ISBN = newBook.ISBN;
+            addBookObject.Title = newBook.Title;
+            addBookObject.PublicationYear = newBook.PublicationYear;
+            addBookObject.publicationinfo = newBook.publicationinfo;
+            addBookObject.Pages = newBook.Pages;
+            if (aid.HasValue)
+                addBookObject.BookAuth = new List<Author> { new AuthorManager(aid.Value) };     // if book has author, add i author to bookAuth list.
+            else
+                addBookObject.BookAuth = new List<Author>();                                    // else add empty list.
 
-            _eBookRepo.Add(MapNewBook(book).bookObj);
-            // _eAuthorRepo.Add(MapNewAuthor(auth).authorobj);
+            _eBookRepo.Add(MapBook(addBookObject).bookObj);
         }
-
-        static private BookRepository MapNewBook(Book newBook)
-        {
-            BookRepository book = new BookRepository(newBook.ISBN);
-            book.bookObj.ISBN = newBook.ISBN;
-            book.bookObj.Title = newBook.Title;
-            book.bookObj.SignId = newBook.SignId;
-            book.bookObj.PublicationYear = newBook.PublicationYear;
-            book.bookObj.publicationinfo = newBook.publicationinfo;
-            book.bookObj.pages = newBook.Pages;
-            return book;
-        }
+        
 
         static public void RemoveBook(string isbn)
         {
         
-            Book book = BookManager.getBooks(isbn); 
-            _eBookRepo.Delete(MapBook(book).bookObj);
+            Book book = BookManager.getBooks(isbn);             // get book by isbn
+            _eBookRepo.Delete(MapBook(book).bookObj);           // delete this book from repo
 
-            getBookList().Remove(getBooks(isbn));
+            getBookList().Remove(getBooks(isbn));               // remove book from list
            
 
         } 
         
+        // returns a list of books based on the searchString 
         static public List<Book> SearchForBook(string searchString)
         {
-            List<Book> SearchList = new List<Book>();
+            List<Book> searchResult = new List<Book>();                 
             var repo = new BookRepository();
-            var booklist = repo.getSearchBookListFromDb(searchString);
+            var booklist = repo.getSearchBookListFromDb(searchString);      // adds the books that amtch with search result to a list
 
-            foreach (var book in booklist)
+            foreach (var book in booklist)                                  // map and add the results to a list and return the list
             {
-                SearchList.Add(MapBook(book));
+                searchResult.Add(MapBook(book));
             }
-            return SearchList;
+            return searchResult;
         }   
-        
-        
+
+        static public bool doesIsbnExist(string isbn)
+        {
+            BookRepository repo = new BookRepository();
+            if (repo.doesIsbnExist(isbn))
+                return true;
+            else
+                return false;
+        }
 
 
     }

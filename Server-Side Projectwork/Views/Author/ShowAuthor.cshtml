@@ -9,14 +9,19 @@
 }
 
 <h2>Show Author</h2>
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
     <div>
         @Html.ActionLink("Edit", "EditAuthor", "Author", new { id = Model.Aid }, null) || @Html.ActionLink("Delete", "DeleteAuthor", "Author", new { id = Model.Aid }, null)
     </div>
 }
+<<<<<<< HEAD
 <div>
     <dd>
+=======
+<div class="containerAuthor">
+    <div class="left">
+>>>>>>> master
         <img src="~/Resources/authimg1.png" class="iconDetails">
     </dd>
 
@@ -40,6 +45,11 @@
             @Html.ActionLink(@item.Title, "ShowBook", "Book", new { id = item.ISBN }, null)
         </li>
     }
+<<<<<<< HEAD
     
    
 </div>
+=======
+</div>
+    
+>>>>>>> master

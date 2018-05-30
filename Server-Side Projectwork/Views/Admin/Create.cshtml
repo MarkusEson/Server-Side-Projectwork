@@ -1,43 +1,40 @@
-﻿@model IEnumerable<Service.Models.Administrator>
-
+﻿@model Service.Models.Administrator
 
 @{
     ViewBag.Title = "Create";
 }
 
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
     using (Html.BeginForm("Create", "Admin", FormMethod.Post))
     {
-        int i = 0;
-
-        foreach (var item in Model)
-        {
-            i += 1;
-        }
+        @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
             <h4>Administrator</h4>
 
+            <div style="margin-left: 310px"> @Html.ValidationSummary(true, " Create unsuccessful!", new { @class = "text-danger glyphicon glyphicon-warning-sign", @style = "font-size: 20px; word-spacing: -10px" }) </div>
+
             <hr />
-        
+
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.TextBox("adminId", i, new { @readonly = "readonly", @hidden = "hidden" })
+            @Html.TextBox("adminId", 0, new { @readonly = "readonly", @hidden = "hidden" })
 
             <div class="form-group">
                 @Html.Label("UserName", "Username", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("UserName", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Username" } })
-                    @Html.ValidationMessage("UserName", "", new { @class = "text-danger" })
+                    @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Username" } })
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                    @Html.ValidationMessage("UsernameExists", "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.Label("UserPass", "Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("inPassword", "Password", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("UserPass", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Password" } })
-                    @Html.ValidationMessage("UserPass", "", new { @class = "text-danger" })
+                    @Html.EditorFor(m => m.TempPass, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Password" } })
+                    @Html.ValidationMessageFor(m => m.TempPass, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -46,24 +43,24 @@
             <div class="form-group">
                 @Html.Label("FirstName", "Firstname", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("FirstName", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Firstname" } })
-                    @Html.ValidationMessage("FirstName", "optional", new { @class = "text-danger" })
+                    @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Firstname" } })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.Label("LastName", "Lastname", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Editor("LastName", new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Lastname" } })
-                    @Html.ValidationMessage("LastName", "optional", new { @class = "text-danger" })
+                    @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", @style = "width: 400px", @placeholder = "Lastname" } })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextArea("Description", new { @class = "form-control", @style = "width: 400px", @rows = "5", @placeholder = "Description" })
-                    @Html.ValidationMessage("Description", "optional", new { @class = "text-danger" })
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @style = "width: 400px", @rows = "5", @placeholder = "Description" })
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -72,7 +69,7 @@
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
-        
+
         </div>
     }
 

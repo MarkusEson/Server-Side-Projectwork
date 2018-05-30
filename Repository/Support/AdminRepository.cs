@@ -30,7 +30,7 @@ namespace Repository.Support
             }
         }
 
-        public ADMINISTRATOR Read(int AdminId) // Find author by id
+        public ADMINISTRATOR Read(int AdminId)
         {
             using (var db = new Libdb())
             {
@@ -40,22 +40,19 @@ namespace Repository.Support
             }
         }
 
-        public List<ADMINISTRATOR> List() // retrieve all authors
+        public List<ADMINISTRATOR> List()
         {
             using (var db = new Libdb())
             {
-                // return 
                 var query = db.ADMINISTRATOR.OrderBy(x => x.AdminId);
                 return query.ToList();
             }
         }
 
-        public void Add(ADMINISTRATOR admin)
+        public void Create(ADMINISTRATOR admin)
         {
             using (var db = new Libdb())
             {
-                
-
                 db.ADMINISTRATOR.Add(admin);
 
                 db.Entry(admin).State = EntityState.Added;
@@ -63,7 +60,7 @@ namespace Repository.Support
             }
         }
 
-        public void Remove(ADMINISTRATOR admin)
+        public void Delete(ADMINISTRATOR admin)
         {
             using (var db = new Libdb())
             {
@@ -83,6 +80,30 @@ namespace Repository.Support
 
                 db.Entry(adminobj).State = EntityState.Modified;
                 db.SaveChanges();
+            }
+        }
+
+        /* Check for username-match using raw SQL */
+        public bool UsernameExists(string username)
+        {
+            using (var db = new Libdb())
+            {
+                var query = db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE UserName = {0}", username).ToList();
+
+                if(query.Count != 0) { return true; }
+                else { return false; }
+            }
+        }
+
+        /* Check for username-match using raw SQL */
+        public bool DoHashMatch(string dbHash)
+        {
+            using (var db = new Libdb())
+            {
+                var query = db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE PassHash = {0}", dbHash).ToList();
+
+                if(query.Count != 0) { return true; }
+                else { return false; }
             }
         }
 

@@ -80,12 +80,16 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                db.AUTHOR.Remove(auth);
-                db.Entry(auth).State = EntityState.Deleted;
+                var au = db.AUTHOR.FirstOrDefault(x => x.Aid == auth.Aid);
+                
+                au.BOOK.Clear();
+                
+                db.AUTHOR.Remove(au);
                 db.SaveChanges();
             }
         }
 
+        // returns a list of authors where the the name contains the searchString
         public List<AUTHOR> getSearchAuthorListFromDb(string searchString)
         {
             using (var db = new Libdb())
@@ -95,13 +99,21 @@ namespace Repository.Support
             }
         }
 
+<<<<<<< HEAD
 
+=======
+        // returns list of authors based connected to the id=isbn
+>>>>>>> master
         public List<AUTHOR> GetAuthorByIsbn(string id)
         {
             using (var db = new Libdb())
             {
                 db.Configuration.LazyLoadingEnabled = false;
+<<<<<<< HEAD
                 return db.BOOK.Find("").AUTHOR.ToList();
+=======
+                return db.BOOK.Include(x => x.AUTHOR).First(x => x.ISBN == id).AUTHOR.ToList();
+>>>>>>> master
 
             }
         }

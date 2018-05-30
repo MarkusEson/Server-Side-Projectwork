@@ -7,28 +7,34 @@
     ViewBag.Title = "Authors";
 }
 
+<div>
+    <div>
+        <h1 class="errorMessage">@TempData["Error"]</h1>
+    </div>
+</div>
 
 <div>
     <h2>Search for an Author</h2>
     @using (Html.BeginForm("SearchAuthor", "Author", FormMethod.Post))
     {
         @Html.TextBox("searchString")
-        <input type="Submit" />
+        <input type="Submit" value="Search"/>
     }
 </div>
 
-<h2>Result</h2>
-@if (Session["UserName"] != null)
+@if (Session["UserSession"] != null)
 {
     <div>
         @Html.ActionLink("Add New Author", "AddAuthor", "Author", null, null)
     </div>
 }
+
+
 <div>
     <div class="pagination">
         @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
     </div>
-    <div class="pagination">
+    <div>
 
         @foreach (var author in Model)
         {
