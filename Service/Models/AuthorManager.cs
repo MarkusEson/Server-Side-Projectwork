@@ -25,7 +25,6 @@ namespace Service.Models
 
             AuthBooks = authorBookList;
         }
-<<<<<<< HEAD
 
         static public List<Author> GetAuthorByIsbn(string id)
         {
@@ -46,9 +45,6 @@ namespace Service.Models
 
         public List<Book> ListofAuthorsBooks { get; set; }
 
-=======
-       
->>>>>>> master
         static private AuthorRepository _eAuthorRepo = new AuthorRepository();
 
         static public Author getAuthor(int aAid)
@@ -56,23 +52,6 @@ namespace Service.Models
             return MapAuthor(new AuthorRepository(aAid));
         }
 
-<<<<<<< HEAD
-=======
-        // gets the author by the books isbn
-        static public List<Author> GetAuthorByIsbn(string id)
-        {
-            List<Author> returnAuthList = new List<Author>();
-            var repo = new AuthorRepository();
-            var authbyisbn = repo.GetAuthorByIsbn(id);
-
-            foreach (var auth in authbyisbn)
-            {
-                returnAuthList.Add(MapAuthor(auth));
-            }
-            return returnAuthList;
-        }
-
->>>>>>> master
         static public List<Author> getAuthorList()
         {
             List<Author> authorList = new List<Author>();
@@ -89,13 +68,13 @@ namespace Service.Models
             return authorList;
         }
 
-        static public void updateAuthor(int aAid, string fName, string lName, string bYear)
+        static public void UpdateAuthor(Author editedAuthor)
         {
-            Author authObj = AuthorManager.getAuthor(aAid);
-            authObj.Aid = aAid;
-            authObj.FirstName = fName;
-            authObj.LastName = lName;
-            authObj.BirthYear = bYear;
+            Author authObj = AuthorManager.getAuthor(editedAuthor.Aid);
+            authObj.Aid = editedAuthor.Aid;
+            authObj.FirstName = editedAuthor.FirstName;
+            authObj.LastName = editedAuthor.LastName;
+            authObj.BirthYear = editedAuthor.BirthYear;
             _eAuthorRepo.Update(MapAuthor(authObj).authorobj);
 
         }
@@ -156,7 +135,7 @@ namespace Service.Models
         {
             List<Author> searchResult = new List<Author>();                     
             var repo = new AuthorRepository();
-            var authorlist = repo.getSearchAuthorListFromDb(searchString);          // get all authors with the searchstring keyword
+            var authorlist = repo.GetSearchAuthorListFromDb(searchString);          // get all authors with the searchstring keyword
 
             foreach (var auth in authorlist)                                        // map and add the objects to list, then return list.
             {

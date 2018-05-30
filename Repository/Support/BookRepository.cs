@@ -94,7 +94,7 @@ namespace Repository.Support
         }
 
         // returns a list of books where the title contains the search string
-        public List<BOOK> getSearchBookListFromDb(string searchString)
+        public List<BOOK> GetSearchBookListFromDb(string searchString)
         {
             using (var db = new Libdb())
             {
@@ -117,7 +117,7 @@ namespace Repository.Support
             }
         }
 
-        public bool doesIsbnExist(string isbn)
+        public bool DoesIsbnExist(string isbn)
         {
             using (var db = new Libdb())
             {
