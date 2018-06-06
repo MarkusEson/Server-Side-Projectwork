@@ -7,7 +7,7 @@ namespace Service.Models
 {
     public class Authorization
     {
-        enum Rank {
+        public enum Rank {
             user = 0,
             administrator = 1
         };
