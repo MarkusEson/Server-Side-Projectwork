@@ -17,6 +17,8 @@ namespace Service.Models
     {
         public int AdminId { get; set; }    // Primary Key
 
+        public int AdminRank { get; set; }
+
         [Required]
         [DisplayName("Username")]
         [StringLength(20, ErrorMessage = "Max length is 20 characters!")]
@@ -58,6 +60,7 @@ namespace Service.Models
             {
                 Administrator anAdmin = new Administrator();
                 anAdmin.AdminId = elem.AdminId;
+                anAdmin.AdminRank = elem.AdminRank;
                 anAdmin.UserName = elem.UserName;
                 anAdmin.PassSalt = elem.PassSalt;
                 anAdmin.PassHash = elem.PassHash;
@@ -126,6 +129,7 @@ namespace Service.Models
         {
             Administrator theAdmin = new Administrator();
             theAdmin.AdminId = adminObj.adminobj.AdminId;
+            theAdmin.AdminRank = adminObj.adminobj.AdminRank;
             theAdmin.UserName = adminObj.adminobj.UserName;
             theAdmin.PassSalt = adminObj.adminobj.PassSalt;
             theAdmin.PassHash = adminObj.adminobj.PassHash;
@@ -140,6 +144,7 @@ namespace Service.Models
         {
             AdminRepository theAdmin = new AdminRepository(adminObj.AdminId);
             theAdmin.adminobj.AdminId = adminObj.AdminId;
+            theAdmin.adminobj.AdminRank = adminObj.AdminRank;
             theAdmin.adminobj.UserName = adminObj.UserName;
             theAdmin.adminobj.PassSalt = adminObj.PassSalt;
             theAdmin.adminobj.PassHash = adminObj.PassHash;
@@ -154,6 +159,7 @@ namespace Service.Models
         {
             AdminRepository theAdmin = new AdminRepository();
             theAdmin.adminobj.AdminId = adminObj.AdminId;
+            theAdmin.adminobj.AdminRank = adminObj.AdminRank;
             theAdmin.adminobj.UserName = adminObj.UserName;
             theAdmin.adminobj.PassSalt = adminObj.PassSalt;
             theAdmin.adminobj.PassHash = adminObj.PassHash;
