@@ -39,10 +39,14 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult EditAuthor(Author editedAuthor )
         {
-            // int aid, string fname, string lname, string byear
-            if(ModelState.IsValid)
+            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            if (isAuthorized)
             {
-                return RedirectToAction("UpdateAuthor", editedAuthor);
+                // int aid, string fname, string lname, string byear
+                if (ModelState.IsValid)
+                {
+                    return RedirectToAction("UpdateAuthor", editedAuthor);
+                }
             }
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("ListAuthors");
@@ -64,12 +68,16 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult AddAuthor(Author newAuthor)
         {
-            newAuthor.Aid = AuthorManager.getAuthorList().Count();
-            // string fname, string lname, string byear
-            if(ModelState.IsValid)
+            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            if (isAuthorized)
             {
-                AuthorManager.AddAnAuthor(newAuthor);
-                return RedirectToAction("ListAuthors", "Author");
+                newAuthor.Aid = AuthorManager.getAuthorList().Count();
+                // string fname, string lname, string byear
+                if (ModelState.IsValid)
+                {
+                    AuthorManager.AddAnAuthor(newAuthor);
+                    return RedirectToAction("ListAuthors", "Author");
+                }
             }
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("AddAuthor");
@@ -86,7 +94,11 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public RedirectToRouteResult DeleteAuthor(Author auth)
         {
-            AuthorManager.RemoveAuthor(auth);
+            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            if (isAuthorized)
+            {
+                AuthorManager.RemoveAuthor(auth);
+            }
             return RedirectToAction("ListAuthors", 0);
         }
 

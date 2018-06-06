@@ -25,17 +25,21 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, FormCollection formValues)
         {
-            Administrator admin = Administrator.GetAdmin(id);
+            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
 
-            if(ModelState.IsValid)
+            if (isAuthorized)
             {
-                Administrator.UpdateAdmin(id, formValues["FirstName"],
-                                           formValues["LastName"],
-                                           formValues["Description"]);
+                Administrator admin = Administrator.GetAdmin(id);
 
-                return RedirectToAction("Details", new { id = admin.AdminId });
+                if (ModelState.IsValid)
+                {
+                    Administrator.UpdateAdmin(id, formValues["FirstName"],
+                                               formValues["LastName"],
+                                               formValues["Description"]);
+
+                    return RedirectToAction("Details", new { id = admin.AdminId });
+                }
             }
-
             return View();
 
         }
@@ -79,15 +83,19 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            if(Session["UserSession"].Equals( Administrator.GetAdmin(id).UserName )) // Check if the deleted admin is currently logged in
+            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+
+            if (isAuthorized)
             {
-                Session.Abandon();
-                Session.Contents.Abandon();
-                Session.Contents.RemoveAll();
+                Administrator.DeleteAdmin(id);
+
+                if (Session["UserSession"].Equals(Administrator.GetAdmin(id).UserName)) // Check if the deleted admin is currently logged in
+                {
+                    Session.Abandon();
+                    Session.Contents.Abandon();
+                    Session.Contents.RemoveAll();
+                }
             }
-
-            Administrator.DeleteAdmin(id);
-
             return RedirectToAction("Index");
         }
     }
