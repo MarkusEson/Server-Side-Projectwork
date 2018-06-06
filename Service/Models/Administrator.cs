@@ -112,9 +112,9 @@ namespace Service.Models
 
         }
 
-        static public int GetIDByUsername(string username)
+        static public int GetRankByUsername(string username)
         {
-            return _eAdminRepo.GetIdByUsername(username);
+            return _eAdminRepo.GetRankByUsername(username);
         }
 
         static public bool IsLoginFine(string username, string password)
