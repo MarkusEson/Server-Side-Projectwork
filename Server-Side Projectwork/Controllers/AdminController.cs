@@ -49,8 +49,9 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Administrator newAdmin)
         {
-            //if(Session["UserSession"] != null) //"Auth"
-            //{
+            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            if(Session["UserSession"] != null) //"Auth"
+            {
                 foreach (var admin in Administrator.GetAdminList())
                 {
                     if (admin.UserName == newAdmin.UserName)
