@@ -116,6 +116,7 @@
     <Compile Include="Models\AuthorManager.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookManager.cs" />
+    <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\Classification.cs" />
     <Compile Include="Models\ClassificationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

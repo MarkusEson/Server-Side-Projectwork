@@ -190,5 +190,18 @@ namespace Service.Models
             return Convert.ToBase64String(hasher.GetBytes(32));
 
         }
+
+        static public bool IsAuthorized(int? userID, int? userRank, int requiredRank)
+        {
+            if (userID == null)
+            {
+                return false; // not authorized
+            }
+            else if (userRank == requiredRank)
+            {
+                return true; // user has required rank
+            }
+            else return false; // denied
+        }
     }
 }
