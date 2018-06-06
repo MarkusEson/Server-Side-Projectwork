@@ -49,8 +49,8 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Administrator newAdmin)
         {
-            if(Session["UserSession"] != null) //"Auth"
-            {
+            //if(Session["UserSession"] != null) //"Auth"
+            //{
                 foreach (var admin in Administrator.GetAdminList())
                 {
                     if (admin.UserName == newAdmin.UserName)
@@ -68,7 +68,7 @@ namespace Server_Side_Projectwork.Controllers
 
                     return RedirectToAction("Details", new { id = i});
                 }
-            }
+            //}
 
             return View("AccessDenied");
         }

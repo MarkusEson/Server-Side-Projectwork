@@ -112,6 +112,11 @@ namespace Service.Models
 
         }
 
+        static public int GetIDByUsername(string username)
+        {
+            return _eAdminRepo.GetIdByUsername(username);
+        }
+
         static public bool IsLoginFine(string username, string password)
         {
             if (_eAdminRepo.UsernameExists(username)) // Try username with existing users (using raw SQL)
