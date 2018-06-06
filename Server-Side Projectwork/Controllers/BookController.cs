@@ -44,10 +44,13 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult EditBook(Book editedBook)
         {
-            // string isbn, string title, string pyear, string pinfo, short? pages 
-            if (ModelState.IsValid)
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
+            if (isAuthorized)
             {
-                return RedirectToAction("UpdateBook", editedBook);
+                if (ModelState.IsValid)
+                {
+                    return RedirectToAction("UpdateBook", editedBook);
+                }
             }
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("ListBooks");
@@ -70,21 +73,27 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddBook(Book newBook, int? authorID)
         {
+
             try
             {
-                if (!BookManager.DoesIsbnExist(newBook.ISBN))
+                bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
+                if (isAuthorized)
                 {
-                    if (ModelState.IsValid)
+                    if (!BookManager.DoesIsbnExist(newBook.ISBN))
                     {
-                        BookManager.AddABook(newBook, authorID);
-                        return RedirectToAction("ListBooks", "Book");
+                        if (ModelState.IsValid)
+                        {
+                            BookManager.AddABook(newBook, authorID);
+                            return RedirectToAction("ListBooks", "Book");
+                        }
+                    }
+                    else
+                    {
+                        TempData["Error"] = "Something went wrong!";
+                        return RedirectToAction("AddBook");
                     }
                 }
-                else {
-
-                    TempData["Error"] = "Something went wrong!";
-                    return RedirectToAction("AddBook");
-                }
+                    
             }
             catch(Exception ex)
             {
@@ -107,7 +116,11 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public RedirectToRouteResult DeleteBook(Book book)
         {
-            BookManager.RemoveBook(book.ISBN);
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
+            if (isAuthorized)
+            {
+                BookManager.RemoveBook(book.ISBN);
+            }
             return RedirectToAction("ListBooks", 0);
         }
 

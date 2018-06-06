@@ -25,7 +25,7 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, FormCollection formValues)
         {
-            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
 
             if (isAuthorized)
             {
@@ -54,7 +54,7 @@ namespace Server_Side_Projectwork.Controllers
         public ActionResult Create(Administrator newAdmin)
         {
             
-            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
 
             if(isAuthorized) //"Auth"
             {
@@ -83,18 +83,17 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
 
             if (isAuthorized)
             {
-                Administrator.DeleteAdmin(id);
-
                 if (Session["UserSession"].Equals(Administrator.GetAdmin(id).UserName)) // Check if the deleted admin is currently logged in
                 {
                     Session.Abandon();
                     Session.Contents.Abandon();
                     Session.Contents.RemoveAll();
                 }
+                Administrator.DeleteAdmin(id);
             }
             return RedirectToAction("Index");
         }

@@ -191,9 +191,9 @@ namespace Service.Models
 
         }
 
-        static public bool IsAuthorized(int? userID, int? userRank, int requiredRank)
+        static public bool IsAuthorized(string userID, int userRank, int requiredRank)
         {
-            if (userID == null)
+            if (userID == "")
             {
                 return false; // not authorized
             }

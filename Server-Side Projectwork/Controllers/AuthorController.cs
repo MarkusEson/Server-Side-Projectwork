@@ -39,7 +39,7 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult EditAuthor(Author editedAuthor )
         {
-            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
             if (isAuthorized)
             {
                 // int aid, string fname, string lname, string byear
@@ -68,7 +68,7 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult AddAuthor(Author newAuthor)
         {
-            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
             if (isAuthorized)
             {
                 newAuthor.Aid = AuthorManager.getAuthorList().Count();
@@ -94,7 +94,7 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public RedirectToRouteResult DeleteAuthor(Author auth)
         {
-            bool isAuthorized = Administrator.IsAuthorized((int?)(Session["UserSession"] ?? null), (int?)(Session["UserRank"] ?? null), (int)Authorization.Rank.administrator);
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
             if (isAuthorized)
             {
                 AuthorManager.RemoveAuthor(auth);
