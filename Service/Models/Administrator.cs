@@ -123,7 +123,7 @@ namespace Service.Models
             {
                 AdminRepository admin = new AdminRepository( _eAdminRepo.GetIdByUsername(username) );
                 var salt = admin.adminobj.PassSalt;
-                if (_eAdminRepo.DoHashMatch( HashPassword(password, salt) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
+                if (_eAdminRepo.DoHashMatch( HashPassword(password, salt), username )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
                 else { return false; }
             }
             else { return false; }

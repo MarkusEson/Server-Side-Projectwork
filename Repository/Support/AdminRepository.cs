@@ -116,11 +116,11 @@ namespace Repository.Support
         }
 
         /* Check for username-match using raw SQL */
-        public bool DoHashMatch(string dbHash)
+        public bool DoHashMatch(string inHash, string inUsername)
         {
             using (var db = new Libdb())
             {
-                var query = db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE PassHash = {0}", dbHash).ToList();
+                var query = db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE PassHash = {0} AND UserName = {1}", inHash, inUsername).ToList();
 
                 if(query.Count != 0) { return true; }
                 else { return false; }
