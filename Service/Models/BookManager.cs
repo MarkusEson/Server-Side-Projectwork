@@ -14,15 +14,15 @@ namespace Service.Models
         public BookManager(string id)
         {
             this.id = id;
-            
-            Book bookobj = BookManager.getBooks(id);                    // gets book by isbn
+            Book bookobj = BookManager.getBooks(id);
+            var bookAuthorList = AuthorManager.GetAuthorByIsbn(id);                  // gets book by isbn
             var bookAuthList = AuthorManager.GetAuthorByIsbn(id);       // gets the author(s) who wrote the book
-
             ISBN = bookobj.ISBN;
             Title = bookobj.Title;
             PublicationYear = bookobj.PublicationYear;
             publicationinfo = bookobj.publicationinfo;
             Pages = bookobj.Pages;
+            BookAuthor = bookAuthorList;
             BookAuth = bookAuthList;
         }
 
@@ -65,14 +65,14 @@ namespace Service.Models
             return returnbooklist;
         }
 
-        static public void updateBook(string bISBN, string bTitle, string bPyear, string bpInfo, short? bPages)
+        static public void updateBook(Book updatedBook)
         {
-            Book book = BookManager.getBooks(bISBN);
-            book.ISBN = bISBN;
-            book.Title = bTitle;
-            book.PublicationYear = bPyear;
-            book.publicationinfo = bpInfo;
-            book.Pages = bPages;
+            Book book = BookManager.getBooks(updatedBook.ISBN);
+            book.ISBN = updatedBook.ISBN;
+            book.Title = updatedBook.Title;
+            book.PublicationYear = updatedBook.PublicationYear;
+            book.publicationinfo = updatedBook.publicationinfo;
+            book.Pages = updatedBook.Pages;
             _eBookRepo.Update(MapBook(book).bookObj);
 
         }
@@ -154,7 +154,7 @@ namespace Service.Models
         {
             List<Book> searchResult = new List<Book>();                 
             var repo = new BookRepository();
-            var booklist = repo.getSearchBookListFromDb(searchString);      // adds the books that amtch with search result to a list
+            var booklist = repo.GetSearchBookListFromDb(searchString);      // adds the books that amtch with search result to a list
 
             foreach (var book in booklist)                                  // map and add the results to a list and return the list
             {
@@ -163,10 +163,10 @@ namespace Service.Models
             return searchResult;
         }   
 
-        static public bool doesIsbnExist(string isbn)
+        static public bool DoesIsbnExist(string isbn)
         {
             BookRepository repo = new BookRepository();
-            if (repo.doesIsbnExist(isbn))
+            if (repo.DoesIsbnExist(isbn))
                 return true;
             else
                 return false;

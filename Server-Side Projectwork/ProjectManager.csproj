@@ -207,6 +207,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Book\DeleteBook.cshtml" />
     <Content Include="Views\Author\DeleteAuthor.cshtml" />
+    <Content Include="Views\Admin\AccessDenied.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

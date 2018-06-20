@@ -15,14 +15,15 @@ namespace Server_Side_Projectwork.Controllers
     public class BookController : Controller
     {
         private const int DefaultPageSize = 10;
-        private IList<Book> allBooks = BookManager.getBookList();
+       
         
 
         // ListBooks sends the user to the "ListBooks" view where all the books in the databse are listen and separated by pagination
         public ActionResult ListBooks(int? page)
         {
+            IList<Book> allBooks = BookManager.getBookList();
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            return View("ListBooks", this.allBooks.ToPagedList(currentPageIndex, DefaultPageSize));
+            return View("ListBooks", allBooks.ToPagedList(currentPageIndex, DefaultPageSize));
         }
 
         // Shows the clicked book in detail, displaying information about pages, author, etc.
@@ -43,16 +44,13 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult EditBook(Book editedBook)
         {
-            // string isbn, string title, string pyear, string pinfo, short? pages 
-            if (ModelState.IsValid)
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
+            if (isAuthorized)
             {
-                TempData["ISBN"] = editedBook.ISBN;
-                TempData["Title"] = editedBook.Title;
-                TempData["PublicationYear"] = editedBook.PublicationYear;
-                TempData["publicationinfo"] = editedBook.publicationinfo;
-                TempData["Pages"] = editedBook.Pages;
-
-                return RedirectToAction("UpdateBook");
+                if (ModelState.IsValid)
+                {
+                    return RedirectToAction("UpdateBook", editedBook);
+                }
             }
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("ListBooks");
@@ -60,9 +58,9 @@ namespace Server_Side_Projectwork.Controllers
         }
 
         // update book sends the tempdata to the update func. then redirets to the book list again.
-        public RedirectToRouteResult UpdateBook()
+        public RedirectToRouteResult UpdateBook(Book editedBook)
         {
-            BookManager.updateBook(Convert.ToString(TempData["ISBN"]), Convert.ToString(TempData["Title"]), Convert.ToString(TempData["PublicationYear"]), Convert.ToString(TempData["publicationinfo"]), Convert.ToInt16(TempData["Pages"]));
+            BookManager.updateBook(editedBook);
             return RedirectToAction("ListBooks", "Book");
         }
 
@@ -75,21 +73,37 @@ namespace Server_Side_Projectwork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddBook(Book newBook, int? authorID)
         {
-            // string isbn, string title, string pyear, string pinfo, short pages
-            if (!BookManager.doesIsbnExist(newBook.ISBN))
-            {
-                if(ModelState.IsValid)
-                {
-                    BookManager.AddABook(newBook, authorID);
-                    return RedirectToAction("ListBooks", "Book");
-                }
-                
-            }
 
+            try
+            {
+                bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
+                if (isAuthorized)
+                {
+                    if (!BookManager.DoesIsbnExist(newBook.ISBN))
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            BookManager.AddABook(newBook, authorID);
+                            return RedirectToAction("ListBooks", "Book");
+                        }
+                    }
+                    else
+                    {
+                        TempData["Error"] = "Something went wrong!";
+                        return RedirectToAction("AddBook");
+                    }
+                }
+                    
+            }
+            catch(Exception ex)
+            {
+                TempData["Error"] = "Something went wrong!";
+                return RedirectToAction("listBooks", "Book");
+            }
             TempData["Error"] = "Something went wrong!";
             return RedirectToAction("AddBook");
             
-
+            
         }
         
         [HttpGet]
@@ -102,7 +116,11 @@ namespace Server_Side_Projectwork.Controllers
         [HttpPost]
         public RedirectToRouteResult DeleteBook(Book book)
         {
-            BookManager.RemoveBook(book.ISBN);
+            bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
+            if (isAuthorized)
+            {
+                BookManager.RemoveBook(book.ISBN);
+            }
             return RedirectToAction("ListBooks", 0);
         }
 

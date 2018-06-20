@@ -83,6 +83,26 @@ namespace Repository.Support
             }
         }
 
+        public int GetIdByUsername(string username)
+        {
+            using (var db = new Libdb())
+            {
+                var query = db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE UserName = {0}", username);
+                int result = (int)query.First().AdminId;
+                return result;
+            }
+        }
+
+        public int GetRankByUsername(string username)
+        {
+            using (var db = new Libdb())
+            {
+                var query = db.ADMINISTRATOR.SqlQuery("SELECT * FROM dbo.ADMINISTRATOR WHERE UserName = {0}", username);
+                int result = (int)query.First().AdminRank;
+                return result;
+            }
+        }
+
         /* Check for username-match using raw SQL */
         public bool UsernameExists(string username)
         {

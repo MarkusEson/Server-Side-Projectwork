@@ -25,7 +25,7 @@ namespace Service.Models
 
         [Range(0, 9999)]
         public short? Pages { get; set; }
-
+        public List<Author> BookAuthor { get; set; }
         public List<Author> BookAuth { get; set; }          // this is a list of the books authors
     }
 }

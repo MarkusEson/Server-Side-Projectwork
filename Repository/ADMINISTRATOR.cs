@@ -18,6 +18,8 @@
         [Key]
         public int AdminId { get; set; }
 
+        public int AdminRank { get; set; }
+
         [StringLength(20)]
         public string UserName { get; set; }
 

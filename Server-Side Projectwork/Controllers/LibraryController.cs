@@ -25,6 +25,7 @@ namespace Server_Side_Projectwork.Controllers
             if( Administrator.IsLoginFine(uName, uPass) )
             {
                 Session["UserSession"] = uName;
+                Session["UserRank"] = Administrator.GetRankByUsername(uName);
                 return View();
             }
 

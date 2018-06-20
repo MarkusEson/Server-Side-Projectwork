@@ -17,6 +17,8 @@ namespace Service.Models
     {
         public int AdminId { get; set; }    // Primary Key
 
+        public int AdminRank { get; set; }
+
         [Required]
         [DisplayName("Username")]
         [StringLength(20, ErrorMessage = "Max length is 20 characters!")]
@@ -58,6 +60,7 @@ namespace Service.Models
             {
                 Administrator anAdmin = new Administrator();
                 anAdmin.AdminId = elem.AdminId;
+                anAdmin.AdminRank = elem.AdminRank;
                 anAdmin.UserName = elem.UserName;
                 anAdmin.PassSalt = elem.PassSalt;
                 anAdmin.PassHash = elem.PassHash;
@@ -78,8 +81,7 @@ namespace Service.Models
             adminObj = newAdmin;
 
             var salt = GetSalt();
-            var saltedPassword = salt + adminObj.TempPass;
-            var hash = HashPassword(saltedPassword);
+            var hash = HashPassword(adminObj.TempPass, salt);
 
             adminObj.PassSalt = salt;
             adminObj.PassHash = hash;
@@ -110,21 +112,21 @@ namespace Service.Models
 
         }
 
+        static public int GetRankByUsername(string username)
+        {
+            return _eAdminRepo.GetRankByUsername(username);
+        }
+
         static public bool IsLoginFine(string username, string password)
         {
-            foreach (var admin in GetAdminList())
+            if (_eAdminRepo.UsernameExists(username)) // Try username with existing users (using raw SQL)
             {
-                if (_eAdminRepo.UsernameExists(username)) // Try username with existing users (using raw SQL)
-                {
-                    var saltedInput = admin.PassSalt + password;
-
-                    if(_eAdminRepo.DoHashMatch( HashPassword(saltedInput) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
-                    else { return false; }
-                }
+                AdminRepository admin = new AdminRepository( _eAdminRepo.GetIdByUsername(username) );
+                var salt = admin.adminobj.PassSalt;
+                if (_eAdminRepo.DoHashMatch( HashPassword(password, salt) )) { return true; } // Hash the entered password and compare with users hash (using raw SQL)
                 else { return false; }
             }
-
-            return false;
+            else { return false; }
         }
 
         /*** Map a AdminRepository-object to an Administrator-object ***/
@@ -132,6 +134,7 @@ namespace Service.Models
         {
             Administrator theAdmin = new Administrator();
             theAdmin.AdminId = adminObj.adminobj.AdminId;
+            theAdmin.AdminRank = adminObj.adminobj.AdminRank;
             theAdmin.UserName = adminObj.adminobj.UserName;
             theAdmin.PassSalt = adminObj.adminobj.PassSalt;
             theAdmin.PassHash = adminObj.adminobj.PassHash;
@@ -146,6 +149,7 @@ namespace Service.Models
         {
             AdminRepository theAdmin = new AdminRepository(adminObj.AdminId);
             theAdmin.adminobj.AdminId = adminObj.AdminId;
+            theAdmin.adminobj.AdminRank = adminObj.AdminRank;
             theAdmin.adminobj.UserName = adminObj.UserName;
             theAdmin.adminobj.PassSalt = adminObj.PassSalt;
             theAdmin.adminobj.PassHash = adminObj.PassHash;
@@ -160,6 +164,7 @@ namespace Service.Models
         {
             AdminRepository theAdmin = new AdminRepository();
             theAdmin.adminobj.AdminId = adminObj.AdminId;
+            theAdmin.adminobj.AdminRank = adminObj.AdminRank;
             theAdmin.adminobj.UserName = adminObj.UserName;
             theAdmin.adminobj.PassSalt = adminObj.PassSalt;
             theAdmin.adminobj.PassHash = adminObj.PassHash;
@@ -178,14 +183,25 @@ namespace Service.Models
             return Convert.ToBase64String(saltBytes); // Convert byte-array to normal string
         }
 
-        static private string HashPassword(string saltedPassword)
+        static private string HashPassword(string password, string salt)
         {
-            SHA512 SHA = new SHA512CryptoServiceProvider();
+            byte[] byteSalt = Convert.FromBase64String(salt);
+            Rfc2898DeriveBytes hasher = new Rfc2898DeriveBytes(password, byteSalt);
+            return Convert.ToBase64String(hasher.GetBytes(32));
 
-            Byte[] dataBytes = Encoding.Default.GetBytes(saltedPassword); // Turn the salted password into a byte-array
-            Byte[] resultBytes = SHA.ComputeHash(dataBytes); // Hash the salted password byte-array
+        }
 
-            return Convert.ToBase64String(resultBytes); // Convert byte-array to normal string
+        static public bool IsAuthorized(string userID, int userRank, int requiredRank)
+        {
+            if (userID == "")
+            {
+                return false; // not authorized
+            }
+            else if (userRank == requiredRank)
+            {
+                return true; // user has required rank
+            }
+            else return false; // denied
         }
     }
 }
