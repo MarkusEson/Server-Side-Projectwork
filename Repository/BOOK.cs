@@ -28,7 +28,7 @@ namespace Repository
         public string PublicationYear { get; set; }
 
         [StringLength(255)]
-        public string publicationinfo { get; set; }
+        public string Publicationinfo { get; set; }
 
         [Range(0,9999)]
         public short? pages { get; set; }

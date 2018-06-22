@@ -44,7 +44,7 @@ namespace Service.Models
                 aBook.ISBN = elem.ISBN;
                 aBook.Title = elem.Title;
                 aBook.PublicationYear = elem.PublicationYear;
-                aBook.Publicationinfo = elem.publicationinfo;
+                aBook.Publicationinfo = elem.Publicationinfo;
                 aBook.Pages = elem.pages;
                 BookList.Add(aBook);
             }
@@ -83,7 +83,7 @@ namespace Service.Models
             book.ISBN = bookobj.bookObj.ISBN;
             book.Title = bookobj.bookObj.Title;
             book.PublicationYear = bookobj.bookObj.PublicationYear;
-            book.Publicationinfo = bookobj.bookObj.publicationinfo;
+            book.Publicationinfo = bookobj.bookObj.Publicationinfo;
             book.Pages = bookobj.bookObj.pages;
             return book;
         }
@@ -96,7 +96,7 @@ namespace Service.Models
             book.ISBN = bookobj.ISBN;
             book.Title = bookobj.Title;
             book.PublicationYear = bookobj.PublicationYear;
-            book.Publicationinfo = bookobj.publicationinfo;
+            book.Publicationinfo = bookobj.Publicationinfo;
             book.Pages = bookobj.pages;
             return book;
         }
@@ -108,7 +108,7 @@ namespace Service.Models
             aBook.bookObj.ISBN = bookobj.ISBN;
             aBook.bookObj.Title = bookobj.Title;
             aBook.bookObj.PublicationYear = bookobj.PublicationYear;
-            aBook.bookObj.publicationinfo = bookobj.Publicationinfo;
+            aBook.bookObj.Publicationinfo = bookobj.Publicationinfo;
             aBook.bookObj.pages = bookobj.Pages;
             if(bookobj.BookAuth == null)        // if book has no authors, manually sets book AUTHOR to null. 
             {
