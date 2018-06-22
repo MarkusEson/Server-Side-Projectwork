@@ -36,7 +36,7 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                var query = db.BOOK.Where(x => x.ISBN == id);
+                var query = db.BOOK.Where(b => b.ISBN == id);
                 return query.SingleOrDefault();
                 //db.BOOK.Load();
                 //return db.BOOK.Find(id);
@@ -48,7 +48,7 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 // return 
-                var query = db.BOOK.OrderBy(x => x.Title);
+                var query = db.BOOK.OrderBy(b => b.Title);
                 return query.ToList();
             }
         }
@@ -85,7 +85,7 @@ namespace Repository.Support
             
             using (var db = new Libdb())
             {
-                var bk = db.BOOK.FirstOrDefault(x => x.ISBN == book.ISBN);
+                var bk = db.BOOK.FirstOrDefault(b => b.ISBN == book.ISBN);
                 bk.AUTHOR.Clear();
                 db.BOOK.Remove(bk);
                 
@@ -99,7 +99,7 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.BOOK.Where(x => x.Title.Contains(searchString)).OrderBy(x => x.Title).ToList();
+                return db.BOOK.Where(b => b.Title.Contains(searchString)).OrderBy(b => b.Title).ToList();
             }
         }
 
@@ -109,7 +109,7 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                var author = db.AUTHOR.Include(x => x.BOOK).FirstOrDefault(x => x.Aid.Equals(aid));
+                var author = db.AUTHOR.Include(b => b.BOOK).FirstOrDefault(a => a.Aid.Equals(aid));
                 if (author != null)
                     return author.BOOK.ToList();
                 else
@@ -123,7 +123,7 @@ namespace Repository.Support
             {
                 db.Configuration.LazyLoadingEnabled = false;
                 //var book = db.BOOK.Include(x => x.ISBN).FirstOrDefault(x => x.ISBN.Equals(isbn));
-                var book = db.BOOK.FirstOrDefault(x => x.ISBN.Equals(isbn));
+                var book = db.BOOK.FirstOrDefault(b => b.ISBN.Equals(isbn));
                 if (book == null)
                     return false;        // isbn does not exist on db
                 else

@@ -37,7 +37,7 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                var query = db.AUTHOR.Where(x => x.Aid == Aid);
+                var query = db.AUTHOR.Where(a => a.Aid == Aid);
                 return query.SingleOrDefault();
                 //db.AUTHOR.Load();
                 //return db.AUTHOR.Find(Aid);
@@ -49,7 +49,7 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 // return 
-                var query = db.AUTHOR.OrderBy(x => x.Aid);
+                var query = db.AUTHOR.OrderBy(a => a.Aid);
                 return query.ToList();
             }
         }
@@ -80,7 +80,7 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                var au = db.AUTHOR.FirstOrDefault(x => x.Aid == auth.Aid);
+                var au = db.AUTHOR.FirstOrDefault(a => a.Aid == auth.Aid);
                 
                 au.BOOK.Clear();
                 
@@ -95,7 +95,7 @@ namespace Repository.Support
             using (var db = new Libdb())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.AUTHOR.Where(x => x.FirstName.Contains(searchString)).OrderBy(x => x.FirstName).ToList();
+                return db.AUTHOR.Where(a => a.FirstName.Contains(searchString)).OrderBy(a => a.FirstName).ToList();
             }
         }
         
@@ -106,7 +106,7 @@ namespace Repository.Support
             {
                 db.Configuration.LazyLoadingEnabled = false;
                 //return db.BOOK.Find("").AUTHOR.ToList();
-                return db.BOOK.Include(x => x.AUTHOR).First(x => x.ISBN == id).AUTHOR.ToList();
+                return db.BOOK.Include(x => x.AUTHOR).First(b => b.ISBN == id).AUTHOR.ToList();
 
             }
         }

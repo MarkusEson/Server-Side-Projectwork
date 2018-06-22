@@ -16,7 +16,7 @@ namespace Server_Side_Projectwork.Controllers
         // lists all the authors on the db and sends as paged list
         public ActionResult ListAuthors(int? page)
         {
-            IList<Author> allAuthors = AuthorManager.getAuthorList();
+            IList<Author> allAuthors = AuthorManager.GetAuthorList();
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
             return View("ListAuthors", allAuthors.ToPagedList(currentPageIndex, DefaultPageSize));
         }
@@ -71,7 +71,7 @@ namespace Server_Side_Projectwork.Controllers
             bool isAuthorized = Administrator.IsAuthorized((string)(Session["UserSession"]), (int)(Session["UserRank"]), (int)Authorization.Rank.administrator);
             if (isAuthorized)
             {
-                newAuthor.Aid = AuthorManager.getAuthorList().Count();
+                newAuthor.Aid = AuthorManager.GetAuthorList().Count();
                 // string fname, string lname, string byear
                 if (ModelState.IsValid)
                 {

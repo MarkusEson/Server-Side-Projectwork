@@ -15,7 +15,7 @@ namespace Service.Models
         {
             this.id = id;
 
-            Author authobj = AuthorManager.getAuthor(id);           // gets the author by id
+            Author authobj = AuthorManager.GetAuthor(id);           // gets the author by id
             var authorBookList = BookManager.GetBooksByAid(id);     // gets the books the author has written
 
             Aid = authobj.Aid;
@@ -26,11 +26,11 @@ namespace Service.Models
             AuthBooks = authorBookList;
         }
 
-        static public List<Author> GetAuthorByIsbn(string id)
+        static public List<Author> GetAuthorByIsbn(string isbn)
         {
             List<Author> returnauthorlist = new List<Author>();
             var repo = new AuthorRepository();
-            var authbyid = repo.GetAuthorByIsbn(id);
+            var authbyid = repo.GetAuthorByIsbn(isbn);
 
             foreach (var auth in authbyid)
             {
@@ -45,18 +45,18 @@ namespace Service.Models
 
         public List<Book> ListofAuthorsBooks { get; set; }
 
-        static private AuthorRepository _eAuthorRepo = new AuthorRepository();
+        static private AuthorRepository _EAuthorRepo = new AuthorRepository();
 
-        static public Author getAuthor(int aAid)
+        static public Author GetAuthor(int aAid)
         {
             return MapAuthor(new AuthorRepository(aAid));
         }
 
-        static public List<Author> getAuthorList()
+        static public List<Author> GetAuthorList()
         {
             List<Author> authorList = new List<Author>();
 
-            foreach (var elem in _eAuthorRepo.List())
+            foreach (var elem in _EAuthorRepo.List())
             {
                 Author anAuthor = new Author();
                 anAuthor.Aid = elem.Aid;
@@ -70,12 +70,12 @@ namespace Service.Models
 
         static public void UpdateAuthor(Author editedAuthor)
         {
-            Author authObj = AuthorManager.getAuthor(editedAuthor.Aid);
+            Author authObj = AuthorManager.GetAuthor(editedAuthor.Aid);
             authObj.Aid = editedAuthor.Aid;
             authObj.FirstName = editedAuthor.FirstName;
             authObj.LastName = editedAuthor.LastName;
             authObj.BirthYear = editedAuthor.BirthYear;
-            _eAuthorRepo.Update(MapAuthor(authObj).authorobj);
+            _EAuthorRepo.Update(MapAuthor(authObj).authorobj);
 
         }
 
@@ -119,7 +119,7 @@ namespace Service.Models
             addAuthObject.FirstName = newAuthor.FirstName;
             addAuthObject.LastName = newAuthor.LastName;
             addAuthObject.BirthYear = newAuthor.BirthYear;
-            _eAuthorRepo.Add(MapAuthor(addAuthObject).authorobj);
+            _EAuthorRepo.Add(MapAuthor(addAuthObject).authorobj);
         }
 
 
@@ -127,8 +127,8 @@ namespace Service.Models
         static public void RemoveAuthor(Author auth)
         {
             //Author auth = AuthorManager.getAuthor(id);              // get the author by id
-            getAuthorList().Remove(getAuthor(auth.Aid));                  // remove author from author list
-            _eAuthorRepo.Remove(MapAuthor(auth).authorobj);         // map to entity and remove author from db
+            GetAuthorList().Remove(GetAuthor(auth.Aid));                  // remove author from author list
+            _EAuthorRepo.Remove(MapAuthor(auth).authorobj);         // map to entity and remove author from db
         }
 
         static public List<Author> SearchForAuthor(string searchString)

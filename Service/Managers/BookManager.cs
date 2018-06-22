@@ -14,37 +14,37 @@ namespace Service.Models
         public BookManager(string id)
         {
             this.id = id;
-            Book bookobj = BookManager.getBooks(id);
+            Book bookobj = BookManager.GetBooks(id);
             var bookAuthorList = AuthorManager.GetAuthorByIsbn(id);                  // gets book by isbn
             var bookAuthList = AuthorManager.GetAuthorByIsbn(id);       // gets the author(s) who wrote the book
             ISBN = bookobj.ISBN;
             Title = bookobj.Title;
             PublicationYear = bookobj.PublicationYear;
-            publicationinfo = bookobj.publicationinfo;
+            Publicationinfo = bookobj.Publicationinfo;
             Pages = bookobj.Pages;
             BookAuthor = bookAuthorList;
             BookAuth = bookAuthList;
         }
 
-        static private BookRepository _eBookRepo = new BookRepository();
+        static private BookRepository _EBookRepo = new BookRepository();
 
-        static public Book getBooks(string id)
+        static public Book GetBooks(string id)
         {
             return MapBook(new BookRepository(id));
         }
 
         // gets the book list from db
-        static public List<Book> getBookList()
+        static public List<Book> GetBookList()
         {
             List<Book> BookList = new List<Book>();
 
-            foreach (var elem in _eBookRepo.List())
+            foreach (var elem in _EBookRepo.List())
             {
                 Book aBook = new Book();
                 aBook.ISBN = elem.ISBN;
                 aBook.Title = elem.Title;
                 aBook.PublicationYear = elem.PublicationYear;
-                aBook.publicationinfo = elem.publicationinfo;
+                aBook.Publicationinfo = elem.publicationinfo;
                 aBook.Pages = elem.pages;
                 BookList.Add(aBook);
             }
@@ -65,15 +65,15 @@ namespace Service.Models
             return returnbooklist;
         }
 
-        static public void updateBook(Book updatedBook)
+        static public void UpdateBook(Book updatedBook)
         {
-            Book book = BookManager.getBooks(updatedBook.ISBN);
+            Book book = BookManager.GetBooks(updatedBook.ISBN);
             book.ISBN = updatedBook.ISBN;
             book.Title = updatedBook.Title;
             book.PublicationYear = updatedBook.PublicationYear;
-            book.publicationinfo = updatedBook.publicationinfo;
+            book.Publicationinfo = updatedBook.Publicationinfo;
             book.Pages = updatedBook.Pages;
-            _eBookRepo.Update(MapBook(book).bookObj);
+            _EBookRepo.Update(MapBook(book).bookObj);
 
         }
 
@@ -83,7 +83,7 @@ namespace Service.Models
             book.ISBN = bookobj.bookObj.ISBN;
             book.Title = bookobj.bookObj.Title;
             book.PublicationYear = bookobj.bookObj.PublicationYear;
-            book.publicationinfo = bookobj.bookObj.publicationinfo;
+            book.Publicationinfo = bookobj.bookObj.publicationinfo;
             book.Pages = bookobj.bookObj.pages;
             return book;
         }
@@ -96,7 +96,7 @@ namespace Service.Models
             book.ISBN = bookobj.ISBN;
             book.Title = bookobj.Title;
             book.PublicationYear = bookobj.PublicationYear;
-            book.publicationinfo = bookobj.publicationinfo;
+            book.Publicationinfo = bookobj.publicationinfo;
             book.Pages = bookobj.pages;
             return book;
         }
@@ -108,7 +108,7 @@ namespace Service.Models
             aBook.bookObj.ISBN = bookobj.ISBN;
             aBook.bookObj.Title = bookobj.Title;
             aBook.bookObj.PublicationYear = bookobj.PublicationYear;
-            aBook.bookObj.publicationinfo = bookobj.publicationinfo;
+            aBook.bookObj.publicationinfo = bookobj.Publicationinfo;
             aBook.bookObj.pages = bookobj.Pages;
             if(bookobj.BookAuth == null)        // if book has no authors, manually sets book AUTHOR to null. 
             {
@@ -127,24 +127,24 @@ namespace Service.Models
             addBookObject.ISBN = newBook.ISBN;
             addBookObject.Title = newBook.Title;
             addBookObject.PublicationYear = newBook.PublicationYear;
-            addBookObject.publicationinfo = newBook.publicationinfo;
+            addBookObject.Publicationinfo = newBook.Publicationinfo;
             addBookObject.Pages = newBook.Pages;
             if (aid.HasValue)
                 addBookObject.BookAuth = new List<Author> { new AuthorManager(aid.Value) };     // if book has author, add i author to bookAuth list.
             else
                 addBookObject.BookAuth = new List<Author>();                                    // else add empty list.
 
-            _eBookRepo.Add(MapBook(addBookObject).bookObj);
+            _EBookRepo.Add(MapBook(addBookObject).bookObj);
         }
         
 
         static public void RemoveBook(string isbn)
         {
         
-            Book book = BookManager.getBooks(isbn);             // get book by isbn
-            _eBookRepo.Delete(MapBook(book).bookObj);           // delete this book from repo
+            Book book = BookManager.GetBooks(isbn);             // get book by isbn
+            _EBookRepo.Delete(MapBook(book).bookObj);           // delete this book from repo
 
-            getBookList().Remove(getBooks(isbn));               // remove book from list
+            GetBookList().Remove(GetBooks(isbn));               // remove book from list
            
 
         } 

@@ -21,7 +21,7 @@ namespace Server_Side_Projectwork.Controllers
         // ListBooks sends the user to the "ListBooks" view where all the books in the databse are listen and separated by pagination
         public ActionResult ListBooks(int? page)
         {
-            IList<Book> allBooks = BookManager.getBookList();
+            IList<Book> allBooks = BookManager.GetBookList();
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
             return View("ListBooks", allBooks.ToPagedList(currentPageIndex, DefaultPageSize));
         }
@@ -60,7 +60,7 @@ namespace Server_Side_Projectwork.Controllers
         // update book sends the tempdata to the update func. then redirets to the book list again.
         public RedirectToRouteResult UpdateBook(Book editedBook)
         {
-            BookManager.updateBook(editedBook);
+            BookManager.UpdateBook(editedBook);
             return RedirectToAction("ListBooks", "Book");
         }
 

@@ -44,7 +44,7 @@ namespace Repository.Support
         {
             using (var db = new Libdb())
             {
-                var query = db.ADMINISTRATOR.OrderBy(x => x.AdminId);
+                var query = db.ADMINISTRATOR.OrderBy(a => a.AdminId);
                 return query.ToList();
             }
         }
